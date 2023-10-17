@@ -2,9 +2,11 @@
 package Webpack;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -24,6 +26,28 @@ public class register extends HttpServlet {
     OracleConnection oconn;
     OraclePreparedStatement ops;
     OracleResultSet ors;
+    
+    // Oconn connection handling, change the classname in the try line: classname.class.getClassLoader()
+    private String oconnUrl;
+    private String oconnUsername;
+    private String oconnPassword;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+
+        try (InputStream input = register.class.getClassLoader().getResourceAsStream("db.properties")) {
+            Properties props = new Properties();
+            props.load(input);
+            oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
+                  + props.getProperty("port") + ":" + props.getProperty("SID");
+            oconnUsername = props.getProperty("username");
+            oconnPassword = props.getProperty("password");
+        } catch (IOException ex) {
+            throw new ServletException(ex);
+        }
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -46,7 +70,7 @@ public class register extends HttpServlet {
             pincode = request.getParameter("pincode");
             try {
                 DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
-                oconn = (OracleConnection) DriverManager.getConnection("jdbc:oracle:thin:@DESKTOP-CPL2IQA:1521:orcl", "MINOR", "DATABASE");
+                oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
                 ops = (OraclePreparedStatement) oconn.prepareCall(query);
                 ors = (OracleResultSet) ops.executeQuery();
                 ors.next();
