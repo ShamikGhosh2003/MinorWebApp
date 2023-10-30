@@ -3,8 +3,45 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="main-style.css">
         <title>Register</title>
+        <script>
+            function validateForm() {
+               var name = document.forms['register']['pname'].value;
+               var email = document.forms['register']['email'].value;
+               var phone = document.forms['register']['phone'].value;
+               var address = document.forms['register']['address'].value;
+               var pincode = document.forms['register']['pincode'].value;
+               var password = document.forms['register']['password'].value;
+               var confirmPassword = document.forms['register']['confirm-password'].value;
+               var gstn = document.forms['register']['gstn'].value;
+
+               if(name == "" || email == "" || phone == "" || age == "" || address == "" || pincode == "" || password == "" || confirmPassword == "") {
+                    document.getElementById('error-alert').innerHTML = "All fields are required.";
+                    event.preventDefault();
+               }
+               if(phone.length != 10 || isNaN(phone)) {
+                    document.getElementById('error-alert').innerHTML = "Please enter valid phone number.";
+                    event.preventDefault();
+               }
+               if(pincode.length != 6 || isNaN(pincode)) {
+                    document.getElementById('error-alert').innerHTML = "Please enter valid pincode.";
+                    event.preventDefault();
+               }
+               if(password.length < 8) {
+                    document.getElementById('error-alert').innerHTML = "Password must be at least 8 characters.";
+                    event.preventDefault();
+               }
+               if(password != confirmPassword) {
+                    document.getElementById('error-alert').innerHTML = "Passwords do not match.";
+                    event.preventDefault();
+               }
+               if(gstn.length < 15) {
+                    document.getElementById('error-alert').innerHTML = "Passwords do not match.";
+                    event.preventDefault();
+               }
+           }
+       </script>
     </head>
     <body>
         <div class="header">
@@ -12,8 +49,9 @@
         </div>
         <div class="form-container">
             <div class="form-box" style="width: 45%;">
-                <form method="POST" action="http://localhost:8084/MinorWebApp/RegisterPharmacy">
+                <form method="POST" action="http://localhost:8080/MinorWebApp/RegisterPharmacy">
                     <h2 style="text-align: center;">REGISTER</h2>
+                    <br>
                     <div class="input-group">
                         <label for="pname">Pharmacy Name:</label>
                         <input type="text" name="pname" placeholder="Enter the name of your pharmacy" required>
@@ -61,9 +99,9 @@
                    </div>                   
                     <br>
                     <div style="text-align: right; line-height: 150%;">
-                    Have an account? <a href="login.html">Login in</a>
+                    Have an account? <a href="login.html">Login in</a><br>
+                    Not a Pharmacy? <a href="registerUser.html">Register as a User</a>
                     <br>
-                    <a href="resetpassword.html">Forgot Password</a>
                     </div>
                 </form>
             </div>
