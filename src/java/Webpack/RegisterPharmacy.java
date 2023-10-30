@@ -37,7 +37,7 @@ public class RegisterPharmacy extends HttpServlet {
     public void init() throws ServletException {
         super.init();
 
-        try (InputStream input = register.class.getClassLoader().getResourceAsStream("db.properties")) {
+        try (InputStream input = RegisterPharmacy.class.getClassLoader().getResourceAsStream("db.properties")) {
             Properties props = new Properties();
             props.load(input);
             oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
