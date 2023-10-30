@@ -21,7 +21,7 @@ import oracle.jdbc.OracleResultSet;
 
 @WebServlet(name = "register", urlPatterns = {"/register"})
 public class register extends HttpServlet {
-    String cid, fname, lname, email, phone, address, pincode, password, gender, age;
+    String cid, fname, lname, email, phone, address, pincode, password, gender, age, cidNum;
     String query = "SELECT NVL((SELECT * FROM (SELECT CID FROM CUSTOMER ORDER BY CID DESC) WHERE ROWNUM <=1),'0') AS CID FROM DUAL";
     OracleConnection oconn;
     OraclePreparedStatement ops;
@@ -74,14 +74,19 @@ public class register extends HttpServlet {
                 ops = (OraclePreparedStatement) oconn.prepareCall(query);
                 ors = (OracleResultSet) ops.executeQuery();
                 ors.next();
-                int lastCID = Integer.parseInt(ors.getString("CID"));
-                if(lastCID==0)
+                //Getting the last CID in the database
+                String lastCID = ors.getString("CID");   
+                if(lastCID.equals("0"))
                 {
-                    cid = "1000";                    
+                    cid = "C1000";                    
                 }
                 else
                 {
-                    cid = ""+(lastCID+1);
+                    //Getting the CID number
+                    int lastCIDNum = Integer.parseInt(lastCID.substring(1));
+                    cidNum = ""+(lastCIDNum+1);
+                    //Setting the new CID
+                    cid = "C"+cidNum;
                 }
                 out.println("<h1>Displaying the HTML input values in this servlet...</h1>");
                 out.println("<h3>CID: "+cid+"</h3>");
