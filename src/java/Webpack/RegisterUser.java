@@ -19,8 +19,8 @@ import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 
 
-@WebServlet(name = "register", urlPatterns = {"/register"})
-public class register extends HttpServlet {
+@WebServlet(name = "RegisterUser", urlPatterns = {"/RegisterUser"})
+public class RegisterUser extends HttpServlet {
     String cid, fname, lname, email, phone, address, pincode, password, gender, age, cidNum;
     String query = "SELECT NVL((SELECT * FROM (SELECT CID FROM CUSTOMER ORDER BY CID DESC) WHERE ROWNUM <=1),'0') AS CID FROM DUAL";
     OracleConnection oconn;
@@ -36,7 +36,7 @@ public class register extends HttpServlet {
     public void init() throws ServletException {
         super.init();
 
-        try (InputStream input = register.class.getClassLoader().getResourceAsStream("db.properties")) {
+        try (InputStream input = RegisterUser.class.getClassLoader().getResourceAsStream("db.properties")) {
             Properties props = new Properties();
             props.load(input);
             oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
@@ -120,7 +120,7 @@ public class register extends HttpServlet {
                 oconn.close();
                 ops.close();
             } catch (SQLException ex) {
-                Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegisterUser.class.getName()).log(Level.SEVERE, null, ex);
                 out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
             }
             
