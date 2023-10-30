@@ -7,6 +7,7 @@ app = Flask(__name__)
 def handle_post(path):
     data = request.form.to_dict()
     print(f"POST request received on /MinorWebApp/{path}")
+    print(data)
     pprint.pprint(data)
     return f'POST request received on /MinorWebApp/{path}', 200
 

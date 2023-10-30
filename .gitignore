@@ -1,3 +1,4 @@
 /dist/
 src/java/db.properties
 /build/
+/web/StatPages/media/
