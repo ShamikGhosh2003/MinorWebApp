@@ -2,3 +2,4 @@
 src/java/db.properties
 /build/
 /web/StatPages/media/
+/web/WEB-INF/db.properties/
