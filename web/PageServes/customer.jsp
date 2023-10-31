@@ -4,11 +4,15 @@
     Author     : ADMIN
 --%>
 
+<%@page import="java.io.IOException"%>
+<%@page import="java.util.Properties"%>
+<%@page import="java.io.InputStream"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="oracle.jdbc.OracleResultSetMetaData"%>
 <%@page import="oracle.jdbc.OracleResultSet"%>
 <%@page import="oracle.jdbc.OraclePreparedStatement"%>
 <%@page import="oracle.jdbc.OracleConnection"%>
+<%@page import="java.io.InputStream"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -38,7 +42,21 @@
         OracleResultSet ors; //Store the data in the webpage from oracle
         OracleResultSetMetaData orsm;
         int reccounter; //record counter
-        String query;        
+        String query;
+        java.util.Properties props = new java.util.Properties();
+        String oconnUrl, oconnUsername, oconnPassword;
+    %>
+    <%
+        try {
+            InputStream input = application.getResourceAsStream("/WEB-INF/db.properties");
+            props.load(input);
+            oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
+                + props.getProperty("port") + ":" + props.getProperty("SID");
+            oconnUsername = props.getProperty("username");
+            oconnPassword = props.getProperty("password");
+        } catch (IOException ex) {
+            out.println("Error: " + ex.getMessage());
+        }
     %>
     <body style="background-color: black; color: belge;">
         <!--STAGE3: REGISTERING THE DRIVER MANAGER-->
@@ -46,7 +64,7 @@
             DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
 
             //STAGE4: INSTANTIATING THE ORACLE OBJECTS
-            oconn = (OracleConnection) DriverManager.getConnection("jdbc:oracle:thin:@DESKTOP-CPL2IQA:1521:orcl","MINOR","DATABASE");
+            oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
 
             //STAGE5: CREATING THE QUERY
             query = "SELECT * FROM CUSTOMER ORDER BY CID ASC";
