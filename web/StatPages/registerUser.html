@@ -20,7 +20,7 @@
                     document.getElementById('error-alert').innerHTML = "All fields are required.";
                     event.preventDefault();
                }
-               if(isNaN(age) || age < 18 || age > 120) {
+               if(isNaN(age) || age < 0 || age > 140) {
                     document.getElementById('error-alert').innerHTML = "Please enter valid age.";
                     event.preventDefault();
                }
@@ -44,9 +44,15 @@
        </script>
     </head>
     <body>
-        <div class="header">
-            <h1>MedFinder</h1>
-        </div>
+        <header class="header">           
+            <a href="#" class="logo">MedFinder</a>
+            <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="registerUser.html">Register</a>
+            <a href="about.html">About Us</a>
+            <a href="#">Contact</a>
+            </nav>
+        </header>
         <div class="form-container">
             <div class="form-box" style="width: 45%;">
                 <form method="POST" name="register" action="http://localhost:8080/MinorWebApp/RegisterUser" onsubmit="validateForm()">
@@ -54,8 +60,13 @@
                     <br>
                     <div id="error-alert" style="color: red; text-align: center; font-weight: bold;"></div>
                     <div class="input-group">
-                        <label for="pname">Name:</label>
-                        <input type="text" name="pname" placeholder="Enter the name of your pharmacy" required>
+                        <label for="fname">First Name:</label>
+                        <input type="text" name="pname" placeholder="John" required>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="lname">Last Name:</label>
+                        <input type="text" name="lname" placeholder="Doe" required>
                     </div>
                     <br>
                     <div class="input-group">
@@ -81,6 +92,29 @@
                     <div class="input-group">
                         <label for="pincode">Pincode:</label>
                         <input type="number" name="pincode" placeholder="700000" required>
+                    </div>
+                    <br>
+                    <div class="input-group radio-group">
+                        <label for="gender">Gender: </label>
+                        <div style="margin-left: 60px;">
+                            <input type="radio" name="gender" value="M" required>Male
+                            <input type="radio" name="gender" value="F" required>Female
+                        </div>
+                    </div> 
+                    <br>
+                    <div class="input-group">
+                        <label for="sques">Security Question:</label>
+                        <select id="sques" name="sques" required>
+                            <option value="" selected disabled hidden>Select a Security Question</option>
+                            <option value="CHILDHOOD NICKNAME?">Childhood nickname?</option>
+                            <option value="WHAT IS YOUR MOTHER'S MAIDEN NAME?">What is your mother's maiden name?</option>
+                            <option value="WHAT SCHOOL DID YOU GO TO?">What school did you go to?</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="sans">Security Answer:</label>
+                        <input type="text" name="sans" placeholder="Security Answer" required>
                     </div>
                     <br>
                     <div class="input-group">

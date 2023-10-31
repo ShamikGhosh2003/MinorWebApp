@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="main-style.css">
+    <script>
+        function redirect(url) {
+            url = "http://localhost:8080/PageServes/" + url;
+            window.location.href = url;
+        }
+    </script>
+</head>
+<body>
+    <header class="header">           
+        <a href="#" class="logo">MedFinder</a>
+        <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="registerUser.html">Register</a>
+        <a href="about.html">About Us</a>
+        <a href="#">Contact</a>
+        </nav>
+    </header>
+    <main class="admin-panel">
+        <div class="table-container">
+            <h2>Admin Panel</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Table</th>
+                        <th>Description</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Customers</td>
+                        <td>Information about registered customers.</td>
+                        <td><a href="#" onclick="redirect('customers.jsp')">Customers</a></td>
+                    </tr>
+                    <tr>
+                        <td>Pharmacies</td>
+                        <td>Information about registered pharmacies.</td>
+                        <td><a href="#" onclick="redirect('pharmacy.jsp')">Pharmacies</a></td>
+                    </tr>
+                    <tr>
+                        <td>Orders</td>
+                        <td>Orders accepted by the system.</td>
+                        <td><a href="#" onclick="redirect('orders.jsp')">Orders</a></td>
+                    </tr>
+                    <tr>
+                         <td>Pharmacy Med Stock</td>
+                         <td>Individual pharmacy's stock.</td>
+                         <td><a href="#" onclick="redirect('medPharmStock.jsp')">Med Pharmacy Stock</a></td>
+                    </tr>
+                    <tr>
+                        <td>Medicine</td>
+                        <td>Individual information about medicines.</td>
+                        <td><a href="#" onclick="redirect('medicine.jsp')">Medicines</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
