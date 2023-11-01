@@ -7,7 +7,8 @@
         <script>
             alert("New Link for password has been generated and sent to your mail!!! \n For security reasons your browser is now getting closed");
             window.close();
-            if(window.parent) window.parent.window.close();    
+            if(window.opener) 
+                window.opener.close();    
         </script>
     </head>
     <body>

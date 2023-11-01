@@ -73,12 +73,14 @@ public class CheckLogin extends HttpServlet {
                     userType = "CUSTOMER";
                     HttpSession sess = request.getSession(true);
                     sess.setAttribute("userType",userType);
-                    response.sendRedirect("http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp");
+                    sess.setAttribute("email",email);
+                    response.sendRedirect("http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp");
                 }else if(ors2.next()){
                     userType = "PHARMACY";
                     HttpSession sess = request.getSession(true);
                     sess.setAttribute("userType",userType);
-                    response.sendRedirect("http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html");
+                    sess.setAttribute("email",email);
+                    response.sendRedirect("http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp");//StatPages/PharmacyHome.html");
                 }else{
                     response.sendRedirect("http://localhost:8080/MinorWebApp/StatPages/WrongPass.html");
                 }
