@@ -6,10 +6,10 @@
     <title>User Login</title>
     <link rel="stylesheet" href="main-style.css">
     <script>
-        function changeActionURL(url) {
+        /*function changeActionURL(url) {
             url = "http://localhost:8080/MinorWebApp/" + url;
             document.getElementById("form-login").action = url;
-        }
+        }*/
     </script>
 </head>
 <body>
@@ -25,7 +25,7 @@
     <main class="login">
         <div class="form-container">
             <div class="form-box" id="form-login-container">
-                <form method="POST" action="" id="form-login">
+                <form method="POST" action="http://localhost:8080/MinorWebApp/CheckLogin" id="form-login">
                     <h2>LOG IN</h2>
                     <br>
                     <div class="input-group">
@@ -40,15 +40,17 @@
                     <br>
                     <div class="input-group button-group">
                         <label></label>
-                        <button type="submit" onclick="changeActionURL('UserLogin')" class="button-80">User Login</button>
-                        <button type="submit" onclick="changeActionURL('PharmacyLogin')" class="button-80">Pharmacy Login</button>
-                        <button type="submit" onclick="changeActionURL('AdminLogin')" class="button-80">Admin Login</button>
+                        <button type="submit" class="button-80">Login</button>
+                        <!--<button type="submit" onclick="changeActionURL('PharmacyLogin')" class="button-80">Pharmacy Login</button>
+                        <button type="submit" onclick="changeActionURL('AdminLogin')" class="button-80">Admin Login</button>-->
                    </div>
                    <br>
                     <div class="form-box-links">
-                    New? <a href="register.html">Register</a>
+                    New User? <a href="registerUser.html">Register Here</a>
                     <br>
-                    <a href="resetpassword.html">Forgot Password</a>
+                    New Pharmacy? <a href="registerPharmacy.html">Register Here</a>
+                    <br>
+                    <a href="ForgotPassword.html">Forgot Password</a>
                     </div>
                 </form>
             </div>
