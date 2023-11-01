@@ -21,7 +21,7 @@ import oracle.jdbc.OracleResultSet;
 
 @WebServlet(name = "RegisterUser", urlPatterns = {"/RegisterUser"})
 public class RegisterUser extends HttpServlet {
-    String cid, fname, lname, email, phone, address, pincode, password, gender, age, cidNum;
+    String cid, fname, lname, email, phone, address, pincode, password, gender, age, sques, sans, cidNum;
     String query = "SELECT NVL((SELECT * FROM (SELECT CID FROM CUSTOMER ORDER BY CID DESC) WHERE ROWNUM <=1),'0') AS CID FROM DUAL";
     OracleConnection oconn;
     OraclePreparedStatement ops;
@@ -68,6 +68,8 @@ public class RegisterUser extends HttpServlet {
             address = request.getParameter("address");
             phone = request.getParameter("phone");
             pincode = request.getParameter("pincode");
+            sques = request.getParameter("sques");
+            sans = request.getParameter("sans");
             try {
                 DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                 oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
@@ -99,7 +101,14 @@ public class RegisterUser extends HttpServlet {
                 out.println("<h3>Address: "+address+"</h3>");
                 out.println("<h3>Phone: "+phone+"</h3>");
                 out.println("<h3>Pincode: "+pincode+"</h3>");
-                ops = (OraclePreparedStatement) oconn.prepareCall("INSERT INTO CUSTOMER(CID,EMAIL,PASSWORD,FNAME,LNAME,GENDER,AGE,ADDRESS,PHONE,PINCODE) VALUES(?,?,?,?,?,?,?,?,?,?)");
+                out.println("<h3>Security Question: "+sques+"</h3>");
+                out.println("<h3>Security Answer: "+sans+"</h3>");
+                /*email = email.toLowerCase();
+                fname = fname.toUpperCase();
+                lname = lname.toUpperCase();
+                address = address.toUpperCase();
+                sans = address.toUpperCase();*/
+                ops = (OraclePreparedStatement) oconn.prepareCall("INSERT INTO CUSTOMER(CID,EMAIL,PASSWORD,FNAME,LNAME,GENDER,AGE,ADDRESS,PHONE,PINCODE,SQUES,SANS) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
                 ops.setString(1,cid);
                 ops.setString(2,email);
                 ops.setString(3,password);
@@ -110,7 +119,8 @@ public class RegisterUser extends HttpServlet {
                 ops.setString(8,address);
                 ops.setString(9,phone);
                 ops.setString(10,pincode);
-                
+                ops.setString(11,sques);
+                ops.setString(12,sans);                
                 int x = ops.executeUpdate();
                 if(x>0)
                     out.println("<h3 style='color:green'>Data inserted Successfully....</h3>");
