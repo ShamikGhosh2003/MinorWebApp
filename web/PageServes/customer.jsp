@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Displayer JSP</title>
+    <title>Customer</title>
     <link rel="stylesheet" href="../StatPages/main-style.css">
     <%! 
         //DECLARATION

@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders Displayer JSP</title>
+    <title>Pharamcy</title>
     <link rel="stylesheet" href="../StatPages/main-style.css">
     <%! 
         //DECLARATION
@@ -50,7 +50,7 @@
     </header>
     <main class="admin-panel">
         <div class="table-container">
-            <h2>Orders Displayer JSP</h2>
+            <h2>Pharamcy Table</h2>
             <%
                 DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                 oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
