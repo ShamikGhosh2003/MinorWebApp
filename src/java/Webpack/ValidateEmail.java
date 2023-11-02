@@ -37,10 +37,13 @@ public class ValidateEmail extends HttpServlet {
     private String oconnUrl;
     private String oconnUsername;
     private String oconnPassword;
+    private String mailUsername;
+    private String mailPassword;
 
     @Override
     public void init() throws ServletException {
         super.init();
+        // Loads src/java/db.properties
         try (InputStream input = RegisterUser.class.getClassLoader().getResourceAsStream("db.properties")) {
             Properties props = new Properties();
             props.load(input);
@@ -48,6 +51,15 @@ public class ValidateEmail extends HttpServlet {
                   + props.getProperty("port") + ":" + props.getProperty("SID");
             oconnUsername = props.getProperty("username");
             oconnPassword = props.getProperty("password");
+        } catch (IOException ex) {
+            throw new ServletException(ex);
+        }
+        // Loads src/java/mail.properties
+        try (InputStream mailInput = RegisterUser.class.getClassLoader().getResourceAsStream("mail.properties")) {
+        Properties mailProps = new Properties();
+        mailProps.load(mailInput);
+        mailUsername = mailProps.getProperty("username");
+        mailPassword = mailProps.getProperty("password");
         } catch (IOException ex) {
             throw new ServletException(ex);
         }
@@ -91,8 +103,8 @@ public class ValidateEmail extends HttpServlet {
                     vto = email;
                     vsubject = "Forgot Password!!!";
                     vbody = "Please click the link below or copy paste it in your browser to reset your password";
-                    final String username = "medfinder23@gmail.com";
-                    final String password = "kbhypfhmnpaftssw";
+                    final String username = mailUsername;
+                    final String password = mailPassword;
                     Properties props = new Properties();
                     props.put("mail.smtp.auth","true");
                     props.put("mail.smtp.starttls.enable","true");
