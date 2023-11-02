@@ -91,6 +91,10 @@ public class RegisterPharmacy extends HttpServlet {
                     //Setting the new PID
                     pid = "P"+pidNum;
                 }
+                pname = pname.toUpperCase();
+                address = address.toUpperCase();
+                email = email.toLowerCase();
+                sans = sans.toUpperCase();
                 out.println("<h1>Displaying the HTML input values in this servlet...</h1>");
                 out.println("<h3>PID: "+pid+"</h3>");
                 out.println("<h3>Pharmacy Name: "+pname+"</h3>");                
@@ -103,10 +107,6 @@ public class RegisterPharmacy extends HttpServlet {
                 out.println("<h3>Status (by default): "+status+"</h3>");
                 out.println("<h3>Security Question: "+sques+"</h3>");
                 out.println("<h3>Security Answer: "+sans+"</h3>");
-                /*pname = pname.toUpperCase();
-                address = address.toUpperCase();
-                email = email.toLowerCase();
-                sans = sans.toUpperCase();*/
                 ops = (OraclePreparedStatement) oconn.prepareCall("INSERT INTO PHARMACY(PID,PNAME,PASSWORD,ADDRESS,GSTN,EMAIL,PHONE,STATUS,PINCODE,SQUES,SANS) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
                 ops.setString(1,pid);
                 ops.setString(2,pname);

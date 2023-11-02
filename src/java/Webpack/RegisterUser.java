@@ -90,6 +90,11 @@ public class RegisterUser extends HttpServlet {
                     //Setting the new CID
                     cid = "C"+cidNum;
                 }
+                email = email.toLowerCase();
+                fname = fname.toUpperCase();
+                lname = lname.toUpperCase();
+                address = address.toUpperCase();
+                sans = sans.toUpperCase();
                 out.println("<h1>Displaying the HTML input values in this servlet...</h1>");
                 out.println("<h3>CID: "+cid+"</h3>");
                 out.println("<h3>Email: "+email+"</h3>");
@@ -102,12 +107,7 @@ public class RegisterUser extends HttpServlet {
                 out.println("<h3>Phone: "+phone+"</h3>");
                 out.println("<h3>Pincode: "+pincode+"</h3>");
                 out.println("<h3>Security Question: "+sques+"</h3>");
-                out.println("<h3>Security Answer: "+sans+"</h3>");
-                /*email = email.toLowerCase();
-                fname = fname.toUpperCase();
-                lname = lname.toUpperCase();
-                address = address.toUpperCase();
-                sans = address.toUpperCase();*/
+                out.println("<h3>Security Answer: "+sans+"</h3>");                
                 ops = (OraclePreparedStatement) oconn.prepareCall("INSERT INTO CUSTOMER(CID,EMAIL,PASSWORD,FNAME,LNAME,GENDER,AGE,ADDRESS,PHONE,PINCODE,SQUES,SANS) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
                 ops.setString(1,cid);
                 ops.setString(2,email);
