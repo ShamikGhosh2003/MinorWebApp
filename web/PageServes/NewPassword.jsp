@@ -7,10 +7,49 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Password Reset Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../StatPages/main-style.css">
+        <title>Reset Password</title>
     </head>
-    <body style="background-color: blue">
+    <body>
+        <header class="header">           
+            <a href="#" class="logo">MedFinder</a>
+            <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="profile.html">Profile</a>
+            <a href="about.html">About Us</a>
+            <a href="#">Contact</a>
+            </nav>
+        </header>
+        <div class="form-container">
+            <div class="form-box" style="width: 38%;">
+                <form method="POST" name="reset-password">
+                    <h2 style="text-align: center;">FORGOT PASSWORD</h2>
+                    <br>
+                    <br>
+                    <div class="input-group">
+                        <label for="tpass">New Password:</label>
+                        <input type="password" name="tpass" required>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="cpass">Confirm Password:</label>
+                        <input type="password" name="cpass" required>
+                    </div>
+                    <br><br>
+                    <div class="input-group button-group">
+                        <label></label>
+                        <button type="submit" class="button-80" name="bConfirm">Reset Password</button>
+                    </div> 
+                    <br>
+                    <div style="text-align: right; line-height: 150%;">
+                    Remember your password? <a href="login.html">Log in</a><br>
+                    New? <a href="register.html">Sign up</a>
+                    </div>
+                </form>
+            </div>
+        </div>
         <%!
             String email, pass, userType, table, query;
             OracleConnection oconn;
@@ -85,32 +124,5 @@
         <%                   
             }   
         %>
-        <form>
-            <div>
-                <br/><br/><br/><br/>
-                <table border="1" style="font-size: 100%; color:whitesmoke; background-color: black">
-                    <thead>
-                        <tr><th colspan="2">RESET YOUR PASSWORD</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>NEW PASSWORD</td>
-                            <td><input type="password" name="tpass" id="tpass" required></td>
-                        </tr>
-                        <tr>
-                            <td>CONFIRM PASSWORD</td>
-                            <td><input type="password" name="cpass" id="cpass" required></td>
-                        </tr>
-                        <tr><td><button type="submit" style="font-size: 50%" name="bConfirm">Confirm</button></td>
-                            <td>
-                                <button type="reset" style="font-size: 50%" name="bClear">Clear</button>
-                            </td>
-                    </tbody>
-                    <tfoot>
-                        <th  colspan="2"> &copy; TECHNO INDIA TECHNOLOGIES &reg;</th>
-                    </tfoot>
-                </table>
-            </div>
-        </form>
     </body>
 </html>
