@@ -5,3 +5,4 @@ src/java/mail.properties
 web/StatPages/media/
 web/WEB-INF/db.properties/
 web/WEB-INF/mail.properties
+nbproject
