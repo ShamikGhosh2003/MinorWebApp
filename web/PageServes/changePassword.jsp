@@ -51,13 +51,14 @@
             OracleConnection oconn;
             OraclePreparedStatement ops;
             OracleResultSet ors = null;
-            HttpSession sess;
-            java.util.Properties props = new java.util.Properties();
+            HttpSession sess;            
             String oconnUrl, oconnUsername, oconnPassword;
+            String mailUsername, mailPassword;
         %>
         <%
             try {
                 InputStream input = application.getResourceAsStream("/WEB-INF/db.properties");
+                Properties props = new Properties();
                 props.load(input);
                 oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
                     + props.getProperty("port") + ":" + props.getProperty("SID");
@@ -65,6 +66,14 @@
                 oconnPassword = props.getProperty("password");
             } catch (IOException ex) {
                 out.println("Error: " + ex.getMessage());
+            }
+            try (InputStream mailInput = application.getResourceAsStream("/WEB-INF/mail.properties")) {
+                Properties mailProps = new Properties();
+                mailProps.load(mailInput);
+                mailUsername = mailProps.getProperty("username");
+                mailPassword = mailProps.getProperty("password");
+                } catch (IOException ex) {
+                    throw new ServletException(ex);
             }
             
             if(request.getParameter("submit")!=null)
@@ -107,8 +116,8 @@
                             vto = email;
                             vsubject = "Password Changed Successfully";
                             vbody = "Your recent password Change was successful! You can now login using the new password. \nLogin link: http://localhost:8080/MinorWebApp/StatPages/login.html";
-                            final String username = "medfinder23@gmail.com";
-                            final String password = "kbhypfhmnpaftssw";
+                            final String username = mailUsername;
+                            final String password = mailPassword;
 
                             Properties props = new Properties();
                             props.put("mail.smtp.auth","true");
