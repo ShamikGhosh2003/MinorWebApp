@@ -21,8 +21,8 @@ import oracle.jdbc.OracleResultSet;
 @WebServlet(name = "CheckLogin", urlPatterns = {"/CheckLogin"})
 public class CheckLogin extends HttpServlet {
     OracleConnection oconn;
-    OraclePreparedStatement ops1, ops2;
-    OracleResultSet ors1=null, ors2=null;
+    OraclePreparedStatement ops1, ops2, ops3;
+    OracleResultSet ors1=null, ors2=null, ors3=null;
     String email, password, userType;
     
     // Oconn connection handling, change the classname in the try line: classname.class.getClassLoader()
@@ -58,24 +58,36 @@ public class CheckLogin extends HttpServlet {
             out.println("<body>");
             email = request.getParameter("email");
             password = request.getParameter("password");
+            //password = hash.passwordHash(password);
+            email = email.toLowerCase();
             try {
                 DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                 oconn = (OracleConnection) DriverManager.getConnection(oconnUrl,oconnUsername,oconnPassword);
-                ops1 = (OraclePreparedStatement) oconn.prepareStatement("SELECT * FROM CUSTOMER WHERE EMAIL = ? AND PASSWORD = ?");
+                ops1 = (OraclePreparedStatement) oconn.prepareStatement("SELECT * FROM ADMIN WHERE EMAIL = ? AND PASSWORD = ?");
                 ops1.setString(1,email);
                 ops1.setString(2,password);
                 ors1 = (OracleResultSet) ops1.executeQuery();
-                ops2 = (OraclePreparedStatement) oconn.prepareStatement("SELECT * FROM PHARMACY WHERE EMAIL = ? AND PASSWORD = ?");
+                ops2 = (OraclePreparedStatement) oconn.prepareStatement("SELECT * FROM CUSTOMER WHERE EMAIL = ? AND PASSWORD = ?");
                 ops2.setString(1,email);
                 ops2.setString(2,password);
                 ors2 = (OracleResultSet) ops2.executeQuery();
+                ops3 = (OraclePreparedStatement) oconn.prepareStatement("SELECT * FROM PHARMACY WHERE EMAIL = ? AND PASSWORD = ?");
+                ops3.setString(1,email);
+                ops3.setString(2,password);
+                ors3 = (OracleResultSet) ops3.executeQuery();
                 if(ors1.next()){
+                    userType = "ADMIN";
+                    HttpSession sess = request.getSession(true);
+                    sess.setAttribute("userType",userType);
+                    sess.setAttribute("id",email);
+                    response.sendRedirect("http://localhost:8080/MinorWebApp/StatPages/admin-database.html");
+                }else if(ors2.next()){
                     userType = "CUSTOMER";
                     HttpSession sess = request.getSession(true);
                     sess.setAttribute("userType",userType);
                     sess.setAttribute("email",email);
-                    response.sendRedirect("http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp");
-                }else if(ors2.next()){
+                    response.sendRedirect("http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp");
+                }else if(ors3.next()){
                     userType = "PHARMACY";
                     HttpSession sess = request.getSession(true);
                     sess.setAttribute("userType",userType);
@@ -89,6 +101,8 @@ public class CheckLogin extends HttpServlet {
                 oconn.close();
             } catch (SQLException ex) {
                 Logger.getLogger(CheckLogin.class.getName()).log(Level.SEVERE, null, ex);
+                out.println("<h2 style='color: red'>"+ex.getMessage()+"</h2>");
+                
             }
             out.println("</body>");
             out.println("</html>");
