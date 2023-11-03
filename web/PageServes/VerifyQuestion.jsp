@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>VerifyQuestion JSP</title>
+        <title>Verify Question JSP</title>
         <script>
             function funClose()
             {
@@ -50,9 +50,11 @@
             {
                 userType = sess.getAttribute("userType").toString();
             }
-            if(userType.equals("CUSTOMER"))
+            if(userType.equals("ADMIN"))
+                table = "ADMIN";
+            else if(userType.equals("CUSTOMER"))
                 table = "CUSTOMER";
-            if(userType.equals("PHARMACY"))
+            else if(userType.equals("PHARMACY"))
                 table = "PHARMACY";
             query = "SELECT * FROM "+table+" WHERE EMAIL=?";
             ops = (OraclePreparedStatement) oconn.prepareStatement(query);

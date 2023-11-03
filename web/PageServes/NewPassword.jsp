@@ -3,6 +3,7 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="oracle.jdbc.OraclePreparedStatement"%>
 <%@page import="oracle.jdbc.OracleConnection"%>
+<%@page import="Webpack.hash"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -76,6 +77,7 @@
                 {
                     sess = request.getSession(false);
                     pass = request.getParameter("tpass");
+                    pass = hash.passwordHash(pass);
                     email = sess1.getAttribute("email").toString();
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl,oconnUsername,oconnPassword);
@@ -83,6 +85,8 @@
                         userType = sess.getAttribute("userType").toString();
                     if(userType.equals("CUSTOMER"))
                         table = "CUSTOMER";
+                    if(userType.equals("ADMIN"))
+                        table = "ADMIN";
                     if(userType.equals("PHARMACY"))
                         table = "PHARMACY";
                     query = "UPDATE "+table+" SET PASSWORD=? WHERE EMAIL=?";

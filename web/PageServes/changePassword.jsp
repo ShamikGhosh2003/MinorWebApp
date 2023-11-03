@@ -14,6 +14,7 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="oracle.jdbc.OraclePreparedStatement"%>
 <%@page import="oracle.jdbc.OracleConnection"%>
+<%@page import="Webpack.hash"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!DOCTYPE html>
@@ -90,7 +91,9 @@
                     if(userType.equals("PHARMACY"))
                         table = "PHARMACY";
                     oldpass = request.getParameter("current-password");
+                    oldpass = hash.passwordHash(oldpass);
                     newpass = request.getParameter("new-password");
+                    newpass = hash.passwordHash(newpass);
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl,oconnUsername,oconnPassword);
                     query = "SELECT * FROM "+table+" WHERE EMAIL=?";
