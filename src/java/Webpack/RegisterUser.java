@@ -94,7 +94,7 @@ public class RegisterUser extends HttpServlet {
                 fname = fname.toUpperCase();
                 lname = lname.toUpperCase();
                 address = address.toUpperCase();
-                sans = sans.toUpperCase();
+                password = hash.passwordHash(password);
                 out.println("<h1>Displaying the HTML input values in this servlet...</h1>");
                 out.println("<h3>CID: "+cid+"</h3>");
                 out.println("<h3>Email: "+email+"</h3>");
