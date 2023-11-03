@@ -28,8 +28,8 @@ import oracle.jdbc.OracleResultSet;
 @WebServlet(name = "ValidateEmail", urlPatterns = {"/ValidateEmail"})
 public class ValidateEmail extends HttpServlet {
     OracleConnection oconn;
-    OraclePreparedStatement ops1, ops2;
-    OracleResultSet ors1, ors2;
+    OraclePreparedStatement ops1, ops2, ops3;
+    OracleResultSet ors1, ors2, ors3;
     String email, userType, table;
     String vto, vfrom, vsubject, vbody; //Variables required to compose the email 
     
@@ -76,29 +76,40 @@ public class ValidateEmail extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             email = request.getParameter("email");
+            email = email.toLowerCase();
             try {
                 DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                 oconn = (OracleConnection) DriverManager.getConnection(oconnUrl,oconnUsername,oconnPassword);
-                ops1 = (OraclePreparedStatement) oconn.prepareStatement("SELECT * FROM CUSTOMER WHERE EMAIL = ?");
+                ops1 = (OraclePreparedStatement) oconn.prepareStatement("SELECT * FROM ADMIN WHERE EMAIL = ?");
                 ops1.setString(1,email);
                 ors1 = (OracleResultSet) ops1.executeQuery();
-                ops2 = (OraclePreparedStatement) oconn.prepareStatement("SELECT * FROM PHARMACY WHERE EMAIL = ?");
+                ops2 = (OraclePreparedStatement) oconn.prepareStatement("SELECT * FROM CUSTOMER WHERE EMAIL = ?");
                 ops2.setString(1,email);
                 ors2 = (OracleResultSet) ops2.executeQuery();
+                ops3 = (OraclePreparedStatement) oconn.prepareStatement("SELECT * FROM PHARMACY WHERE EMAIL = ?");
+                ops3.setString(1,email);
+                ors3 = (OracleResultSet) ops3.executeQuery();
                 boolean ors1val = ors1.next();
                 boolean ors2val = ors2.next();
+                boolean ors3val = ors3.next();
                 if(ors1val){
+                    userType = "ADMIN";
+                    HttpSession sess = request.getSession(true);
+                    sess.setAttribute("userType",userType);
+                    out.println("<h2>Inside ADMIN</h2>");
+                }if(ors2val){
                     userType = "CUSTOMER";
                     HttpSession sess = request.getSession(true);
                     sess.setAttribute("userType",userType);
                     out.println("<h2>Inside CUSTOMER</h2>");
-                }if(ors2val){
+                }
+                if(ors3val){
                     userType = "PHARMACY";
                     HttpSession sess = request.getSession(true);
                     sess.setAttribute("userType",userType);
-                    out.println("<h2>Inside CUSTOMER</h2>");
+                    out.println("<h2>Inside PHARMACY</h2>");
                 }
-                if(ors1val || ors2val)
+                if(ors1val || ors2val || ors3val)
                 {
                     vto = email;
                     vsubject = "Forgot Password!!!";
