@@ -34,7 +34,7 @@
             oconnPassword = props.getProperty("password");
             DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
             oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-            query = "SELECT * FROM MEDICINE WHERE MNAME = ?";
+            query = "SELECT P.PNAME, M.MNAME, PMS.MQTY, PMS.PRICE FROM PHARMACY P,MEDICINE M, PHARM_MED_STOCK PMS WHERE M.MID = (SELECT MID FROM MEDICINE WHERE MNAME = ?) AND P.PID=PMS.PID AND M.MID=PMS.MID";
             ops = (OraclePreparedStatement) oconn.prepareCall(query);
             ops.setString(1, request.getParameter("medicineName"));
             ors = (OracleResultSet) ops.executeQuery();

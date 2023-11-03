@@ -67,6 +67,9 @@
                 %>
                 </select>
                 <input type="submit" value="Search">
+                <br><br>
+                <a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback Form</a>
+                <br><br>
             </form>
         </div>
     </main>
