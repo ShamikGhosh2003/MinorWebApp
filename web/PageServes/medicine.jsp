@@ -54,7 +54,7 @@
             <%
                 DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                 oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-                query = "SELECT * FROM MEDICINE ORDER BY MID ASC";
+                query = "SELECT MID,MNAME,MCAT, TO_CHAR(TRUNC(MEDICINE.MEXP), 'YYYY-MM-DD') AS MEXP FROM MEDICINE ORDER BY MID ASC ";
                 ops = (OraclePreparedStatement) oconn.prepareCall(query);
                 ors = (OracleResultSet) ops.executeQuery();
                 orsm = (OracleResultSetMetaData) ors.getMetaData();
