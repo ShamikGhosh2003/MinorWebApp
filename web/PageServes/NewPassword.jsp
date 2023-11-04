@@ -77,7 +77,7 @@
                 {
                     sess = request.getSession(false);
                     pass = request.getParameter("tpass");
-                    pass = hash.passwordHash(pass);
+                    //pass = hash.passwordHash(pass);
                     email = sess1.getAttribute("email").toString();
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl,oconnUsername,oconnPassword);
