@@ -91,9 +91,9 @@
                     if(userType.equals("PHARMACY"))
                         table = "PHARMACY";
                     oldpass = request.getParameter("current-password");
-                    oldpass = hash.passwordHash(oldpass);
+                    //oldpass = hash.passwordHash(oldpass);
                     newpass = request.getParameter("new-password");
-                    newpass = hash.passwordHash(newpass);
+                    //newpass = hash.passwordHash(newpass);
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl,oconnUsername,oconnPassword);
                     query = "SELECT * FROM "+table+" WHERE EMAIL=?";
@@ -179,7 +179,7 @@
         </header>
         <div class="form-container">
             <div class="form-box" style="width: 45%;">
-                <form onsubmit="validateForm()"><!--method="POST" name="change-password" action="http://localhost:8080/MinorWebApp/ChangePassword"--> 
+                <form onsubmit="validateForm()" method="POST"><!--method="POST" name="change-password" action="http://localhost:8080/MinorWebApp/ChangePassword"--> 
                     <h2 style="text-align: center;">CHANGE PASSWORD</h2>
                     <br>
                     <div id="error-alert" style="color: red; text-align: center; font-weight: bold;"></div>

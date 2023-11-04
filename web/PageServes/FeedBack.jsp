@@ -59,10 +59,10 @@
                 }
                 to1 = mailUsername;
                 subject1 = "FEEDBACK from a "+userType;
-                body1 = request.getParameter("feedback");
+                body1 = request.getParameter("feedback") + "\nFeedback given by: \nemail: "+email;
                 to2 = email;
-                subject2 = "Feedback";
-                body2 = "Thank You for your valuable feedback! This will help us improve!!";
+                subject2 = "FEEDBACK";
+                body2 = "Thank You for your valuable feedback! This will help us improve!! \n\nYour feedback was: " + request.getParameter("feedback");
                 final String username = mailUsername;
                 final String password = mailPassword;
 
@@ -108,7 +108,7 @@
         %>
         <div class="form-container">
             <div class="form-box" style="width: 45%;">
-                <form> <!-- method="POST" action="http://localhost:8080/MinorWebApp/Feedback"-->
+                <form method="POST"> <!-- method="POST" action="http://localhost:8080/MinorWebApp/Feedback"-->
                     <h2 style="text-align: center;">FEEDBACK</h2>
                     <br>
                     <p>Please let us know how we can do better.</p>
