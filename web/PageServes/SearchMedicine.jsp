@@ -68,7 +68,9 @@
                 </select>
                 <input type="submit" value="Search">
                 <br><br>
-                <a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback Form</a>
+                <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback Form</a></button>
+                <br>
+                <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp">Change Password</a></button>
                 <br><br>
             </form>
         </div>
