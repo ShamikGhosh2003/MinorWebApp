@@ -1,9 +1,3 @@
-<%-- 
-    Document   : FeedBack
-    Created on : 3 Nov, 2023, 5:33:32 AM
-    Author     : ADMIN
---%>
-
 <%@page import="java.io.IOException"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="javax.mail.MessagingException"%>
@@ -33,10 +27,11 @@
             <a href="profile.html">Profile</a>
             <a href="about.html">About Us</a>
             <a href="#">Contact</a>
+            <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
             </nav>
         </header>
         <%!
-            String to1, to2, from1, from2, subject1, subject2, body1, body2;
+            String to1, to2, from1, from2, subject1, subject2, body1, body2, link;
             String email, userType;
             String mailUsername, mailPassword;
             HttpSession sess; 
@@ -94,10 +89,14 @@
                     message2.setSubject(subject2);
                     message2.setText(body2);
                     Transport.send(message2);
+                    if(userType.equals("CUSTOMER"))
+                        link = "http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp";
+                    else if(userType.equals("PHARMACY"))
+                        link = "http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html";
         %>
                         <script>
                             alert("Your feedback has been recorded! You are being forwarded to home page!");
-                            location.href="http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp";
+                            location.href="<%=link%>";
                         </script>
         <% 
                     
