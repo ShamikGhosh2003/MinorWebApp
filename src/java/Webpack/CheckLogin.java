@@ -92,7 +92,7 @@ public class CheckLogin extends HttpServlet {
                     HttpSession sess = request.getSession(true);
                     sess.setAttribute("userType",userType);
                     sess.setAttribute("email",email);
-                    response.sendRedirect("http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp");//StatPages/PharmacyHome.html");
+                    response.sendRedirect("http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html");
                 }else{
                     response.sendRedirect("http://localhost:8080/MinorWebApp/StatPages/WrongPass.html");
                 }
