@@ -142,7 +142,7 @@
                             </script>
                     <%      to = mailUsername;
                             subject = "REVIEW NEW MEDICINE ADDED";
-                            body = "New Medicine added to MEDICINE table by PHARMACY bearing the email: "+email+"\nPlease review this new medicine";
+                            body = "New Medicine added to MEDICINE table by PHARMACY bearing the email: "+email+"\nPlease review this new medicine.\nNew medicine name: "+mname;
                             final String username = mailUsername;
                             final String password = mailPassword;
 
