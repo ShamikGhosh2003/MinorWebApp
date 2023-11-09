@@ -25,7 +25,7 @@
         <header class="header">           
             <a href="#" class="logo">MedFinder</a>
             <nav class="navbar">
-            <a href="index.html">Home</a>
+            <a href="../StatPages/PharmacyHome.html">Home</a>
             <a href="registerUser.html">Register</a>
             <a href="about.html">About Us</a>
             <a href="#">Contact</a>
