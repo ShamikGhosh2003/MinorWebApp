@@ -89,8 +89,10 @@
                         %>
                         <td>
                             <form>
-                                <button type="button" name="Modify">MODIFY</button>
-                                <button type="submit" name="Delete">DELETE</button>
+                                <div class="input-group button-group">
+                                    <button type="button" name="Modify" class="button-80">MODIFY</button>
+                                    <button type="submit" name="Delete" class="button-80">DELETE</button>
+                                </div>
                             </form>
                         </td>
                     </tr>    
