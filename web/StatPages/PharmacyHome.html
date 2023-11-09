@@ -1,16 +1,68 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy Home</title>
+    <link rel="stylesheet" href="main-style.css">
+    <script>
+        function redirect(url) {
+            url = "http://localhost:8080/MinorWebApp/PageServes/" + url;
+            window.location.href = url;
+        }
+    </script>
+</head>
+<body>
+    <header class="header">           
+        <a href="#" class="logo">MedFinder</a>
+        <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="registerUser.html">Register</a>
+        <a href="about.html">About Us</a>
+        <a href="#">Contact</a>
+        <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+        </nav>
+    </header>
+    <main class="admin-panel">
+        <div class="table-container">
+            <h2>Pharmacy Home Page</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Table</th>
+                        <th>Description</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Check Orders</td>
+                        <td>Information about the Orders.</td>
+                        <td><a href="#" onclick="redirect('CheckOrders.jsp')">Check Orders</a></td>
+                    </tr>
+                    <tr>
+                        <td>Pharmacy Stock</td>
+                        <td>Information about the medicine stock.</td>
+                        <td><a href="#" onclick="redirect('PharmacyStock.jsp')">Pharmacy Stock</a></td>
+                    </tr>
+                    <tr>
+                        <td>Add New Medicine</td>
+                        <td>Add a new medicine Orders accepted by the system.</td>
+                        <td><a href="#" onclick="redirect('AddMedicine.jsp')">Add Medicine</a></td>
+                    </tr>
+                    <tr>
+                         <td>Update Inventory</td>
+                         <td>Update Pharmacy's Inventory</td>
+                         <td><a href="#" onclick="redirect('UpdateInventory.jsp')">Update Inventory</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            <br><br>
+            <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback Form</a></button>
+            <br>
+            <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp">Change Password</a></button>
+            <br><br>
+        </div>
+    </main>
+</body>
 </html>
