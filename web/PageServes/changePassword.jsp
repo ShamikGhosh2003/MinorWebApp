@@ -30,7 +30,7 @@
                var newPassword = document.forms['change-password']['new-password'].value;
                var confirmPassword = document.forms['change-password']['confirm-password'].value;
 
-               if(currentPassword == "" || newPassword == "" || confirmPassword == "") {
+               if(currentPassword === "" || newPassword === "" || confirmPassword === "") {
                     document.getElementById('error-alert').innerHTML = "All fields are required.";
                     event.preventDefault();
                }
@@ -38,7 +38,7 @@
                     document.getElementById('error-alert').innerHTML = "Password must be at least 8 characters.";
                     event.preventDefault();
                }
-               if(newPassword != confirmPassword) {
+               if(newPassword !== confirmPassword) {
                     document.getElementById('error-alert').innerHTML = "Passwords do not match.";
                     event.preventDefault();
                }
@@ -175,6 +175,7 @@
             <a href="profile.html">Profile</a>
             <a href="about.html">About Us</a>
             <a href="#">Contact</a>
+            <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
             </nav>
         </header>
         <div class="form-container">
@@ -205,7 +206,7 @@
                    </div>                   
                     <br>
                     <div style="text-align: right; line-height: 150%;">
-                    Forgot password? <a href="forgot-password.html">Reset password</a><br>
+                    Forgot password? <a href="../StatPages/ForgotPassword.html">Reset password</a><br>
                     </div>
                 </form>
             </div>
