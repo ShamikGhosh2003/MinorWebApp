@@ -37,6 +37,7 @@
             query = "SELECT P.PNAME, M.MNAME, PMS.MQTY, PMS.PRICE FROM PHARMACY P,MEDICINE M, PHARM_MED_STOCK PMS WHERE M.MID = (SELECT MID FROM MEDICINE WHERE MNAME = ?) AND P.PID=PMS.PID AND M.MID=PMS.MID";
             ops = (OraclePreparedStatement) oconn.prepareCall(query);
             ops.setString(1, request.getParameter("medicineName"));
+            //ops.setString(2, request.getParameter("city"));
             ors = (OracleResultSet) ops.executeQuery();
             orsm = (OracleResultSetMetaData) ors.getMetaData();
             hasResult = ors.next();
@@ -53,6 +54,7 @@
         <a href="registerUser.html">Register</a>
         <a href="about.html">About Us</a>
         <a href="#">Contact</a>
+        <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
         </nav>
     </header>
     <main>
