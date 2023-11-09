@@ -20,7 +20,7 @@
         OraclePreparedStatement ops;
         OracleResultSet ors; //Store the data in the webpage from oracle
         OracleResultSetMetaData orsm;
-        int reccounter; //record counter
+        int reccounter=0; //record counter
         String query;
         java.util.Properties props = new java.util.Properties();
         String oconnUrl, oconnUsername, oconnPassword;
@@ -46,6 +46,7 @@
         <a href="registerUser.html">Register</a>
         <a href="about.html">About Us</a>
         <a href="#">Contact</a>
+        <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
         </nav>
     </header>
     <main class="admin-panel">
@@ -64,8 +65,9 @@
                     <%
                         for(int i=1; i<=orsm.getColumnCount(); i++)
                         {
+                            reccounter++; 
                     %>
-                    <th><%=orsm.getColumnName(i)%></th>
+                            <th><%=orsm.getColumnName(i)%></th>
                     <%
                         }
                     %>
@@ -81,7 +83,7 @@
                             for(int i=1; i<=orsm.getColumnCount(); i++)
                             {
                         %>
-                        <td><%=ors.getString(i)%></td>
+                                <td><%=ors.getString(i)%></td>
                         <% 
                             }
                         %>
@@ -98,7 +100,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="8" style="text-align: center">MedFinder</th>
+                        <th colspan="<%=reccounter+1%>" style="text-align: center">MedFinder</th>
                     </tr>
                 </tfoot>
             </table>
