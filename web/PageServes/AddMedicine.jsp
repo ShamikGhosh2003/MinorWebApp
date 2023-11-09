@@ -79,6 +79,7 @@
                 if(sess!=null)
                     email = sess.getAttribute("email").toString();
                 mname = request.getParameter("mname");
+                sess.setAttribute("mname",mname);
                 //mname = mname.toUpperCase();
                 try{
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
@@ -139,7 +140,7 @@
                                 alert("Medicine does not exist in Medicine database of the website!!");
                                 alert("Directing you to Add New Medicine Registration page");
                                 //Change the link here or make a system so it automatically creates a new medicine in the database
-                                location.href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html";
+                                location.href="http://localhost:8080/MinorWebApp/PageServes/AddNewMedicine.jsp";
                             </script>
                     <%            
                         }
