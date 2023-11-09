@@ -1,4 +1,4 @@
-package webpack;
+package Webpack;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,7 +25,7 @@ public class SessLogOut extends HttpServlet {
             out.println("<body>");
             HttpSession sess = request.getSession(false);
             sess.invalidate();
-            response.sendRedirect("SignOut.html");
+            response.sendRedirect("StatPages/login.html");
             out.println("</body>");
             out.println("</html>");
         }
