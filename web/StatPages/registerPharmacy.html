@@ -16,15 +16,15 @@
                var confirmPassword = document.forms['register']['confirm-password'].value;
                var gstn = document.forms['register']['gstn'].value;
 
-               if(name == "" || email == "" || phone == "" || age == "" || address == "" || pincode == "" || password == "" || confirmPassword == "") {
+               if(name === "" || email === "" || phone === "" || age === "" || address === "" || pincode === "" || password === "" || confirmPassword === "") {
                     document.getElementById('error-alert').innerHTML = "All fields are required.";
                     event.preventDefault();
                }
-               if(phone.length != 10 || isNaN(phone)) {
+               if(phone.length !== 10 || isNaN(phone)) {
                     document.getElementById('error-alert').innerHTML = "Please enter valid phone number.";
                     event.preventDefault();
                }
-               if(pincode.length != 6 || isNaN(pincode)) {
+               if(pincode.length !== 6 || isNaN(pincode)) {
                     document.getElementById('error-alert').innerHTML = "Please enter valid pincode.";
                     event.preventDefault();
                }
@@ -32,7 +32,7 @@
                     document.getElementById('error-alert').innerHTML = "Password must be at least 8 characters.";
                     event.preventDefault();
                }
-               if(password != confirmPassword) {
+               if(password !== confirmPassword) {
                     document.getElementById('error-alert').innerHTML = "Passwords do not match.";
                     event.preventDefault();
                }
@@ -81,6 +81,17 @@
                     <div class="input-group">
                         <label for="address">Address:</label>
                         <input type="text" name="address" placeholder="123, Gold Street" required>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="city">City:</label>
+                        <select id="city" name="city" required>
+                            <option value="" selected disabled hidden>Select a City</option>
+                            <option value="KOLKATA">Kolkata</option>
+                            <option value="HOWRAH">Howrah</option>
+                            <option value="BURDWAN">Burdwan</option>
+                            <option value="DURGAPUR">Durgapur</option>
+                        </select>
                     </div>
                     <br>
                     <div class="input-group">

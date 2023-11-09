@@ -7,7 +7,8 @@
         <title>Register</title>
         <script>
             function validateForm() {
-               var name = document.forms['register']['pname'].value;
+               var fname = document.forms['register']['fname'].value;
+               var lname = document.forms['register']['lname'].value;
                var email = document.forms['register']['email'].value;
                var phone = document.forms['register']['phone'].value;
                var age = document.forms['register']['age'].value;
@@ -16,7 +17,7 @@
                var password = document.forms['register']['password'].value;
                var confirmPassword = document.forms['register']['confirm-password'].value;
 
-               if(name == "" || email == "" || phone == "" || age == "" || address == "" || pincode == "" || password == "" || confirmPassword == "") {
+               if(fname === "" || lname === "" || email === "" || phone === "" || age === "" || address === "" || pincode === "" || password === "" || confirmPassword === "") {
                     document.getElementById('error-alert').innerHTML = "All fields are required.";
                     event.preventDefault();
                }
@@ -24,11 +25,11 @@
                     document.getElementById('error-alert').innerHTML = "Please enter valid age.";
                     event.preventDefault();
                }
-               if(phone.length != 10 || isNaN(phone)) {
+               if(phone.length !== 10 || isNaN(phone)) {
                     document.getElementById('error-alert').innerHTML = "Please enter valid phone number.";
                     event.preventDefault();
                }
-               if(pincode.length != 6 || isNaN(pincode)) {
+               if(pincode.length !== 6 || isNaN(pincode)) {
                     document.getElementById('error-alert').innerHTML = "Please enter valid pincode.";
                     event.preventDefault();
                }
@@ -36,7 +37,7 @@
                     document.getElementById('error-alert').innerHTML = "Password must be at least 8 characters.";
                     event.preventDefault();
                }
-               if(password != confirmPassword) {
+               if(password !== confirmPassword) {
                     document.getElementById('error-alert').innerHTML = "Passwords do not match.";
                     event.preventDefault();
                }
@@ -61,22 +62,22 @@
                     <div id="error-alert" style="color: red; text-align: center; font-weight: bold;"></div>
                     <div class="input-group">
                         <label for="fname">First Name:</label>
-                        <input type="text" name="fname" placeholder="John" required>
+                        <input type="text" id="fname" name="fname" placeholder="John" required>
                     </div>
                     <br>
                     <div class="input-group">
                         <label for="lname">Last Name:</label>
-                        <input type="text" name="lname" placeholder="Doe" required>
+                        <input type="text" id ="lname" name="lname" placeholder="Doe" required>
                     </div>
                     <br>
                     <div class="input-group">
                         <label for="email">Email:</label>
-                        <input type="email" name="email" placeholder="example@domain.com" required>
+                        <input type="email" id="email" name="email" placeholder="example@domain.com" required>
                     </div>
                     <br>
                     <div class="input-group">
                         <label for="phone">Phone:</label>
-                        <input type="text" name="phone" placeholder="9876543210" required>
+                        <input type="text" id="phone" name="phone" placeholder="9876543210" required>
                     </div>
                     <br>
                     <div class="input-group">
@@ -87,6 +88,17 @@
                     <div class="input-group">
                         <label for="address">Address:</label>
                         <input type="text" name="address" placeholder="123, Gold Street" required>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="city">City:</label>
+                        <select id="city" name="city" required>
+                            <option value="" selected disabled hidden>Select a City</option>
+                            <option value="KOLKATA">Kolkata</option>
+                            <option value="HOWRAH">Howrah</option>
+                            <option value="BURDWAN">Burdwan</option>
+                            <option value="DURGAPUR">Durgapur</option>
+                        </select>
                     </div>
                     <br>
                     <div class="input-group">
@@ -114,7 +126,7 @@
                     <br>
                     <div class="input-group">
                         <label for="sans">Security Answer:</label>
-                        <input type="text" name="sans" placeholder="Security Answer" required>
+                        <input type="text" name="sans" id="sans" placeholder="Security Answer" required>
                     </div>
                     <br>
                     <div class="input-group">
