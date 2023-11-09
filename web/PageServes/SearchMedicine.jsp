@@ -44,6 +44,7 @@
         <a href="registerUser.html">Register</a>
         <a href="about.html">About Us</a>
         <a href="#">Contact</a>
+        <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
         </nav>
     </header>
     <main>
@@ -66,6 +67,14 @@
                     }
                 %>
                 </select>
+                <select id="city" name="city" required>
+                    <option value="" selected disabled hidden>Select a City</option>
+                    <option value="KOLKATA">Kolkata</option>
+                    <option value="HOWRAH">Howrah</option>
+                    <option value="BURDWAN">Burdwan</option>
+                    <option value="DURGAPUR">Durgapur</option>
+                </select>
+                <br>
                 <input type="submit" value="Search">
                 <br><br>
                 <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback Form</a></button>
