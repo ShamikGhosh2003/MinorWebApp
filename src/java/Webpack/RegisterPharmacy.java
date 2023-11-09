@@ -21,7 +21,7 @@ import oracle.jdbc.OracleResultSet;
 
 @WebServlet(name = "RegisterPharmacy", urlPatterns = {"/RegisterPharmacy"})
 public class RegisterPharmacy extends HttpServlet {
-    String pid, pname, gstn, email, phone, address, pincode, password, status = "OPERATIONAL", sques, sans, pidNum;
+    String pid, pname, gstn, email, phone, address, pincode, password, status = "OPERATIONAL", sques, sans, pidNum, city;
     //The below query gives us the last PID in the database, if #rows = NULL, retuns 0
     String query = "SELECT NVL((SELECT * FROM (SELECT PID FROM PHARMACY ORDER BY PID DESC) WHERE ROWNUM <=1),'0') AS PID FROM DUAL";
     OracleConnection oconn;
@@ -68,6 +68,7 @@ public class RegisterPharmacy extends HttpServlet {
             password = request.getParameter("password");
             sques = request.getParameter("sques");
             sans = request.getParameter("sans");
+            city = request.getParameter("city");
             try {
                 DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                 oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
@@ -104,11 +105,12 @@ public class RegisterPharmacy extends HttpServlet {
                 out.println("<h3>Password: "+password+"</h3>");
                 out.println("<h3>Phone: "+phone+"</h3>");
                 out.println("<h3>Address: "+address+"</h3>");
+                out.println("<h3>City: "+city+"</h3>");
                 out.println("<h3>Pincode: "+pincode+"</h3>");
                 out.println("<h3>Status (by default): "+status+"</h3>");
                 out.println("<h3>Security Question: "+sques+"</h3>");
                 out.println("<h3>Security Answer: "+sans+"</h3>");
-                ops = (OraclePreparedStatement) oconn.prepareCall("INSERT INTO PHARMACY(PID,PNAME,PASSWORD,ADDRESS,GSTN,EMAIL,PHONE,STATUS,PINCODE,SQUES,SANS) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+                ops = (OraclePreparedStatement) oconn.prepareCall("INSERT INTO PHARMACY(PID,PNAME,PASSWORD,ADDRESS,GSTN,EMAIL,PHONE,STATUS,PINCODE,SQUES,SANS,CITY) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
                 ops.setString(1,pid);
                 ops.setString(2,pname);
                 ops.setString(3,password);
@@ -120,6 +122,7 @@ public class RegisterPharmacy extends HttpServlet {
                 ops.setString(9,pincode);
                 ops.setString(10,sques);
                 ops.setString(11,sans);
+                ops.setString(12,city);
                 int x = ops.executeUpdate();
                 if(x>0)
                     out.println("<h3 style='color:green'>Data inserted Successfully....</h3>");
