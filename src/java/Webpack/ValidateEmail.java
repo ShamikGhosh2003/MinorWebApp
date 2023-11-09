@@ -111,7 +111,7 @@ public class ValidateEmail extends HttpServlet {
                 }
                 if(ors1val || ors2val || ors3val)
                 {
-                    vto = email;
+                    vto = email;                    
                     vsubject = "Forgot Password!!!";
                     vbody = "Please click the link below or copy paste it in your browser to reset your password";
                     final String username = mailUsername;
