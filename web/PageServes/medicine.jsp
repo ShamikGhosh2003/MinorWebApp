@@ -24,6 +24,7 @@
         String query;
         java.util.Properties props = new java.util.Properties();
         String oconnUrl, oconnUsername, oconnPassword;
+        String ident;
     %>
     <%
         try {
@@ -80,20 +81,26 @@
                     %>
                     <tr>
                         <%
+                            ident = "MEDICINE";
                             for(int i=1; i<=orsm.getColumnCount(); i++)
                             {
                         %>
                                 <td><%=ors.getString(i)%></td>
                         <% 
+                                if(orsm.getColumnName(i).equals("MID"))
+                                ident+=","+ors.getString(i);
                             }
                         %>
                         <td>
-                            <form>
-                                <div class="input-group button-group">
-                                    <button type="button" name="Modify" class="button-80">MODIFY</button>
-                                    <button type="submit" name="Delete" class="button-80">DELETE</button>
-                                </div>
-                            </form>
+                            <div class="input-group button-group">
+                                <form method="POST" action="http://localhost:8080/MinorWebApp/ModifyAll">
+                                    <!--<h3><%=ident%></h3>-->
+                                    <button type="submit" name="Modify" value="<%=ident%>" class="button-80">MODIFY</button>
+                                </form>
+                                <form method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
+                                    <button type="submit" name="Delete" value="<%=ident%>" class="button-80">DELETE</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>    
                     <% 
