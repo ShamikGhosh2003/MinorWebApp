@@ -79,7 +79,7 @@ public class CheckLogin extends HttpServlet {
                     userType = "ADMIN";
                     HttpSession sess = request.getSession(true);
                     sess.setAttribute("userType",userType);
-                    sess.setAttribute("id",email);
+                    sess.setAttribute("email",email);
                     response.sendRedirect("http://localhost:8080/MinorWebApp/StatPages/admin-database.html");
                 }else if(ors2.next()){
                     userType = "CUSTOMER";
