@@ -21,7 +21,7 @@
         OracleResultSet ors; //Store the data in the webpage from oracle
         OracleResultSetMetaData orsm;
         int reccounter=0; //record counter
-        String query, email;        
+        String query, email,ident;        
         java.util.Properties props = new java.util.Properties();
         HttpSession sess;
         String oconnUrl, oconnUsername, oconnPassword;
@@ -85,16 +85,21 @@
                     %>
                     <tr>
                         <%
+                            ident = "PHARM_MED_STOCK";
                             for(int i=1; i<=orsm.getColumnCount(); i++)
                             {
                         %>
                                 <td><%=ors.getString(i)%></td>
                         <% 
+                                if(orsm.getColumnName(i).equals("PID"))
+                                    ident+=","+ors.getString(i);
+                                if(orsm.getColumnName(i).equals("MID"))
+                                    ident+=","+ors.getString(i);
                             }
                         %>
                         <td>
-                            <form>
-                                <button type="submit" name="Delete">DELETE</button>
+                            <form method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
+                                <button type="submit" name="Delete" value="<%=ident%>" class="button-80">DELETE</button>
                             </form>
                         </td>
                     </tr>    
