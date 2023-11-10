@@ -11,14 +11,12 @@ body{
     background-position: center;
     background-attachment: fixed;
 }
-main {
-    overflow: hidden;
-}
-.header{
+header {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 20px 10%;
+    height: 20%;
+    padding: 20px 5% 20px 5%;
     background: transparent;
     display: flex;
     justify-content: space-between;
@@ -28,14 +26,24 @@ main {
     border-image-source: linear-gradient(to right, transparent, white, transparent);
     border-image-slice: 1;
 }
-.logo{
+.heading {
     font-size: 32px;
     color: #fff;
     text-decoration: none;
     font-weight: 650;
     filter: drop-shadow(0 0 5px #09001d);
+    font-family: 'Times New Roman', Times, serif;
+}
+.logo {
+    width: 100px;
+    height: 53px;
+    padding-right: 30px;
+}
+.navbar {
+    margin-left: auto;
 }
 .navbar a{
+    justify-content: flex-end;
     font-size: 15px;
     color: #fff;
     text-decoration: none;
@@ -46,15 +54,14 @@ main {
 .navbar a:hover{
     color: #a90799;
 }
+main {
+    padding-bottom: 100px;
+    padding-top: 100px;
+}
 .form-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
-    height: calc(100vh - 90px); /* View height - header */
-    margin-top: 90px; /* Same as the header height */
-    padding-top: 100px;
-    padding-bottom: 50px;
 }
 .form-box {
     border: 3px;
@@ -142,10 +149,6 @@ select {
 }
 .button-80:focus {
     outline: none;
-}
-main {
-    padding: 20px;
-    margin-top: 90px;
 }
 .table-container {
     background-color: #fff;
