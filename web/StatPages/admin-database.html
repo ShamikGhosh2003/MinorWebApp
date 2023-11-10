@@ -4,7 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <link rel="stylesheet" href="main-style.css">
+    <link rel="stylesheet" href="../stylesheet/main-style.css">
+    <style>
+        h1 {
+            text-align: center;
+            padding-bottom: 15px;
+        }
+    </style>
     <script>
         function redirect(url) {
             url = "http://localhost:8080/MinorWebApp/PageServes/" + url;
@@ -13,52 +19,52 @@
     </script>
 </head>
 <body>
-    <header class="header">           
-        <a href="#" class="heading">MedFinder</a>
+    <header>
+        <a href="#"><img src="../media/logo.png" class="logo"></a>
+        <span class="heading">MedFinder</span>
         <nav class="navbar">
         <a href="index.html">Home</a>
-        <a href="registerUser.html">Register</a>
         <a href="about.html">About Us</a>
-        <a href="#">Contact</a>
+        <a href="../PageServes/FeedBack.jsp">Feedback</a>
         <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
         </nav>
     </header>
     <main class="admin-panel">
         <div class="table-container">
-            <h2>Admin Panel</h2>
+            <h1>Project Database</h1>
             <table>
                 <thead>
                     <tr>
-                        <th>Table</th>
+                        <th>Table Name</th>
                         <th>Description</th>
-                        <th>Link</th>
+                        <th>Link to database table</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Customers</td>
-                        <td>Information about registered customers.</td>
-                        <td><a href="#" onclick="redirect('customer.jsp')">Customers</a></td>
+                        <td>CUSTOMER</td>
+                        <td>Information about the registered customers.</td>
+                        <td><a href="#" onclick="redirect('customer.jsp')">Customer</a></td>
                     </tr>
                     <tr>
-                        <td>Pharmacies</td>
-                        <td>Information about registered pharmacies.</td>
-                        <td><a href="#" onclick="redirect('pharmacy.jsp')">Pharmacies</a></td>
+                        <td>PHARMACY</td>
+                        <td>Information about the registered pharmacies.</td>
+                        <td><a href="#" onclick="redirect('pharmacy.jsp')">Pharmacy</a></td>
                     </tr>
                     <tr>
-                        <td>Orders</td>
+                        <td>ORDERS</td>
                         <td>Orders accepted by the system.</td>
                         <td><a href="#" onclick="redirect('orders.jsp')">Orders</a></td>
                     </tr>
                     <tr>
-                         <td>Pharmacy Med Stock</td>
-                         <td>Individual pharmacy's stock.</td>
-                         <td><a href="#" onclick="redirect('medPharmStock.jsp')">Med Pharmacy Stock</a></td>
+                         <td>PHARM_MED_STOCK</td>
+                         <td>An individual pharmacy's medicine stock.</td>
+                         <td><a href="#" onclick="redirect('medPharmStock.jsp')">Pharm_Med_Stock</a></td>
                     </tr>
                     <tr>
-                        <td>Medicine</td>
+                        <td>MEDICINE</td>
                         <td>Individual information about medicines.</td>
-                        <td><a href="#" onclick="redirect('medicine.jsp')">Medicines</a></td>
+                        <td><a href="#" onclick="redirect('medicine.jsp')">Medicine</a></td>
                     </tr>
                 </tbody>
             </table>
