@@ -11,8 +11,10 @@ body{
     background-position: center;
     background-attachment: fixed;
 }
+main {
+    overflow: hidden;
+}
 .header{
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -44,50 +46,6 @@ body{
 .navbar a:hover{
     color: #a90799;
 }
-.home{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 150vh;
-}
-.home-content{
-    border:none;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
-    padding:15px;
-    width: 25%;
-    background-color: rgb(252, 252, 216);
-    border-radius: 10px;
-    margin-right: 50px;
-    margin-top: 50px;
-}
-.home-content h2{
-    font-size: 25px;
-    font-weight: 700;
-    text-shadow: 0 0 10 px rgba(0,0,0,.3);
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-    color: #09001d;
-}
-.home-content .start-btn{
-    width: 250px;
-    height: 50px;
-    background: #c40094;
-    border: 2px solid #fff;
-    outline: none;
-    border-radius: 6px;
-    box-shadow: 0 0 10px #c40094;
-    font-size: 18px;
-    color: #fff;
-    letter-spacing: 1px;
-    font-weight: 400;
-    cursor: pointer;
-    transition: .5s;
-    padding: 0 20px;
-}
-.home-content .start-btn:hover {
-    background: #09001d;
-    box-shadow: none;
-}
 .form-container {
     display: flex;
     justify-content: center;
@@ -97,7 +55,6 @@ body{
     margin-top: 90px; /* Same as the header height */
     padding-top: 100px;
     padding-bottom: 50px;
-    overflow: auto;
 }
 .form-box {
     border: 3px;
@@ -106,7 +63,6 @@ body{
     width: 20%;
     background-color: rgb(238, 214, 228);
     border-radius: 10px;
-    overflow-y: auto;
 }
 .form-box h2 {
     text-align: center;

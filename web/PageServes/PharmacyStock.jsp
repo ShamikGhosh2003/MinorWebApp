@@ -44,7 +44,7 @@
 </head>
 <body>
     <header class="header">           
-        <a href="#" class="logo">MedFinder</a>
+        <a href="#" class="heading">MedFinder</a>
         <nav class="navbar">
         <a href="../StatPages/PharmacyHome.html">Home</a>
         <a href="registerUser.html">Register</a>
