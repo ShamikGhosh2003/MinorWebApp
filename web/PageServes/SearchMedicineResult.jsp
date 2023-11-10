@@ -62,12 +62,13 @@
     </style>
     <%! 
         OracleConnection oconn;
-        OraclePreparedStatement ops;
-        OracleResultSet ors; //Store the data in the webpage from oracle
+        OraclePreparedStatement ops, ops1;
+        OracleResultSet ors, ors1; //Store the data in the webpage from oracle
         OracleResultSetMetaData orsm;
-        String query;
+        String query, query2;
         java.util.Properties props = new java.util.Properties();
         String oconnUrl, oconnUsername, oconnPassword;
+        String ident,email,cid;
     %>
     <%
         boolean hasResult = false;
@@ -80,13 +81,20 @@
             oconnPassword = props.getProperty("password");
             DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
             oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-            query = "SELECT P.PNAME, M.MNAME, P.ADDRESS, PMS.MQTY, PMS.PRICE FROM PHARMACY P,MEDICINE M, PHARM_MED_STOCK PMS WHERE M.MID = (SELECT MID FROM MEDICINE WHERE MNAME = ?) AND P.PID=PMS.PID AND M.MID=PMS.MID";
+            query = "SELECT P.PNAME, M.MNAME, P.ADDRESS, PMS.MQTY, PMS.PRICE ,P.PID, M.MID FROM PHARMACY P,MEDICINE M, PHARM_MED_STOCK PMS WHERE M.MID = (SELECT MID FROM MEDICINE WHERE MNAME = ?) AND P.PID=PMS.PID AND M.MID=PMS.MID";
             ops = (OraclePreparedStatement) oconn.prepareCall(query);
             ops.setString(1, request.getParameter("medicineName"));
             //ops.setString(2, request.getParameter("city"));
             ors = (OracleResultSet) ops.executeQuery();
             orsm = (OracleResultSetMetaData) ors.getMetaData();
-            hasResult = ors.next();
+            HttpSession sess = request.getSession(false);
+            if(session!=null)
+                email = sess.getAttribute("email").toString();
+            ops1 = (OraclePreparedStatement) oconn.prepareStatement("SELECT CID FROM CUSTOMER WHERE EMAIL = ?");
+            ops1.setString(1,email);
+            ors1 = (OracleResultSet) ops1.executeQuery();
+            ors1.next();
+            cid = ors1.getString("CID");
         } catch (Exception ex) {
             out.println("Error: " + ex.getMessage());
         }
@@ -106,31 +114,54 @@
     <main>
         <div class="result-container">
             <h2>Search Result</h2>
-            <%
-                if(hasResult) {
-            %>
             <table>
                 <thead>
                     <%
-                        for(int i=1; i<=orsm.getColumnCount(); i++)
+                        for(int i=1; i<=orsm.getColumnCount()-2; i++) //-2 given to exclude PID, MID from printing
                         {
                     %>
                     <th><%=orsm.getColumnName(i)%></th>
                     <%
                         }
                     %>
+                    <th>QUANTITY</th>
                 </thead>
                 <tbody>
+                    <%  
+                        while(ors.next())
+                        {
+                            hasResult=true; 
+                    %>
                     <tr>
                         <%
-                            for(int i=1; i<=orsm.getColumnCount(); i++)
+                            ident = "ORDERS,"+cid;
+                            int count = 0;
+                            for(int i=1; i<=orsm.getColumnCount(); i++) 
                             {
+                                if(orsm.getColumnName(i).equals("PID")){
+                                    ident+=","+ors.getString(i);++count;}
+                                if(orsm.getColumnName(i).equals("MID")){
+                                    ident+=","+ors.getString(i);++count;}
+                                if(orsm.getColumnName(i).equals("MQTY"))
+                                    ident+=","+ors.getString(i);
+                                if(count!=0)
+                                    continue;
                         %>
-                        <td><%=ors.getString(i)%></td>
-                        <% 
+                                <td><%=ors.getString(i)%></td>
+                        <%                             
                             }
                         %>
-                    </tr>    
+                        <td>                            
+                            <form method="POST" action="http://localhost:8080/MinorWebApp/AddToCart">
+                                <!--<h3><%=ident%></h3>-->
+                                <input type="number" id="quantity" name="<%=ident%>" min="1" max="100">
+                                <button type="submit" name="cart" value="<%=ident%>" class="button-80">Add to cart</button>
+                            </form>
+                        </td>
+                    </tr>  
+                    <% 
+                        }
+                    %>
                 </tbody>
             </table> 
             <!--
@@ -138,12 +169,10 @@
             Change this submit quantity form to showing which pharmacy has said medicine instead through SQL queries.
             -->
             <form>
-                <label for="quantity">Quantity:</label>
-                <input type="number" id="quantity" name="quantity" min="1" max="100">
-                <input type="submit" value="Add to Cart">
+                <input type="submit" value="Go to cart" name="go-to-cart">
             </form>
             <%
-                } else {
+                if(!hasResult) {
             %>
             <p>No results found for <%=request.getParameter("medicineName")%></p>
             <%
