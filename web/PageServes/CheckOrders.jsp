@@ -54,9 +54,8 @@
                 <%
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-                    query = "SELECT O.OID, O.CID, C.FNAME || ' ' || C.LNAME AS CUSTOMER_NAME, O.PID, P.PNAME, O.ODATE, O.TOTAL, O.TOTAL_ITEMS, O.STATUS, O.DESCRIPT FROM ORDERS O, PHARMACY P, CUSTOMER C WHERE O.CID=C.CID AND O.PID=P.PID ORDER BY OID ASC";
-                    ops = (OraclePreparedStatement) oconn.prepareCall(query);
-                    
+                    query = "SELECT O.OID, O.CID, C.FNAME || ' ' || C.LNAME AS CUSTOMER_NAME, O.PID, P.PNAME, O.MID, M.MNAME, O.ODATE, O.QTY, O.STATUS FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.PID=P.PID AND O.MID = M.MID ORDER BY OID ASC";
+                    ops = (OraclePreparedStatement) oconn.prepareCall(query);                    
                     ors = (OracleResultSet) ops.executeQuery();
                     orsm = (OracleResultSetMetaData) ors.getMetaData();
                 %>
@@ -70,8 +69,7 @@
                                 <th><%=orsm.getColumnName(i)%></th>
                         <%
                             }
-                        %>
-                        <th>ACTIONS</th>            
+                        %>          
                     </thead>
                     <tbody>
                         <%  
@@ -87,12 +85,6 @@
                             <% 
                                 }
                             %>
-                            <td>
-                                <form>
-                                    <button type="button" name="Modify">MODIFY</button>
-                                    <button type="submit" name="Delete">DELETE</button>
-                                </form>
-                            </td>
                         </tr>    
                         <% 
                             }
