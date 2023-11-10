@@ -62,6 +62,7 @@
                     <div class="input-group">
                         <label for="expiry">Expiry Date</label>
                         <input type="month" name="expiry" required>
+                        <%-- TODO: Noman - Expiry can't be less than current date. --%>
                     </div>
                     <br>
                     <div class="input-group">
@@ -77,6 +78,7 @@
                     <div class="input-group button-group">
                         <label></label>
                         <button type="submit" name = "submit" class="button-80">Submit Payment</button>
+                        <%--TODO: Noman - JS to block double clicks --%>
                    </div>                   
                     <br>
                 </form>
