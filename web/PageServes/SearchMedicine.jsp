@@ -13,7 +13,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medicine Search JSP</title>
-    <link rel="stylesheet" href="../StatPages/main-style.css">
+    <link rel="stylesheet" href="../stylesheet/main-style.css">
+    <style>
+        search-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+            background-color: #fff;
+        }
+        .search-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .search-container select {
+            width: 100%;
+            height: 40px;
+            padding: 5px 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .search-container input[type="submit"] {
+            width: 100%;
+            height: 40px;
+            background-color: #20ab4a;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .search-container input[type="submit"]:hover {
+            background-color: #1a753b;
+        }
+    </style>
     <%! 
         OracleConnection oconn;
         OraclePreparedStatement ops;
@@ -37,7 +71,7 @@
     %>
 </head>
 <body>
-    <header class="header">           
+    <header>           
         <a href="#" class="heading">MedFinder</a>
         <nav class="navbar">
         <a href="index.html">Home</a>

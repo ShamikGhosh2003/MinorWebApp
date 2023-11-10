@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pharmacy Home</title>
-    <link rel="stylesheet" href="main-style.css">
+    <link rel="stylesheet" href="../stylesheet/main-style.css">
     <script>
         function redirect(url) {
             url = "http://localhost:8080/MinorWebApp/PageServes/" + url;
@@ -13,14 +13,20 @@
     </script>
 </head>
 <body>
-    <header class="header">           
+    <header>
+        <a href="#"><img src="../media/logo.png" class="logo"></a>
         <a href="#" class="heading">MedFinder</a>
         <nav class="navbar">
         <a href="index.html">Home</a>
-        <a href="registerUser.html">Register</a>
         <a href="about.html">About Us</a>
-        <a href="#">Contact</a>
-        <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+        <a href="../PageServes/FeedBack.jsp">Feedback</a>
+        <div class="navbar-dropdown">
+            <a class="navbar-dropdown-button">User Settings</a>
+            <div class="navbar-dropdown-content">
+                <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+                <a href="../PageServes/changePassword.jsp">Change Password</a>
+            </div>
+        </div>
         </nav>
     </header>
     <main class="admin-panel">
@@ -57,11 +63,6 @@
                     </tr>
                 </tbody>
             </table>
-            <br><br>
-            <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback Form</a></button>
-            <br>
-            <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp">Change Password</a></button>
-            <br><br>
         </div>
     </main>
 </body>

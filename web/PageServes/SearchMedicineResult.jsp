@@ -13,7 +13,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Result</title>
-    <link rel="stylesheet" href="../StatPages/main-style.css">
+    <link rel="stylesheet" href="../stylesheet/main-style.css">
+    <style>
+        .result-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+            background-color: #fff;
+        }
+        .result-container h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .result-container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .result-container th, .result-container td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .result-container th {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .result-container label {
+            margin-right: 10px;
+        }
+        .result-container input[type="number"] {
+            width: 50px;
+            height: 30px;
+            margin-right: 10px;
+        }
+        .result-container input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .result-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
     <%! 
         OracleConnection oconn;
         OraclePreparedStatement ops;
@@ -47,7 +93,7 @@
     %>
 </head>
 <body>
-    <header class="header">           
+    <header>           
         <a href="#" class="heading">MedFinder</a>
         <nav class="navbar">
         <a href="index.html">Home</a>

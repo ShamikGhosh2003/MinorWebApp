@@ -4,25 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Login</title>
-    <link rel="stylesheet" href="main-style.css">
-    <script>
-        /*function changeActionURL(url) {
+    <link rel="stylesheet" href="../stylesheet/main-style.css">
+    <!-- <script>
+        function changeActionURL(url) {
             url = "http://localhost:8080/MinorWebApp/" + url;
             document.getElementById("form-login").action = url;
-        }*/
-    </script>
+        }
+    </script> -->
 </head>
 <body>
-    <header class="header">           
+    <header>
+        <a href="#"><img src="../media/logo.png" class="logo"></a>      
         <a href="#" class="heading">MedFinder</a>
         <nav class="navbar">
         <a href="index.html">Home</a>
         <a href="registerUser.html">Register</a>
         <a href="about.html">About Us</a>
-        <a href="#">Contact</a>
+        <a href="../PageServes/FeedBack.jsp">Feedback</a>
         </nav>
     </header>
-    <main class="login">
+    <main>
         <div class="form-container">
             <div class="form-box" id="form-login-container">
                 <form method="POST" action="http://localhost:8080/MinorWebApp/CheckLogin" id="form-login">

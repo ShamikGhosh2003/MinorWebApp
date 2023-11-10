@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="main-style.css">
+        <link rel="stylesheet" href="../stylesheet/main-style.css">
         <title>Register</title>
         <script>
             function validateForm() {
@@ -44,15 +44,17 @@
        </script>
     </head>
     <body>
-        <header class="header">           
+        <header>
+            <a href="#"><img src="../media/logo.png" class="logo"></a>
             <a href="#" class="heading">MedFinder</a>
             <nav class="navbar">
             <a href="index.html">Home</a>
-            <a href="registerUser.html">Register</a>
+            <a href="login.html">Login</a>
             <a href="about.html">About Us</a>
-            <a href="#">Contact</a>
+            <a href="../PageServes/FeedBack.jsp">Feedback</a>
             </nav>
         </header>
+    <main>
         <div class="form-container">
             <div class="form-box" style="width: 45%;">
                 <form method="POST" action="http://localhost:8080/MinorWebApp/RegisterPharmacy">
@@ -138,5 +140,6 @@
                 </form>
             </div>
         </div>
+    </main>
     </body>
 </html>

@@ -22,7 +22,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="main-style.css">
+        <link rel="stylesheet" href="../stylesheet/main-style.css">
         <title>Change Password</title>
         <script>
             function validateForm() {
@@ -168,7 +168,8 @@
             }
   
         %>
-        <header class="header">           
+        <header>
+            <a href="#"><img src="../media/logo.png" class="logo"></a>
             <a href="#" class="heading">MedFinder</a>
             <nav class="navbar">
             <a href="index.html">Home</a>

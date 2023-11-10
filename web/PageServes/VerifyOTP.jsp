@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="main-style.css">
+        <link rel="stylesheet" href="../stylesheet/main-style.css">
         <title>Verify OTP JSP</title>        
     </head>
     <body>
@@ -38,7 +38,7 @@
                     }
                 }  
         %>
-        <header class="header">           
+        <header>           
             <a href="#" class="heading">MedFinder</a>
             <nav class="navbar">
             <a href="SearchMedicine.jsp">Home</a>

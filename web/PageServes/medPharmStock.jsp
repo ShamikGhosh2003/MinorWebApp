@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pharmacy Medicine Stock</title>
-    <link rel="stylesheet" href="../StatPages/main-style.css">
+    <link rel="stylesheet" href="../stylesheet/main-style.css">
     <%! 
         //DECLARATION
         OracleConnection oconn;
@@ -39,7 +39,7 @@
     %>
 </head>
 <body>
-    <header class="header">           
+    <header>           
         <a href="#" class="heading">MedFinder</a>
         <nav class="navbar">
         <a href="index.html">Home</a>
