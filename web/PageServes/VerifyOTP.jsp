@@ -24,7 +24,7 @@
                     <script>
                         alert("OTP verified successfully!!!");
                         alert("Your Order is placed successfully!");
-                        location.href="http://localhost:8080/WebApp1/PageServes/SearchMedicine.jsp";
+                        location.href="http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp";
                     </script>
         <%
                 }
@@ -32,11 +32,11 @@
         %>
                     <script>
                         alert("Wrong OTP, Try again!!!");
-                        alert("Your registered email id is: "+<%=email%>);
+                        alert("Your registered email id is: "+"<%=email%>");
                     </script>
         <%
-                    }
-                }  
+                }
+            }  
         %>
         <header>           
             <a href="#" class="heading">MedFinder</a>

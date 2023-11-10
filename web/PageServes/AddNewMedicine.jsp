@@ -138,7 +138,7 @@
                 %>
                             <script>
                                 alert("Medicine Inserted Successfully!!");
-                                alert("Redirecting You to Add Medicine Page, add this new medicine now!!")
+                                alert("Redirecting you to Add Medicine Page, add this new medicine now!!")
                                 location.href="http://localhost:8080/MinorWebApp/PageServes/AddMedicine.jsp";
                             </script>
                     <%      to = mailUsername;
