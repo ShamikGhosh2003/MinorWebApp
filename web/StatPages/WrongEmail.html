@@ -1,15 +1,55 @@
+<!-- TODO: Noman - Add back the JS redirect. -->
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Wrong Email</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script>
-            alert("We could not find the email id in our records. Please check that you've entered the correct email address.");
-            location.href="http://localhost:8080/MinorWebApp/StatPages/ForgotPassword.html";
-        </script>
+        <link rel="stylesheet" href="../stylesheet/main-style.css">
+        <title>Email not found</title>
+        <style>
+            main {
+                padding: 0px;
+            }
+        </style>
     </head>
     <body>
-        <!--<div>TODO write content</div>-->
+        <header>
+            <img src="../media/logo.png" class="logo">
+            <span class="heading">MedFinder</span>
+            <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="registerUser.html">Register</a>
+            <a href="about.html">About Us</a>
+            <a href="#">Contact</a>
+            </nav>
+        </header>
+        <main>
+            <div class="text-box-container">
+                <div class="text-box">
+                    <h1>Email not found</h1>
+                    <br>
+                    <p>
+                        We could not find the email id in our records. Please check that you've entered the correct email address.<br>
+                        <br>
+                        <a href="ForgotPassword.html">Go back to previous page...</a>
+                    </p>
+                    <br>
+                    <!-- <p id="redirect-timer"><a href="ForgotPassword.html">Returning to previous page in 7 seconds...</a></p> -->
+                </div>
+            </div>
+        </main>
+        <!-- Redirect to previous page, currently unused. -->
+        <!-- <script>
+            let counter = 7;
+            const intervalId = setInterval(() => {
+              counter--;
+              document.getElementById('redirect-timer').innerHTML = 
+                `<a href="ForgotPassword.html">Returning to previous page in ${counter} seconds...</a>`;
+              if (counter === 0) {
+                clearInterval(intervalId);
+                window.location.href = 'http://localhost:8080/MinorWebApp/StatPages/ForgotPassword.html';
+              }
+            }, 1000);
+          </script> -->
     </body>
 </html>
