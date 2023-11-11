@@ -38,8 +38,8 @@
     </head>
     <body>
         <header>
-            <a href="#"><img src="../media/logo.png" class="logo"></a>
-            <a href="#" class="heading">MedFinder</a>
+            <img src="../media/logo.png" class="logo">
+            <span class="heading">MedFinder</span>
             <nav class="navbar">
             <a href="../StatPages/PharmacyHome.html">Home</a>
             <a href="registerUser.html">Register</a>
@@ -48,54 +48,56 @@
             <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
             </nav>
         </header>
-        <main class="admin-panel">
-            <div class="table-container">
-                <h2>Pharmacy Orders</h2>
-                <%
-                    DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
-                    oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-                    query = "SELECT O.OID, O.CID, C.FNAME || ' ' || C.LNAME AS CUSTOMER_NAME, O.PID, P.PNAME, O.MID, M.MNAME, O.ODATE, O.QTY, O.STATUS FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.PID=P.PID AND O.MID = M.MID ORDER BY OID ASC";
-                    ops = (OraclePreparedStatement) oconn.prepareCall(query);                    
-                    ors = (OracleResultSet) ops.executeQuery();
-                    orsm = (OracleResultSetMetaData) ors.getMetaData();
-                %>
-                <table>
-                    <thead>
-                        <%
-                            for(int i=1; i<=orsm.getColumnCount(); i++)
-                            {
-                                reccounter++;
-                        %>
-                                <th><%=orsm.getColumnName(i)%></th>
-                        <%
-                            }
-                        %>          
-                    </thead>
-                    <tbody>
-                        <%  
-                            while(ors.next()==true)
-                            {
-                        %>
-                        <tr>
+        <main>
+            <div class="table-box-container">
+                <div class="table-box">
+                    <h2>Pharmacy Orders</h2>
+                    <%
+                        DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+                        oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
+                        query = "SELECT O.OID, O.CID, C.FNAME || ' ' || C.LNAME AS CUSTOMER_NAME, O.PID, P.PNAME, O.MID, M.MNAME, O.ODATE, O.QTY, O.STATUS FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.PID=P.PID AND O.MID = M.MID ORDER BY OID ASC";
+                        ops = (OraclePreparedStatement) oconn.prepareCall(query);                    
+                        ors = (OracleResultSet) ops.executeQuery();
+                        orsm = (OracleResultSetMetaData) ors.getMetaData();
+                    %>
+                    <table>
+                        <thead>
                             <%
                                 for(int i=1; i<=orsm.getColumnCount(); i++)
                                 {
+                                    reccounter++;
                             %>
-                                    <td><%=ors.getString(i)%></td>
+                                    <th><%=orsm.getColumnName(i)%></th>
+                            <%
+                                }
+                            %>          
+                        </thead>
+                        <tbody>
+                            <%  
+                                while(ors.next()==true)
+                                {
+                            %>
+                            <tr>
+                                <%
+                                    for(int i=1; i<=orsm.getColumnCount(); i++)
+                                    {
+                                %>
+                                        <td><%=ors.getString(i)%></td>
+                                <% 
+                                    }
+                                %>
+                            </tr>    
                             <% 
                                 }
                             %>
-                        </tr>    
-                        <% 
-                            }
-                        %>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="<%=reccounter+1%>" style="text-align: center;">MedFinder</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="<%=reccounter+1%>" style="text-align: center;">MedFinder</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </main>
     </body>

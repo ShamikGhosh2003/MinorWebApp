@@ -169,8 +169,8 @@
   
         %>
         <header>
-            <a href="#"><img src="../media/logo.png" class="logo"></a>
-            <a href="#" class="heading">MedFinder</a>
+            <img src="../media/logo.png" class="logo">
+            <span class="heading">MedFinder</span>
             <nav class="navbar">
             <a href="index.html">Home</a>
             <a href="profile.html">Profile</a>
@@ -179,38 +179,40 @@
             <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
             </nav>
         </header>
-        <div class="form-container">
-            <div class="form-box" style="width: 45%;">
-                <form onsubmit="validateForm()" method="POST"><!--method="POST" name="change-password" action="http://localhost:8080/MinorWebApp/ChangePassword"--> 
-                    <h2 style="text-align: center;">CHANGE PASSWORD</h2>
-                    <br>
-                    <div id="error-alert" style="color: red; text-align: center; font-weight: bold;"></div>
-                    <div class="input-group">
-                        <label for="current-password">Current Password:</label>
-                        <input type="password" name="current-password" placeholder="********" required>
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="new-password">New Password:</label>
-                        <input type="password" name="new-password" placeholder="********" required>
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="confirm-password">Confirm New Password:</label>
-                        <input type="password" name="confirm-password" placeholder="********" required>
-                    </div>                         
-                    <br>    
-                    <div class="input-group button-group">
-                        <label></label>
-                        <button type="submit" class="button-80" name="submit">Submit</button>
-                        <button type="reset" class="button-80" name="clear">Clear</button>
-                   </div>                   
-                    <br>
-                    <div style="text-align: right; line-height: 150%;">
-                    Forgot password? <a href="../StatPages/ForgotPassword.html">Reset password</a><br>
-                    </div>
-                </form>
+        <main>
+            <div class="form-container">
+                <div class="form-box" style="width: 45%;">
+                    <form onsubmit="validateForm()" method="POST"><!--method="POST" name="change-password" action="http://localhost:8080/MinorWebApp/ChangePassword"--> 
+                        <h2 style="text-align: center;">CHANGE PASSWORD</h2>
+                        <br>
+                        <div id="error-alert" style="color: red; text-align: center; font-weight: bold;"></div>
+                        <div class="input-group">
+                            <label for="current-password">Current Password:</label>
+                            <input type="password" name="current-password" placeholder="********" required>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="new-password">New Password:</label>
+                            <input type="password" name="new-password" placeholder="********" required>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="confirm-password">Confirm New Password:</label>
+                            <input type="password" name="confirm-password" placeholder="********" required>
+                        </div>                         
+                        <br>    
+                        <div class="input-group button-group">
+                            <label></label>
+                            <button type="submit" class="button-80" name="submit">Submit</button>
+                            <button type="reset" class="button-80" name="clear">Clear</button>
+                        </div>                   
+                        <br>
+                        <div class="form-box-links">
+                        Forgot password? <a href="../StatPages/ForgotPassword.html">Reset password</a><br>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
+        </main>
     </body>
 </html>

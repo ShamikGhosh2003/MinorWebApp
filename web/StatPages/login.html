@@ -5,29 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Login</title>
     <link rel="stylesheet" href="../stylesheet/main-style.css">
+    <!-- Script to redirect page based on button clicked. No longer required, handled on servlet side. -->
     <!-- <script>
         function changeActionURL(url) {
             url = "http://localhost:8080/MinorWebApp/" + url;
             document.getElementById("form-login").action = url;
         }
     </script> -->
+    <style>
+        .form-box {
+            width: 20%;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <a href="#"><img src="../media/logo.png" class="logo"></a>      
-        <a href="#" class="heading">MedFinder</a>
-        <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="registerUser.html">Register</a>
-        <a href="about.html">About Us</a>
-        <a href="../PageServes/FeedBack.jsp">Feedback</a>
-        </nav>
+        <img src="../media/logo.png" class="logo">
+        <span class="heading">MedFinder</span>
+            <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="../PageServes/FeedBack.jsp">Feedback</a>
+            <div class="navbar-dropdown">
+                <a class="navbar-dropdown-button">Register</a>
+                <div class="navbar-dropdown-content">
+                    <a href="registerUser.html">As User</a>
+                <a href="registerPharmacy.html">As Pharmacy</a>
+                </div>
+            </div>
+            </nav>
     </header>
     <main>
         <div class="form-container">
             <div class="form-box" id="form-login-container">
                 <form method="POST" action="http://localhost:8080/MinorWebApp/CheckLogin" id="form-login">
                     <h2>LOG IN</h2>
+                    <br>
+                    <div id="error-alert"></div>
                     <br>
                     <div class="input-group">
                         <label for="email">Email:</label>

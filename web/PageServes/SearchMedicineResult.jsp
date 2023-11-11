@@ -102,7 +102,7 @@
 </head>
 <body>
     <header>           
-        <a href="#" class="heading">MedFinder</a>
+        <span class="heading">MedFinder</span>
         <nav class="navbar">
         <a href="index.html">Home</a>
         <a href="registerUser.html">Register</a>

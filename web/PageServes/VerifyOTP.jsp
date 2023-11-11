@@ -39,7 +39,7 @@
             }  
         %>
         <header>           
-            <a href="#" class="heading">MedFinder</a>
+            <span class="heading">MedFinder</span>
             <nav class="navbar">
             <a href="SearchMedicine.jsp">Home</a>
             <a href="registerUser.html">Register</a>

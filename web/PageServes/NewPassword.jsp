@@ -15,7 +15,7 @@
     </head>
     <body>
         <header>           
-            <a href="#" class="heading">MedFinder</a>
+            <span class="heading">MedFinder</span>
             <nav class="navbar">
             <a href="index.html">Home</a>
             <a href="profile.html">Profile</a>
@@ -44,7 +44,7 @@
                         <button type="submit" class="button-80" name="bConfirm">Reset Password</button>
                     </div> 
                     <br>
-                    <div style="text-align: right; line-height: 150%;">
+                    <div class="form-box-links">
                     Remember your password? <a href="login.html">Log in</a><br>
                     New? <a href="register.html">Sign up</a>
                     </div>

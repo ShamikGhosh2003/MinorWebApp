@@ -21,8 +21,8 @@
     </head>
     <body>
         <header>
-            <a href="#"><img src="../media/logo.png" class="logo"></a>
-            <a href="#" class="heading">MedFinder</a>
+            <img src="../media/logo.png" class="logo">
+            <span class="heading">MedFinder</span>
             <nav class="navbar">
             <a href="index.html">Home</a>
             <a href="profile.html">Profile</a>

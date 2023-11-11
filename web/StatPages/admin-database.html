@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
+    <title>Admin Database</title>
     <link rel="stylesheet" href="../stylesheet/main-style.css">
     <style>
         h1 {
@@ -20,7 +20,7 @@
 </head>
 <body>
     <header>
-        <a href="#"><img src="../media/logo.png" class="logo"></a>
+        <img src="../media/logo.png" class="logo">
         <span class="heading">MedFinder</span>
         <nav class="navbar">
         <a href="index.html">Home</a>
@@ -29,45 +29,47 @@
         <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
         </nav>
     </header>
-    <main class="admin-panel">
-        <div class="table-container">
-            <h1>Project Database</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Table Name</th>
-                        <th>Description</th>
-                        <th>Link to database table</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>CUSTOMER</td>
-                        <td>Information about the registered customers.</td>
-                        <td><a href="../PageServes/customer.jsp">Customer</a></td>
-                    </tr>
-                    <tr>
-                        <td>PHARMACY</td>
-                        <td>Information about the registered pharmacies.</td>
-                        <td><a href="../PageServes/pharmacy.jsp">Pharmacy</a></td>
-                    </tr>
-                    <tr>
-                        <td>ORDERS</td>
-                        <td>Orders accepted by the system.</td>
-                        <td><a href="../PageServes/orders.jsp">Orders</a></td>
-                    </tr>
-                    <tr>
-                         <td>PHARM_MED_STOCK</td>
-                         <td>An individual pharmacy's medicine stock.</td>
-                         <td><a href="../PageServes/medPharmStock.jsp">Pharm_Med_Stock</a></td>
-                    </tr>
-                    <tr>
-                        <td>MEDICINE</td>
-                        <td>Individual information about medicines.</td>
-                        <td><a href="../PageServes/medicine.jsp">Medicine</a></td>
-                    </tr>
-                </tbody>
-            </table>
+    <main>
+        <div class="table-box-container">
+            <div class="table-box">
+                <h1>Project Database</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Table Name</th>
+                            <th>Description</th>
+                            <th>Link to database table</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CUSTOMER</td>
+                            <td>Information about the registered customers.</td>
+                            <td><a href="../PageServes/customer.jsp">Customer</a></td>
+                        </tr>
+                        <tr>
+                            <td>PHARMACY</td>
+                            <td>Information about the registered pharmacies.</td>
+                            <td><a href="../PageServes/pharmacy.jsp">Pharmacy</a></td>
+                        </tr>
+                        <tr>
+                            <td>ORDERS</td>
+                            <td>Orders accepted by the system.</td>
+                            <td><a href="../PageServes/orders.jsp">Orders</a></td>
+                        </tr>
+                        <tr>
+                            <td>PHARM_MED_STOCK</td>
+                            <td>An individual pharmacy's medicine stock.</td>
+                            <td><a href="../PageServes/medPharmStock.jsp">Pharm_Med_Stock</a></td>
+                        </tr>
+                        <tr>
+                            <td>MEDICINE</td>
+                            <td>Individual information about medicines.</td>
+                            <td><a href="../PageServes/medicine.jsp">Medicine</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 </body>
