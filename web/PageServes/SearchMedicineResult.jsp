@@ -168,7 +168,7 @@
             TODO:
             Change this submit quantity form to showing which pharmacy has said medicine instead through SQL queries.
             -->
-            <form>
+            <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp">
                 <input type="submit" value="Go to cart" name="go-to-cart">
             </form>
             <%
