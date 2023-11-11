@@ -34,7 +34,7 @@ public class CheckLogin extends HttpServlet {
     public void init() throws ServletException {
         super.init();
 
-        try (InputStream input = RegisterUser.class.getClassLoader().getResourceAsStream("db.properties")) {
+        try (InputStream input = CheckLogin.class.getClassLoader().getResourceAsStream("db.properties")) {
             Properties props = new Properties();
             props.load(input);
             oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"

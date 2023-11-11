@@ -36,7 +36,7 @@ public class DeleteAll extends HttpServlet {
     public void init() throws ServletException {
         super.init();
 
-        try (InputStream input = RegisterPharmacy.class.getClassLoader().getResourceAsStream("db.properties")) {
+        try (InputStream input = DeleteAll.class.getClassLoader().getResourceAsStream("db.properties")) {
             Properties props = new Properties();
             props.load(input);
             oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
@@ -120,7 +120,7 @@ public class DeleteAll extends HttpServlet {
                 oconn.close();
                 ops.close();
             }catch (SQLException ex) {
-                Logger.getLogger(RegisterPharmacy.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DeleteAll.class.getName()).log(Level.SEVERE, null, ex);
                 out.println("<script>");
                 out.println("alert('Data cannot be deleted because it has records in the child table');");
                 out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/admin-database.html';");

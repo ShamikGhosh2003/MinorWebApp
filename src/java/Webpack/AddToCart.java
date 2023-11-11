@@ -35,7 +35,7 @@ public class AddToCart extends HttpServlet {
     public void init() throws ServletException {
         super.init();
 
-        try (InputStream input = RegisterPharmacy.class.getClassLoader().getResourceAsStream("db.properties")) {
+        try (InputStream input = AddToCart.class.getClassLoader().getResourceAsStream("db.properties")) {
             Properties props = new Properties();
             props.load(input);
             oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
@@ -117,7 +117,7 @@ public class AddToCart extends HttpServlet {
                         out.println("</script>");
                     }
                 }catch (SQLException ex) {
-                    Logger.getLogger(RegisterPharmacy.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AddToCart.class.getName()).log(Level.SEVERE, null, ex);
                     out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
                 }
             }

@@ -44,7 +44,7 @@ public class ValidateEmail extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         // Loads src/java/db.properties
-        try (InputStream input = RegisterUser.class.getClassLoader().getResourceAsStream("db.properties")) {
+        try (InputStream input = ValidateEmail.class.getClassLoader().getResourceAsStream("db.properties")) {
             Properties props = new Properties();
             props.load(input);
             oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
@@ -55,7 +55,7 @@ public class ValidateEmail extends HttpServlet {
             throw new ServletException(ex);
         }
         // Loads src/java/mail.properties
-        try (InputStream mailInput = RegisterUser.class.getClassLoader().getResourceAsStream("mail.properties")) {
+        try (InputStream mailInput = ValidateEmail.class.getClassLoader().getResourceAsStream("mail.properties")) {
         Properties mailProps = new Properties();
         mailProps.load(mailInput);
         mailUsername = mailProps.getProperty("username");
