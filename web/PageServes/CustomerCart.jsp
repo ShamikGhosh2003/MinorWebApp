@@ -69,6 +69,7 @@
         java.util.Properties props = new java.util.Properties();
         String oconnUrl, oconnUsername, oconnPassword;
         String ident,email,cid;
+        int rtotal, total=0;
     %>
     <%
         try {
@@ -108,7 +109,7 @@
         <div class="result-container">
             <h2>CART</h2>
             <%
-                query = "SELECT O.OID, C.CID, P.PID, M.MID, P.PNAME, P.ADDRESS, M.MNAME, O.QTY FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.MID=M.MID AND O.PID=P.PID AND C.CID = ? AND O.STATUS = 'CART' ORDER BY OID ASC";
+                query = "SELECT O.OID,P.PNAME, P.ADDRESS, M.MNAME, O.QTY, O.ITEM_PRICE, O.TOTAL, O.CID, O.PID, O.MID FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.MID=M.MID AND O.PID=P.PID AND C.CID = ? AND O.STATUS = 'CART' ORDER BY OID ASC";
                 ops = (OraclePreparedStatement) oconn.prepareCall(query);
                 ops.setString(1, cid);
                 ors = (OracleResultSet) ops.executeQuery();
@@ -117,7 +118,7 @@
             <table>
                 <thead>
                     <%
-                        for(int i=1; i<=orsm.getColumnCount(); i++) 
+                        for(int i=1; i<=orsm.getColumnCount()-3; i++) 
                         {
                     %>
                         <th><%=orsm.getColumnName(i)%></th>
@@ -137,22 +138,26 @@
                             int count = 0;
                             for(int i=1; i<=orsm.getColumnCount(); i++) 
                             {
-                        %>
-                                <td><%=ors.getString(i)%></td>
-                        <%      if(orsm.getColumnName(i).equals("OID")){
-                                    ident+=","+ors.getString(i);++count;}
+                                if(orsm.getColumnName(i).equals("OID")){
+                                    ident+=","+ors.getString(i);}
+                                if(orsm.getColumnName(i).equals("TOTAL"))
+                                    total += Integer.parseInt(ors.getString(i));
                                 if(orsm.getColumnName(i).equals("CID")){
                                     ident+=","+ors.getString(i);++count;}
                                 if(orsm.getColumnName(i).equals("PID")){
                                     ident+=","+ors.getString(i);++count;}
                                 if(orsm.getColumnName(i).equals("MID")){
-                                    ident+=","+ors.getString(i);++count;}
+                                    ident+=","+ors.getString(i);++count;}                                
                                 if(count!=0)
                                     continue; 
+                        %>
+                                <td><%=ors.getString(i)%></td>
+                        <%                                  
                             }
                         %>
                         <td>
                             <form method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
+                                <!--<h3><%=ident%></h3>-->
                                 <button type="submit" name="Delete" value="<%=ident%>" class="button-80">DELETE</button>
                             </form>
                         </td>
@@ -162,7 +167,8 @@
                     %>
                 </tbody>
             </table> 
-            <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp">
+            <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/PaymentPortal.jsp">
+                <h4>Your total amount is: <%=total%></h4>
                 <input type="submit" value="PlaceOrder" name="PlaceOrder">
             </form>
         </div>

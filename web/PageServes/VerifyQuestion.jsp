@@ -81,15 +81,6 @@
 <%
         }
     }
-    else
-    {
-%>
-    <script>
-        showError("Please verify your security credentials");
-    </script>
-<%
-    }
-%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
