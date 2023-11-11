@@ -75,12 +75,13 @@
         {
 %>
         <script>
-            alert("Incorrect answer. Please try again.")
+            alert("Incorrect answer. Please try again.");
             showError("Incorrect answer. Please try again.");
         </script>
 <%
         }
     }
+%>
 <!DOCTYPE html>
 <html lang="en">
     <head>

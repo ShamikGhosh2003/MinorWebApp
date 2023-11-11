@@ -24,7 +24,7 @@
                     <script>
                         alert("OTP verified successfully!!!");
                         alert("Your Order is placed successfully!");
-                        location.href="http://localhost:8080/MinorWebApp/PageServes/PlaceOrder.jsp";
+                        location.href="http://localhost:8080/MinorWebApp/PlaceOrder";
                     </script>
         <%
                 }

@@ -116,6 +116,10 @@
                 <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp">Change Password</a></button>
                 <br>
                 <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/PaymentPortal.jsp">Payment Portal</a></button>
+                <br>
+                <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp">Cart</a></button>
+                <br>
+                <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/CustomerOrders.jsp">Orders</a></button>
                 <br><br>
             </form>
         </div>

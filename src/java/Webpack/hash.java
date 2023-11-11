@@ -1,22 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Webpack;
-/* 
-This program takes a string input password and returns a SHA-256 hash string.
-*/
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 
-/**
- *
- * @author ADMIN
- */
 public class hash {
     public static String passwordHash(String passwordToHash) {
         String generatedPassword = null;
