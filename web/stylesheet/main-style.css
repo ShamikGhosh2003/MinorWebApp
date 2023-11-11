@@ -98,7 +98,7 @@ main {
     border: 3px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
     padding: 20px;
-    width: 20%;
+    width: 50%;
     background-color: rgb(238, 214, 228);
     border-radius: 10px;
 }
@@ -183,35 +183,102 @@ select {
     outline: none;
 }
 /* General use table */
-.table-container {
+.table-box-container {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.table-box {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
     overflow-x: auto;
+    padding-left: 20px;
+    padding-right: 20px;
 }
-.table-container h2 {
+.table-box h2 {
     margin-bottom: 20px;
 }
-.table-container table {
+.table-box table {
     width: 100%;
     border-collapse: collapse;
 }
-.table-container th,
-.table-container td {
+.table-box th,
+.table-box td {
     padding: 10px 20px;
     border: 1px solid #ddd;
     text-align: left;
 }
-.table-container th {
+.table-box th {
     background-color: #8dff7b;
     color: #333333;
 }
-.table-container td a {
+.table-box td a {
     color: rgb(0, 0, 255);
     text-decoration: none;    
 }
-.table-container td a:hover {
+.table-box td a:hover {
     text-decoration: underline;
     color: #a90799;
+}
+/* Text box for error pages and such */
+.text-box-container {
+    padding-top: 50px;
+    padding-left: 30px;
+}
+.text-box {
+    border: 3px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    padding: 25px;
+    background-color: rgb(238, 214, 228);
+    border-radius: 10px;
+    padding-bottom: 50px;
+    width: 80%;
+}
+.text-box h1 {
+    padding-left: 10px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 50px;
+}
+.text-box p {
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 10px;
+    font-size: 16px;
+}
+.text-box a {
+    color: rgb(0, 0, 255);
+    text-decoration: none;    
+}
+.text-box a:hover {
+    text-decoration: underline;
+    color: #a90799;
+}
+/* Form validation error alerts */
+#error-alert {
+    color: #FF0000; 
+    background-color: #FFCCCC; 
+    border: 2px solid #FF0000; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    text-align: center;
+    font-weight: bold; 
+    font-size: 1.2em; 
+    border-radius: 5px; 
+    display: none;
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+}
+/* Shaking animation for the error-alert in form validation. */
+@keyframes shake {
+    0% { transform: translate(0.5px, 0.5px) rotate(0deg); }
+    10% { transform: translate(-0.5px, -1px) rotate(-0.5deg); }
+    20% { transform: translate(-1.5px, 0px) rotate(0.5deg); }
+    30% { transform: translate(1.5px, 1px) rotate(0deg); }
+    40% { transform: translate(0.5px, -0.5px) rotate(0.5deg); }
+    50% { transform: translate(-0.5px, 1px) rotate(-0.5deg); }
+    60% { transform: translate(-1.5px, 0.5px) rotate(0deg); }
+    70% { transform: translate(1.5px, 0.5px) rotate(-0.5deg); }
+    80% { transform: translate(-0.5px, -0.5px) rotate(0.5deg); }
+    90% { transform: translate(0.5px, 1px) rotate(0deg); }
+    100% { transform: translate(0.5px, -1px) rotate(-0.5deg); }
 }
