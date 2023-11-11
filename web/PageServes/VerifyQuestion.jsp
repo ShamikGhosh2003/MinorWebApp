@@ -137,16 +137,10 @@
             <img src="../media/logo.png" class="logo">
             <span class="heading">MedFinder</span>
             <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="../PageServes/FeedBack.jsp">Feedback</a>
-            <div class="navbar-dropdown">
-                <a class="navbar-dropdown-button">Register</a>
-                <div class="navbar-dropdown-content">
-                    <a href="registerUser.html">As User</a>
-                    <a href="registerPharmacy.html">As Pharmacy</a>
-                </div>
-            </div>
+            <a href="http://localhost:8080/MinorWebApp/StatPages/index.html">Home</a>
+            <a href="http://localhost:8080/MinorWebApp/StatPages/about.html">About Us</a>
+            <a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback</a>
+            <a href="http://localhost:8080/MinorWebApp/StatPages/login.html">Login</a>
             </nav>
         </header>
         <main>
