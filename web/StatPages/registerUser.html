@@ -10,6 +10,8 @@
                 document.forms['register'].addEventListener('submit', function(event) {
                     if(!validateForm()) {
                         event.preventDefault();
+                    } else {
+                        window.location.hash = '';
                     }
                 });
             };
