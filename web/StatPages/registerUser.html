@@ -8,8 +8,9 @@
         <script>
             window.onload = function() {
                 document.forms['register'].addEventListener('submit', function(event) {
-                    event.preventDefault();
-                    validateForm();
+                    if(!validateForm()) {
+                        event.preventDefault();
+                    }
                 });
             };
         
