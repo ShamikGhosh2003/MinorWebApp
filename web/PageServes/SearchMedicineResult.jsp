@@ -81,7 +81,7 @@
             oconnPassword = props.getProperty("password");
             DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
             oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-            query = "SELECT P.PNAME, M.MNAME, P.ADDRESS, PMS.MQTY, PMS.PRICE ,P.PID, M.MID FROM PHARMACY P,MEDICINE M, PHARM_MED_STOCK PMS WHERE M.MID = (SELECT MID FROM MEDICINE WHERE MNAME = ?) AND P.PID=PMS.PID AND M.MID=PMS.MID";
+            query = "SELECT P.PNAME, M.MNAME, P.ADDRESS, PMS.MQTY, PMS.PRICE, P.PID, M.MID FROM PHARMACY P,MEDICINE M, PHARM_MED_STOCK PMS WHERE M.MID = (SELECT MID FROM MEDICINE WHERE MNAME = ?) AND P.PID=PMS.PID AND M.MID=PMS.MID";
             ops = (OraclePreparedStatement) oconn.prepareCall(query);
             ops.setString(1, request.getParameter("medicineName"));
             //ops.setString(2, request.getParameter("city"));
@@ -137,12 +137,14 @@
                             ident = "ORDERS,"+cid;
                             int count = 0;
                             for(int i=1; i<=orsm.getColumnCount(); i++) 
-                            {
+                            {   
                                 if(orsm.getColumnName(i).equals("PID")){
                                     ident+=","+ors.getString(i);++count;}
                                 if(orsm.getColumnName(i).equals("MID")){
                                     ident+=","+ors.getString(i);++count;}
                                 if(orsm.getColumnName(i).equals("MQTY"))
+                                    ident+=","+ors.getString(i);
+                                if(orsm.getColumnName(i).equals("PRICE"))
                                     ident+=","+ors.getString(i);
                                 if(count!=0)
                                     continue;
