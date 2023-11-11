@@ -4,49 +4,68 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../stylesheet/main-style.css">
-        <title>Register</title>
+        <title>Register Pharmacy</title>
         <script>
-            function validateForm() {
-               var name = document.forms['register']['pname'].value;
-               var email = document.forms['register']['email'].value;
-               var phone = document.forms['register']['phone'].value;
-               var address = document.forms['register']['address'].value;
-               var pincode = document.forms['register']['pincode'].value;
-               var password = document.forms['register']['password'].value;
-               var confirmPassword = document.forms['register']['confirm-password'].value;
-               var gstn = document.forms['register']['gstn'].value;
+            window.onload = function() {
+                document.forms['register'].addEventListener('submit', function(event) {
+                    if(!validateForm()) {
+                        event.preventDefault();
+                    }
+                });
+            };
 
-               if(name === "" || email === "" || phone === "" || age === "" || address === "" || pincode === "" || password === "" || confirmPassword === "") {
-                    document.getElementById('error-alert').innerHTML = "All fields are required.";
-                    event.preventDefault();
-               }
-               if(phone.length !== 10 || isNaN(phone)) {
-                    document.getElementById('error-alert').innerHTML = "Please enter valid phone number.";
-                    event.preventDefault();
-               }
-               if(pincode.length !== 6 || isNaN(pincode)) {
-                    document.getElementById('error-alert').innerHTML = "Please enter valid pincode.";
-                    event.preventDefault();
-               }
-               if(password.length < 8) {
-                    document.getElementById('error-alert').innerHTML = "Password must be at least 8 characters.";
-                    event.preventDefault();
-               }
-               if(password !== confirmPassword) {
-                    document.getElementById('error-alert').innerHTML = "Passwords do not match.";
-                    event.preventDefault();
-               }
-               if(gstn.length < 15) {
-                    document.getElementById('error-alert').innerHTML = "Invalid GST number.";
-                    event.preventDefault();
-               }
-           }
-       </script>
+            function showError(message) {
+                var errorAlert = document.getElementById('error-alert');
+                errorAlert.innerHTML = message;
+                errorAlert.style.display = "block";
+                errorAlert.style.animation = 'none';
+                errorAlert.offsetHeight;
+                errorAlert.style.animation = null; 
+                window.location.hash = 'error-alert';
+            }
+
+            function validateForm() {
+                var pname = document.forms['register']['pname'].value;
+                var email = document.forms['register']['email'].value;
+                var phone = document.forms['register']['phone'].value;
+                var address = document.forms['register']['address'].value;
+                var pincode = document.forms['register']['pincode'].value;
+                var password = document.forms['register']['password'].value;
+                var confirmPassword = document.forms['register']['confirm-password'].value;
+                var gstn = document.forms['register']['gstn'].value;
+
+                if(pname === "" || email === "" || phone === "" || address === "" || pincode === "" || password === "" || confirmPassword === "" || gstn === "") {
+                    showError("All fields are required.");
+                    return false;
+                }
+                if(phone.length !== 10 || isNaN(phone)) {
+                    showError("Please enter a valid phone number.");
+                    return false;
+                }
+                if(pincode.length !== 6 || isNaN(pincode)) {
+                    showError("Please enter a valid pincode.");
+                    return false;
+                }
+                if(password.length < 8) {
+                    showError("Password must be at least 8 characters.");
+                    return false;
+                }
+                if(password !== confirmPassword) {
+                    showError("Passwords do not match.");
+                    return false;
+                }
+                if(gstn.length < 15) {
+                    showError("Invalid GST number.");
+                    return false;
+                }
+                return true;
+            }
+        </script>
     </head>
     <body>
         <header>
-            <a href="#"><img src="../media/logo.png" class="logo"></a>
-            <a href="#" class="heading">MedFinder</a>
+            <img src="../media/logo.png" class="logo">
+            <span class="heading">MedFinder</span>
             <nav class="navbar">
             <a href="index.html">Home</a>
             <a href="login.html">Login</a>
@@ -56,38 +75,40 @@
         </header>
     <main>
         <div class="form-container">
-            <div class="form-box" style="width: 45%;">
-                <form method="POST" action="http://localhost:8080/MinorWebApp/RegisterPharmacy">
+            <div class="form-box">
+                <form method="POST" name="register" action="http://localhost:8080/MinorWebApp/RegisterPharmacy">
                     <h2 style="text-align: center;">REGISTER</h2>
+                    <br>
+                    <div id="error-alert"></div>
                     <br>
                     <div class="input-group">
                         <label for="pname">Pharmacy Name:</label>
-                        <input type="text" name="pname" placeholder="Enter the name of your pharmacy" required>
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="gstn">GSTN:</label>
-                        <input type="text" name="gstn" placeholder="Enter the GSTN Number" required>
+                        <input type="text" name="pname" placeholder="Enter the name of your pharmacy">
                     </div>
                     <br>
                     <div class="input-group">
                         <label for="email">Email:</label>
-                        <input type="email" name="email" placeholder="example@domain.com" required>
+                        <input type="email" name="email" placeholder="example@domain.com">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="gstn">GSTN:</label>
+                        <input type="text" name="gstn" placeholder="Enter the GSTN Number">
                     </div>
                     <br>
                     <div class="input-group">
                         <label for="phone">Phone:</label>
-                        <input type="text" name="phone" placeholder="9876543210" required>
+                        <input type="text" name="phone" placeholder="9876543210">
                     </div>
                     <br>
                     <div class="input-group">
                         <label for="address">Address:</label>
-                        <input type="text" name="address" placeholder="123, Gold Street" required>
+                        <input type="text" name="address" placeholder="123, Gold Street">
                     </div>
                     <br>
                     <div class="input-group">
                         <label for="city">City:</label>
-                        <select id="city" name="city" required>
+                        <select id="city" name="city">
                             <option value="" selected disabled hidden>Select a City</option>
                             <option value="KOLKATA">Kolkata</option>
                             <option value="HOWRAH">Howrah</option>
@@ -98,12 +119,12 @@
                     <br>
                     <div class="input-group">
                         <label for="pincode">Pincode:</label>
-                        <input type="number" name="pincode" placeholder="700000" required>
+                        <input type="number" name="pincode" placeholder="700000">
                     </div>
                     <br>
                     <div class="input-group">
                         <label for="sques">Security Question:</label>
-                        <select id="sques" name="sques" required>
+                        <select id="sques" name="sques">
                             <option value="" selected disabled hidden>Select a Security Question</option>
                             <option value="CHILDHOOD NICKNAME?">Childhood nickname?</option>
                             <option value="WHAT IS YOUR MOTHER'S MAIDEN NAME?">What is your mother's maiden name?</option>
@@ -113,17 +134,17 @@
                     <br>
                     <div class="input-group">
                         <label for="sans">Security Answer:</label>
-                        <input type="text" name="sans" placeholder="Security Answer" required>
+                        <input type="text" name="sans" placeholder="Security Answer">
                     </div>
                     <br>
                     <div class="input-group">
                         <label for="password">Password:</label>
-                        <input type="password" name="password" placeholder="********" required>
+                        <input type="password" name="password" placeholder="********">
                     </div>
                     <br>
                     <div class="input-group">
                         <label for="confirm-password">Confirm password:</label>
-                        <input type="password" name="confirm-password" placeholder="********" required>
+                        <input type="password" name="confirm-password" placeholder="********">
                     </div>                         
                     <br>    
                     <div class="input-group button-group">
@@ -132,7 +153,7 @@
                         <button type="reset" class="button-80">Clear</button>
                    </div>                   
                     <br>
-                    <div style="text-align: right; line-height: 150%;">
+                    <div class="form-box-links">
                     Have an account? <a href="login.html">Login in</a><br>
                     Not a Pharmacy? <a href="registerUser.html">Register as a User</a>
                     <br>
