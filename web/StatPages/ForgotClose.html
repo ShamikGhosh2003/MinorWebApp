@@ -1,5 +1,3 @@
-<!-- This page doesn't close by default due to browser security.
-TODO: Noman - Update to redirect instead -->
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,9 +8,6 @@ TODO: Noman - Update to redirect instead -->
         <style>
             main {
                 padding: 0px;
-            }
-            #redirect-timer {
-                color: red;
             }
         </style>
     </head>
@@ -35,24 +30,21 @@ TODO: Noman - Update to redirect instead -->
                     <p>
                         A new link has been sent to your email.<br>
                         <br>
-                        <span id="redirect-timer">The page will close in <b>7</b> seconds...</span>
+                        <a href="login.html" id="redirect-timer">You will be redirected in <b>7</b> seconds...</a>
                     </p>
                     <br>
                 </div>
             </div>
         </main>
-        <!-- Redirect to previous page, currently unused. -->
         <script>
             let counter = 7;
             const intervalId = setInterval(() => {
               counter--;
               document.getElementById('redirect-timer').innerHTML = 
-                `<span id="redirect-timer">The page will close in <b>${counter}</b> seconds...</span>`;
+                `<span id="redirect-timer">You will be redirected in <b>${counter}</b> seconds...</span>`;
               if (counter === 0) {
                 clearInterval(intervalId);
-                window.close();
-                if(window.opener) 
-                    window.opener.close();
+                location.href="login.html";
               }
             }, 1000);
           </script>          
