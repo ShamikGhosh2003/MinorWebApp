@@ -99,6 +99,10 @@
 
         if (error == "incorrect-password") {
             showError("Incorrect email or password.");
+            params.delete('error');
+            window.history.replaceState({}, document.title, url.toString());
+            // Also works, clears all URL params so I'm not using it.
+            // history.replaceState(null, null, window.location.pathname);
         }
     </script>
 </body>
