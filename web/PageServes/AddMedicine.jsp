@@ -46,8 +46,9 @@
             {
     %>
                 <script>
-                    alert("The medicine already exisits in your stock!!");
-                    location.href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html";
+                    //  Medicine already exists in stock.
+                    //  TODO: See if it's possible to redirect to the update inventory page with the value of this new medicine seleteced to be updated.
+                    location.href="http://localhost:8080/MinorWebApp/PageServes/AddMedicine.jsp?error=exists";
                 </script>
     <%
             }else{
@@ -72,16 +73,16 @@
                     if(x>0){
             %>
                         <script>
-                            alert("Data Inserted Successfully!!");
-                            location.href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html";
+                            // Data inserted successfully.
+                            location.href="http://localhost:8080/MinorWebApp/PageServes/AddMedicine.jsp?error=success";
                         </script>
             <%
                     }   
                     else{
             %>
                         <script>
-                            alert("No changes in the PHARM_MED_STOCK database!!!");
-                            location.href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html";
+                            // Data insertion failed.
+                            location.href="http://localhost:8080/MinorWebApp/PageServes/AddMedicine?error=failed";
 
                         </script>
             <%
@@ -90,10 +91,9 @@
                 else{
             %>
                     <script>
-                        alert("Medicine does not exist in Medicine database of the website!!");
-                        alert("Directing you to Add New Medicine Registration page");
+                        // Medicine does not exist in DB.
+                        location.href="http://localhost:8080/MinorWebApp/PageServes/AddNewMedicine.jsp?error=new-medicine";
                         //Change the link here or make a system so it automatically creates a new medicine in the database
-                        location.href="http://localhost:8080/MinorWebApp/PageServes/AddNewMedicine.jsp";
                     </script>
             <%            
                 }
@@ -109,15 +109,37 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../stylesheet/main-style.css">
-        <title>Register</title>
+        <title>Add Medicine</title>
         <script>
+            window.onload = function() {
+                document.forms['add-medicine'].addEventListener('submit', function(event) {
+                    if(!validateForm()) {
+                        event.preventDefault();
+                    } else {
+                        window.location.hash = '';
+                    }
+                });
+            };
+
+            function showError(message) {
+                var errorAlert = document.getElementById('error-alert');
+                errorAlert.innerHTML = message;
+                errorAlert.style.display = "block";
+                errorAlert.style.animation = 'none';
+                errorAlert.offsetHeight;
+                errorAlert.style.animation = null; 
+                window.location.hash = 'error-alert';
+            }
+
             function validateForm() {
-               var mname = document.forms['register']['mname'].value;
-               if(mname === ""){
-                    document.getElementById('error-alert').innerHTML = "Fields is required.";
-                    event.preventDefault();
-               }
-           }
+                var mname = document.forms['add-medicine']['mname'].value;
+                
+                if(mname === "") {
+                    showError("Please enter a valid name.");
+                    return false;
+                }
+                return true;
+            }
        </script>
     </head>
     <body>
@@ -134,25 +156,52 @@
         </header>
         <main>
             <div class="form-container">
-                <div class="form-box" style="width: 45%;">
-                    <form method="POST" name="register" onsubmit="validateForm()">
-                        <h2 style="text-align: center;">ADD MEDICINE</h2>
+                <div class="form-box">
+                    <form method="POST" name="add-medicine">
+                        <h2>ADD MEDICINE</h2>
                         <br>
-                        <div id="error-alert" style="color: red; text-align: center; font-weight: bold;"></div>
+                        <div id="error-alert"></div>
+                        <div id="success-alert"></div>
+                        <br>
                         <div class="input-group">
                             <label for="mname">Medicine Name:</label>
-                            <input type="text" name="mname" placeholder="Enter a new Medicine" required>
+                            <input type="text" name="mname" placeholder="Enter a new Medicine">
                         </div>
                         <br>
                         <div class="input-group button-group">
                             <label></label>
                             <button type="submit" name="submit" class="button-80">Submit</button>
-                            <button type="reset" class="button-80">Clear</button>
                     </div>              
                     </form>
                 </div>
             </div>
         </main>
+            <script src="/MinorWebApp/scripts/showResponse.js"></script>
+            <script>
+                let params = (new URL(document.location)).searchParams;
+                let error = params.get("error");
+
+                if (error == "success") {
+                    showSuccess("Medicine inserted successful.<br>Please update it's stock <a href='http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp'>here</a>.");
+                    params.delete('error');
+                    window.history.replaceState({}, document.title, url.toString());
+                }
+                if(error == "failed") {
+                    showError("Failed to add medicine to inventory.<br>Try again later.");
+                    params.delete('error');
+                    window.history.replaceState({}, document.title, url.toString());
+                }
+                if(error == "exists") {
+                    showError("Medicine already exists in your inventory.<br>Please update it's stock <a href='http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp'>here</a>.");
+                    params.delete('error');
+                    window.history.replaceState({}, document.title, url.toString());
+                }
+                if(error == "new-added") {
+                    showSuccess("Medicine added to database successful.<br>Please add it to your inventory here.</a>");
+                    params.delete('error');
+                    window.history.replaceState({}, document.title, url.toString());
+                }
+            </script>
     </body>
 </html>
 
