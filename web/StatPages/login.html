@@ -5,18 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Login</title>
     <link rel="stylesheet" href="../stylesheet/main-style.css">
-    <!-- Script to redirect page based on button clicked. No longer required, handled on servlet side. -->
-    <!-- <script>
-        function changeActionURL(url) {
-            url = "http://localhost:8080/MinorWebApp/" + url;
-            document.getElementById("form-login").action = url;
-        }
-    </script> -->
     <style>
         .form-box {
             width: 20%;
         }
     </style>
+    <script>
+        window.onload = function() {
+                document.forms['login'].addEventListener('submit', function(event) {
+                    if(!validateForm()) {
+                        event.preventDefault();
+                    } else {
+                        window.location.hash = '';
+                    }
+                });
+            };
+
+        function validateForm() {
+            var email = document.forms['login']['email'].value;
+            var password = document.forms['login']['password'].value;
+
+            if(email === "" && password === "") {
+                showError("All fields are required.");
+                return false;
+            }
+            else if(!email.includes('@')) {
+                showError("Please enter a valid email address.");
+                return false;
+            }
+            else if(password === "") {
+                showError("Please enter a valid password.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -38,19 +61,19 @@
     <main>
         <div class="form-container">
             <div class="form-box" id="form-login-container">
-                <form method="POST" action="http://localhost:8080/MinorWebApp/CheckLogin" id="form-login">
+                <form method="POST" name="login" action="http://localhost:8080/MinorWebApp/CheckLogin">
                     <h2>LOG IN</h2>
                     <br>
                     <div id="error-alert"></div>
                     <br>
                     <div class="input-group">
                         <label for="email">Email:</label>
-                        <input type="text" name="email" id="email" placeholder="example@domain.com" required>
+                        <input type="text" name="email" id="email" placeholder="example@domain.com">
                     </div>
                     <br>
                     <div class="input-group">
                         <label for="password">Password:</label>
-                        <input type="password" name="password" id="password" placeholder="********" required>
+                        <input type="password" name="password" id="password" placeholder="********">
                     </div>
                     <br>
                     <div class="input-group button-group">
@@ -69,5 +92,14 @@
             </div>
         </div>
     </main>
+    <script src="/MinorWebApp/scripts/showResponse.js"></script>
+    <script>
+        let params = (new URL(document.location)).searchParams;
+        let error = params.get("error");
+
+        if (error == "incorrect-password") {
+            showError("Incorrect email or password.");
+        }
+    </script>
 </body>
 </html>

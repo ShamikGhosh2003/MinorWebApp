@@ -94,7 +94,8 @@ public class CheckLogin extends HttpServlet {
                     sess.setAttribute("email",email);
                     response.sendRedirect("http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html");
                 }else{
-                    response.sendRedirect("http://localhost:8080/MinorWebApp/StatPages/WrongPass.html");
+                    // response.sendRedirect("http://localhost:8080/MinorWebApp/StatPages/WrongPass.html");
+                    response.sendRedirect("http://localhost:8080/MinorWebApp/StatPages/login.html?error=incorrect-password");
                 }
                 ops1.close();
                 ops2.close();
