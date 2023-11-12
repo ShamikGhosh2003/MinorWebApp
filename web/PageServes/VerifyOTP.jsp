@@ -48,11 +48,11 @@
             </nav>
         </header>
         <div class="form-container">
-            <div class="form-box" style="width: 45%;">
+            <div class="form-box">
                 <form method="POST" name="register">
-                    <h2 style="text-align: center;">VERIFY OTP</h2>
+                    <h2>VERIFY OTP</h2>
                     <br>
-                    <div id="error-alert" style="color: red; text-align: center; font-weight: bold;"></div>
+                    <div id="error-alert"></div>
                     <div class="input-group">
                         <label for="Totp">Enter OTP:</label>
                         <input type="number" id="mname" size="4" name="Totp" required/>

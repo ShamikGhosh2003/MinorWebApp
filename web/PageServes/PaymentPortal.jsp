@@ -46,9 +46,9 @@
         <div class="form-container">
             <div class="form-box" style="width: 30%;">
                 <form method="POST" name="payment-portal" onsubmit="validateForm()">
-                    <h2 style="text-align: center;">Payment Portal</h2>
+                    <h2>Payment Portal</h2>
                     <br>
-                    <div id="error-alert" style="color: red; text-align: center; font-weight: bold;"></div>
+                    <div id="error-alert"></div>
                     <div class="input-group">
                         <label for="nameOnCard">Name on Card</label>
                         <input type="text" name="nameOnCard" required>

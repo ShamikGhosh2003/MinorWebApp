@@ -90,11 +90,12 @@
 <%
                     vto = email;
                     vsubject = "MedFinder Password Changed";
-                    vbody = "Your password was recently changed. If this was you, you can ignore this email.\n" +
-                            "If not, then please contact support immediately. " +
-                            "You can now login using the new password. " +
-                            "\nLogin link: http://localhost:8080/MinorWebApp/StatPages/login.html";
-
+                    vbody = "Your password was recently changed.\n" +
+                            "If this was you, you can safely ignore this email.\n" +
+                            "If not, then please contact support immediately.\n" +
+                            "\n" +
+                            "You can now login using the new password.\n" +
+                            "Login link: http://localhost:8080/MinorWebApp/StatPages/login.html";
                     final String username = mailUsername;
                     final String password = mailPassword;
 

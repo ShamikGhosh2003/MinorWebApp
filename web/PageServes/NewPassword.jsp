@@ -26,7 +26,7 @@
         <div class="form-container">
             <div class="form-box" style="width: 38%;">
                 <form method="POST" name="reset-password">
-                    <h2 style="text-align: center;">FORGOT PASSWORD</h2>
+                    <h2>FORGOT PASSWORD</h2>
                     <br>
                     <br>
                     <div class="input-group">

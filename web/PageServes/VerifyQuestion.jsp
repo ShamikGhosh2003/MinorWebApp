@@ -126,7 +126,7 @@
     </head>
     <body>
         <header>
-            <img src="../media/logo.png" class="logo">
+            <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
             <span class="heading">MedFinder</span>
             <nav class="navbar">
             <a href="http://localhost:8080/MinorWebApp/StatPages/index.html">Home</a>
@@ -138,7 +138,7 @@
         <main>
             <div class="form-container">
                 <div class="form-box" id="form-login-container">
-                    <form method="POST" name="verify-question-form" action="http://localhost:8080/MinorWebApp/PageServes/VerifyQuestion.jsp?pemail=<%=email%>" id="form-login">
+                    <form method="POST" name="verify-question-form" action="http://localhost:8080/MinorWebApp/PageServes/VerifyQuestion.jsp?pemail=<%=email%>">
                         <h2>SECURITY VERIFICATION FORM</h2>
                         <br>
                         <div id="error-alert"></div>

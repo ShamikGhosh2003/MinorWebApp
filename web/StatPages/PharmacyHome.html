@@ -5,13 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pharmacy Home</title>
     <link rel="stylesheet" href="../stylesheet/main-style.css">
-    <!-- Script to redirect dynamically. Unuses now. -->
-    <!-- <script>
-        function redirect(url) {
-            url = "http://localhost:8080/MinorWebApp/PageServes/" + url;
-            window.location.href = url;
-        }
-    </script> -->
 </head>
 <body>
     <header>
@@ -34,6 +27,9 @@
         <div class="table-box-container">
             <div class="table-box">
                 <h2>Pharmacy Home Page</h2>
+                <br>
+                <div id="error-alert"></div>
+                <div id="success-alert"></div>
                 <table>
                     <thead>
                         <tr>
@@ -67,6 +63,17 @@
                 </table>
             </div>
         </div>
+        <script src="/MinorWebApp/scripts/showResponse.js"></script>
+        <script>
+            let params = (new URL(document.location)).searchParams;
+            let response = params.get("response");
+
+            if (response == "feedback-success") {
+                showSuccess("Feedback recieved successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+        </script>
     </main>
 </body>
 </html>

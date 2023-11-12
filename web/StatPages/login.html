@@ -43,17 +43,17 @@
 </head>
 <body>
     <header>
-        <img src="../media/logo.png" class="logo">
+        <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
         <span class="heading">MedFinder</span>
             <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="../PageServes/FeedBack.jsp">Feedback</a>
+            <a href="http://localhost:8080/MinorWebApp/StatPages/index.html">Home</a>
+            <a href="http://localhost:8080/MinorWebApp/StatPages/about.html">About Us</a>
+            <a href="http://localhost:8080/MinorWebApp/StatPages/FeedBack.jsp">Feedback</a>
             <div class="navbar-dropdown">
                 <a class="navbar-dropdown-button">Register</a>
                 <div class="navbar-dropdown-content">
-                    <a href="registerUser.html">As User</a>
-                <a href="registerPharmacy.html">As Pharmacy</a>
+                    <a href="http://localhost:8080/MinorWebApp/StatPages/registerUser.html">As User</a>
+                <a href="http://localhost:8080/MinorWebApp/StatPages/registerPharmacy.html">As Pharmacy</a>
                 </div>
             </div>
             </nav>
@@ -65,6 +65,7 @@
                     <h2>LOG IN</h2>
                     <br>
                     <div id="error-alert"></div>
+                    <div id="success-alert"></div>
                     <br>
                     <div class="input-group">
                         <label for="email">Email:</label>
@@ -95,14 +96,17 @@
     <script src="/MinorWebApp/scripts/showResponse.js"></script>
     <script>
         let params = (new URL(document.location)).searchParams;
-        let error = params.get("error");
+        let response = params.get("response");
 
-        if (error == "incorrect-password") {
+        if (response == "incorrect-password") {
             showError("Incorrect email or password.");
-            params.delete('error');
+            params.delete('response');
             window.history.replaceState({}, document.title, url.toString());
-            // Also works, clears all URL params so I'm not using it.
-            // history.replaceState(null, null, window.location.pathname);
+        }
+        if (response == "change-password-success") {
+            showSuccess("Password changed successfully.<br>Please try logging in again.")
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
         }
     </script>
 </body>

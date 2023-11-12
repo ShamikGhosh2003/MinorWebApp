@@ -45,6 +45,10 @@
                     showError("All fields are required.");
                     return false;
                 }
+                if(!email.includes('@')) {
+                    showError("Please enter a valid email address.");
+                    return false;
+                }
                 if(phone.length !== 10 || isNaN(phone)) {
                     showError("Please a enter valid phone number.");
                     return false;
@@ -67,7 +71,7 @@
     </head>
     <body>
         <header>
-            <img src="../media/logo.png" class="logo">
+            <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
             <span class="heading">MedFinder</span>
             <nav class="navbar">
             <a href="index.html">Home</a>
@@ -77,104 +81,104 @@
             </nav>
         </header>
         <main>
-        <div class="form-container">
-            <div class="form-box">
-                <form method="POST" name="register" action="http://localhost:8080/MinorWebApp/RegisterUser">
-                    <h2 style="text-align: center;">REGISTER</h2>
-                    <br>
-                    <div id="error-alert"></div>
-                    <br>
-                    <div class="input-group">
-                        <label for="fname">First Name:</label>
-                        <input type="text" id="fname" name="fname" placeholder="John">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="lname">Last Name:</label>
-                        <input type="text" id ="lname" name="lname" placeholder="Doe">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="example@domain.com">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="phone">Phone:</label>
-                        <input type="text" id="phone" name="phone" placeholder="9876543210">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="age">Age:</label>
-                        <input type="text" name="age" placeholder="18">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="address">Address:</label>
-                        <input type="text" name="address" placeholder="123, Gold Street">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="city">City:</label>
-                        <select id="city" name="city">
-                            <option value="" selected disabled hidden>Select a City</option>
-                            <option value="KOLKATA">Kolkata</option>
-                            <option value="HOWRAH">Howrah</option>
-                            <option value="BURDWAN">Burdwan</option>
-                            <option value="DURGAPUR">Durgapur</option>
-                        </select>
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="pincode">Pincode:</label>
-                        <input type="number" name="pincode" placeholder="700000">
-                    </div>
-                    <br>
-                    <div class="input-group radio-group">
-                        <label for="gender">Gender: </label>
-                        <input type="radio" name="gender" value="M">Male
-                        <input type="radio" name="gender" value="F">Female
-                    </div> 
-                    <br>
-                    <div class="input-group">
-                        <label for="sques">Security Question:</label>
-                        <select id="sques" name="sques">
-                            <option value="" selected disabled hidden>Select a Security Question</option>
-                            <option value="CHILDHOOD NICKNAME?">Childhood nickname?</option>
-                            <option value="WHAT IS YOUR MOTHER'S MAIDEN NAME?">What is your mother's maiden name?</option>
-                            <option value="WHAT SCHOOL DID YOU GO TO?">What school did you go to?</option>
-                        </select>
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="sans">Security Answer:</label>
-                        <input type="text" name="sans" id="sans" placeholder="Security Answer">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="password">Password:</label>
-                        <input type="password" name="password" placeholder="********">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="confirm-password">Confirm password:</label>
-                        <input type="password" name="confirm-password" placeholder="********">
-                    </div>                         
-                    <br>    
-                    <div class="input-group button-group">
-                        <label></label>
-                        <button type="submit" class="button-80">Submit</button>
-                        <button type="reset" class="button-80">Clear</button>
-                   </div>                   
-                    <br>
-                    <div class="form-box-links">
-                    Have an account? <a href="login.html">Login in</a><br>
-                    Not a user? <a href="registerPharmacy.html">Register as Pharmacy</a>
-                    <br>
-                    </div>
-                </form>
+            <div class="form-container">
+                <div class="form-box">
+                    <form method="POST" name="register" action="http://localhost:8080/MinorWebApp/RegisterUser">
+                        <h2>REGISTER</h2>
+                        <br>
+                        <div id="error-alert"></div>
+                        <br>
+                        <div class="input-group">
+                            <label for="fname">First Name:</label>
+                            <input type="text" id="fname" name="fname" placeholder="John">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="lname">Last Name:</label>
+                            <input type="text" id ="lname" name="lname" placeholder="Doe">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" placeholder="example@domain.com">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="phone">Phone:</label>
+                            <input type="text" id="phone" name="phone" placeholder="9876543210">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="age">Age:</label>
+                            <input type="text" name="age" placeholder="18">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="address">Address:</label>
+                            <input type="text" name="address" placeholder="123, Gold Street">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="city">City:</label>
+                            <select id="city" name="city">
+                                <option value="" selected disabled hidden>Select a City</option>
+                                <option value="KOLKATA">Kolkata</option>
+                                <option value="HOWRAH">Howrah</option>
+                                <option value="BURDWAN">Burdwan</option>
+                                <option value="DURGAPUR">Durgapur</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="pincode">Pincode:</label>
+                            <input type="number" name="pincode" placeholder="700000">
+                        </div>
+                        <br>
+                        <div class="input-group radio-group">
+                            <label for="gender">Gender: </label>
+                            <input type="radio" name="gender" value="M">Male
+                            <input type="radio" name="gender" value="F">Female
+                        </div> 
+                        <br>
+                        <div class="input-group">
+                            <label for="sques">Security Question:</label>
+                            <select id="sques" name="sques">
+                                <option value="" selected disabled hidden>Select a Security Question</option>
+                                <option value="CHILDHOOD NICKNAME?">Childhood nickname?</option>
+                                <option value="WHAT IS YOUR MOTHER'S MAIDEN NAME?">What is your mother's maiden name?</option>
+                                <option value="WHAT SCHOOL DID YOU GO TO?">What school did you go to?</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="sans">Security Answer:</label>
+                            <input type="text" name="sans" id="sans" placeholder="Security Answer">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="password">Password:</label>
+                            <input type="password" name="password" placeholder="********">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <label for="confirm-password">Confirm password:</label>
+                            <input type="password" name="confirm-password" placeholder="********">
+                        </div>                         
+                        <br>    
+                        <div class="input-group button-group">
+                            <label></label>
+                            <button type="submit" class="button-80">Submit</button>
+                            <button type="reset" class="button-80">Clear</button>
+                    </div>                   
+                        <br>
+                        <div class="form-box-links">
+                        Have an account? <a href="login.html">Login in</a><br>
+                        Not a user? <a href="registerPharmacy.html">Register as Pharmacy</a>
+                        <br>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
         </main>
     </body>
 </html>
