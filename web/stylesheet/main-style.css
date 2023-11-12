@@ -268,7 +268,7 @@ select {
     animation: shake 0.5s;
     animation-iteration-count: 1;
 }
-/* Shaking animation for the error-alert in form validation. */
+/* Shaking animation for the error-alert in. */
 @keyframes shake {
     0% { transform: translate(0.5px, 0.5px) rotate(0deg); }
     10% { transform: translate(-0.5px, -1px) rotate(-0.5deg); }
@@ -281,6 +281,27 @@ select {
     80% { transform: translate(-0.5px, -0.5px) rotate(0.5deg); }
     90% { transform: translate(0.5px, 1px) rotate(0deg); }
     100% { transform: translate(0.5px, -1px) rotate(-0.5deg); }
+}
+/* Success alert pop up */
+#success-alert {
+    color: #006400; 
+    background-color: #90EE90; 
+    border: 2px solid #006400; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+    text-align: center;
+    font-weight: bold; 
+    font-size: 1.2em; 
+    border-radius: 5px; 
+    display: none;
+    animation: pulse 2s;
+    animation-iteration-count: 1;
+}
+/* Pulsing animation for the success-alert. */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
 }
 /* Timer to redirect pages. */
 #redirect-timer {
