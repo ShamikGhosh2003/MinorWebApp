@@ -6,3 +6,6 @@ web/StatPages/media/
 web/WEB-INF/db.properties/
 web/WEB-INF/mail.properties
 nbproject
+web/StatPages/tests/
+web/StatPages/dummy.html
+web/PageServes/tests/
