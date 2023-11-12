@@ -89,7 +89,7 @@
         %>
                     <script>
                         // Added successfully.
-                        location.href="http://localhost:8080/MinorWebApp/PageServes/AddMedicine.jsp?error=new-added";
+                        location.href="http://localhost:8080/MinorWebApp/PageServes/AddMedicine.jsp?response=new-added";
                     </script>
             <%      to = mailUsername;
                     subject = "REVIEW NEW MEDICINE ADDED";
@@ -122,7 +122,7 @@
         %>
                     <script>
                         // Failed
-                        location.href="http://localhost:8080/MinorWebApp/PageServes/AddNewMedicine.jsp?error=failed";
+                        location.href="http://localhost:8080/MinorWebApp/PageServes/AddNewMedicine.jsp?response=failed";
                     </script>
         <%
                 }
@@ -193,16 +193,16 @@
             <script src="/MinorWebApp/scripts/showResponse.js"></script>
             <script>
                 let params = (new URL(document.location)).searchParams;
-                let error = params.get("error");
+                let response = params.get("response");
 
-                if (error == "new-medicine") {
+                if (response == "new-medicine") {
                     showError("Medicine entered does not exist in our database.<br>Please register the medicine.");
-                    params.delete('error');
+                    params.delete('response');
                     window.history.replaceState({}, document.title, url.toString());
                 }
-                if (error == "failed") {
+                if (response == "failed") {
                     showError("Failed to add the medicine.<br>Try again later.");
-                    params.delete('error');
+                    params.delete('response');
                     window.history.replaceState({}, document.title, url.toString());
                 }
             </script>

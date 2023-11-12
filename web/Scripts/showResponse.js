@@ -5,11 +5,11 @@ Code for URL param handling:
 
 <script>
     let params = (new URL(document.location)).searchParams;
-    let error = params.get("error");
+    let response = params.get("response");
 
-    if (error == "incorrect-password") {
+    if (response == "incorrect-password") {
         showError("Incorrect email or password.");
-        params.delete('error');
+        params.delete('response');
         window.history.replaceState({}, document.title, url.toString());
         // history.replaceState(null, null, window.location.pathname);
         // Above line also works, clears all URL params so I'm not using it.

@@ -48,7 +48,7 @@
                 <script>
                     //  Medicine already exists in stock.
                     //  TODO: See if it's possible to redirect to the update inventory page with the value of this new medicine seleteced to be updated.
-                    location.href="http://localhost:8080/MinorWebApp/PageServes/AddMedicine.jsp?error=exists";
+                    location.href="http://localhost:8080/MinorWebApp/PageServes/AddMedicine.jsp?response=exists";
                 </script>
     <%
             }else{
@@ -74,7 +74,7 @@
             %>
                         <script>
                             // Data inserted successfully.
-                            location.href="http://localhost:8080/MinorWebApp/PageServes/AddMedicine.jsp?error=success";
+                            location.href="http://localhost:8080/MinorWebApp/PageServes/AddMedicine.jsp?response=success";
                         </script>
             <%
                     }   
@@ -82,7 +82,7 @@
             %>
                         <script>
                             // Data insertion failed.
-                            location.href="http://localhost:8080/MinorWebApp/PageServes/AddMedicine?error=failed";
+                            location.href="http://localhost:8080/MinorWebApp/PageServes/AddMedicine?response=failed";
 
                         </script>
             <%
@@ -92,7 +92,7 @@
             %>
                     <script>
                         // Medicine does not exist in DB.
-                        location.href="http://localhost:8080/MinorWebApp/PageServes/AddNewMedicine.jsp?error=new-medicine";
+                        location.href="http://localhost:8080/MinorWebApp/PageServes/AddNewMedicine.jsp?response=new-medicine";
                         //Change the link here or make a system so it automatically creates a new medicine in the database
                     </script>
             <%            
@@ -179,26 +179,26 @@
             <script src="/MinorWebApp/scripts/showResponse.js"></script>
             <script>
                 let params = (new URL(document.location)).searchParams;
-                let error = params.get("error");
+                let response = params.get("response");
 
-                if (error == "success") {
+                if (response == "success") {
                     showSuccess("Medicine inserted successful.<br>Please update it's stock <a href='http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp'>here</a>.");
-                    params.delete('error');
+                    params.delete('response');
                     window.history.replaceState({}, document.title, url.toString());
                 }
-                if(error == "failed") {
+                if(response == "failed") {
                     showError("Failed to add medicine to inventory.<br>Try again later.");
-                    params.delete('error');
+                    params.delete('response');
                     window.history.replaceState({}, document.title, url.toString());
                 }
-                if(error == "exists") {
+                if(response == "exists") {
                     showError("Medicine already exists in your inventory.<br>Please update it's stock <a href='http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp'>here</a>.");
-                    params.delete('error');
+                    params.delete('response');
                     window.history.replaceState({}, document.title, url.toString());
                 }
-                if(error == "new-added") {
+                if(response == "new-added") {
                     showSuccess("Medicine added to database successful.<br>Please add it to your inventory here.</a>");
-                    params.delete('error');
+                    params.delete('response');
                     window.history.replaceState({}, document.title, url.toString());
                 }
             </script>
