@@ -20,7 +20,7 @@ import oracle.jdbc.OracleResultSet;
 @WebServlet(name = "AddToCart", urlPatterns = {"/AddToCart"})
 public class AddToCart extends HttpServlet {
 
-    String btnval,table,userType,status="CART",qty,oid,oidNum,cid,pid,mid,tbQty;
+    String btnval,table,userType,status="CART",qty,oid,oidNum,cid,pid,mid,tbQty,price,total;
     OracleConnection oconn;
     OraclePreparedStatement ops;
     OracleResultSet ors;
@@ -67,11 +67,14 @@ public class AddToCart extends HttpServlet {
             table = btnval.substring(0,i);
             int j = btnval.indexOf(",",i+1);
             int k = btnval.indexOf(",",j+1);
-            int l = btnval.lastIndexOf(",");
+            int l = btnval.indexOf(",",k+1);
+            int m = btnval.lastIndexOf(",");
             cid = btnval.substring(i+1,j);
             tbQty = btnval.substring(j+1,k);
-            pid = btnval.substring(k+1,l);
-            mid = btnval.substring(l+1);
+            price = btnval.substring(k+1,l);
+            pid = btnval.substring(l+1,m);
+            mid = btnval.substring(m+1);
+            total = ""+Integer.parseInt(qty)*Integer.parseInt(price);
             if(Integer.parseInt(tbQty)<Integer.parseInt(qty)){
                 out.println("<script>");
                 out.println("alert('Number of items is greater than stock, try again!');");
@@ -91,13 +94,13 @@ public class AddToCart extends HttpServlet {
                     }           
                     else
                     {
-                        //Getting the PID number
+                        //Getting the OID number
                         int lastOIDNum = Integer.parseInt(lastOID.substring(1));
                         oidNum = ""+(lastOIDNum+1);
-                        //Setting the new PID
+                        //Setting the new OID
                         oid = "O"+oidNum;
                     }
-                    query = "INSERT INTO "+table+" (OID,CID,PID,MID,QTY,STATUS) VALUES(?,?,?,?,?,?)";
+                    query = "INSERT INTO "+table+"(OID,CID,PID,MID,QTY,STATUS,ITEM_PRICE,TOTAL) VALUES(?,?,?,?,?,?,?,?)";
                     ops = (OraclePreparedStatement) oconn.prepareCall(query);
                     ops.setString(1, oid);
                     ops.setString(2, cid);
@@ -105,6 +108,8 @@ public class AddToCart extends HttpServlet {
                     ops.setString(4, mid);
                     ops.setString(5, qty);
                     ops.setString(6, status);
+                    ops.setString(7, price);
+                    ops.setString(8,total);
                     int x = ops.executeUpdate();
                     if(x>0){
                         out.println("<script>");
