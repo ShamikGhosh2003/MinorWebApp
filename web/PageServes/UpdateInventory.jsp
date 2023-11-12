@@ -1,3 +1,5 @@
+<%-- TODO: Check if it's possible to have
+an error if there are no medicine in a pharmacy's stock --%>
 <%@page import="java.sql.SQLException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.io.IOException"%>
@@ -60,6 +62,8 @@
     %>
                             <script>
                                 alert("Data Inserted Successfully!!");
+                                // Data inserted successfully.
+                                location.href = "http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp?response=success";
                                 location.href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html";
                             </script>
     <%
@@ -79,23 +83,29 @@
     %>
 </head>
 <body>
-    <header>           
+    <header>
+        <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
         <span class="heading">MedFinder</span>
         <nav class="navbar">
-        <a href="../StatPages/PharmacyHome.html">Home</a>
-        <a href="registerUser.html">Register</a>
-        <a href="about.html">About Us</a>
-        <a href="#">Contact</a>
-        <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+        <a href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html">Home</a>
+        <a href="http://localhost:8080/MinorWebApp/about.html">About Us</a>
+        <a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback</a>
+        <div class="navbar-dropdown">
+            <a class="navbar-dropdown-button">Settings</a>
+            <div class="navbar-dropdown-content">
+                <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+                <a href="http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp">Change Password</a>
+            </div>
+        </div>
         </nav>
     </header>
     <main>        
         <div class="form-container">
-            <div class="form-box" style="width: 45%;">
+            <div class="form-box">
                 <form method="POST">
-                    <h2 style="text-align: center;">UPDATE INVENTORY</h2>
+                    <h2>UPDATE INVENTORY</h2>
                         <br>
-                        <div id="error-alert" style="color: red; text-align: center; font-weight: bold;"></div>
+                        <div id="error-alert"></div>
                         <div class="input-group">
                             <label for="fname">Medicine Name:</label>
                                 <select name="mname" required>
@@ -135,6 +145,7 @@
                                 <option value="FEW">Few</option>
                             </select>
                         </div>
+                        <br>
                         <div class="input-group button-group">
                             <label></label>
                             <button type="submit" name="submit" class="button-80">Submit</button>
