@@ -40,14 +40,19 @@
     %>
 </head>
 <body>
-    <header>           
+    <header>
+        <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
         <span class="heading">MedFinder</span>
         <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="registerUser.html">Register</a>
+        <a href="http://localhost:8080/MinorWebApp/StatPages/admin-database.html">Home</a>
         <a href="about.html">About Us</a>
-        <a href="#">Contact</a>
-        <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+        <div class="navbar-dropdown">
+            <a class="navbar-dropdown-button">Settings</a>
+            <div class="navbar-dropdown-content">
+                <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+                <a href="http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp">Change Password</a>
+            </div>
+        </div>
         </nav>
     </header>
     <main>
