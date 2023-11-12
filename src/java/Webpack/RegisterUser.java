@@ -139,6 +139,7 @@ public class RegisterUser extends HttpServlet {
             
             out.println("</body>");
             out.println("</html>");
+//          TODO: Add a page redirect to login page
         }
     }
 

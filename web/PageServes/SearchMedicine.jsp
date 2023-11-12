@@ -1,3 +1,4 @@
+<%-- TODO Fix this shit wtf happened here, --%>
 <%@page import="java.io.IOException"%>
 <%@page import="java.util.Properties"%>
 <%@page import="java.io.InputStream"%>
@@ -70,59 +71,73 @@
         }
     %>
 </head>
-<body>
-    <header>           
-        <span class="heading">MedFinder</span>
-        <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="registerUser.html">Register</a>
-        <a href="about.html">About Us</a>
-        <a href="#">Contact</a>
-        <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
-        </nav>
-    </header>
-    <main>
-        <div class="search-container">
-            <h2>Search Medicine</h2>
-            <br>
-            <form action="SearchMedicineResult.jsp" method="post">
-                <select name="medicineName">
-                <%
-                    DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
-                    oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-                    query = "SELECT MNAME FROM MEDICINE ORDER BY MNAME ASC";
-                    ops = (OraclePreparedStatement) oconn.prepareCall(query);
-                    ors = (OracleResultSet) ops.executeQuery();
-                    while(ors.next()==true)
-                    {
-                %>
-                <option value="<%=ors.getString(1)%>"><%=ors.getString(1)%></option>
-                <% 
-                    }
-                %>
-                </select>
-                <select id="city" name="city" required>
-                    <option value="" selected disabled hidden>Select a City</option>
-                    <option value="KOLKATA">Kolkata</option>
-                    <option value="HOWRAH">Howrah</option>
-                    <option value="BURDWAN">Burdwan</option>
-                    <option value="DURGAPUR">Durgapur</option>
-                </select>
+    <body>
+        <header>           
+            <span class="heading">MedFinder</span>
+            <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="registerUser.html">Register</a>
+            <a href="about.html">About Us</a>
+            <a href="#">Contact</a>
+            <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+            </nav>
+        </header>
+        <main>
+            <div class="search-container">
+                <h2>Search Medicine</h2>
                 <br>
-                <input type="submit" value="Search">
-                <br><br>
-                <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback Form</a></button>
+                <div id="error-alert"></div>
+                <div id="success-alert"></div>
                 <br>
-                <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp">Change Password</a></button>
-                <br>
-                <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/PaymentPortal.jsp">Payment Portal</a></button>
-                <br>
-                <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp">Cart</a></button>
-                <br>
-                <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/CustomerOrders.jsp">Orders</a></button>
-                <br><br>
-            </form>
-        </div>
-    </main>
-</body>
+                <form action="SearchMedicineResult.jsp" method="post">
+                    <select name="medicineName">
+                    <%
+                        DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+                        oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
+                        query = "SELECT MNAME FROM MEDICINE ORDER BY MNAME ASC";
+                        ops = (OraclePreparedStatement) oconn.prepareCall(query);
+                        ors = (OracleResultSet) ops.executeQuery();
+                        while(ors.next()==true)
+                        {
+                    %>
+                    <option value="<%=ors.getString(1)%>"><%=ors.getString(1)%></option>
+                    <% 
+                        }
+                    %>
+                    </select>
+                    <select id="city" name="city" required>
+                        <option value="" selected disabled hidden>Select a City</option>
+                        <option value="KOLKATA">Kolkata</option>
+                        <option value="HOWRAH">Howrah</option>
+                        <option value="BURDWAN">Burdwan</option>
+                        <option value="DURGAPUR">Durgapur</option>
+                    </select>
+                    <br>
+                    <input type="submit" value="Search">
+                    <br><br>
+                    <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback Form</a></button>
+                    <br>
+                    <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp">Change Password</a></button>
+                    <br>
+                    <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/PaymentPortal.jsp">Payment Portal</a></button>
+                    <br>
+                    <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp">Cart</a></button>
+                    <br>
+                    <button type="button"><a href="http://localhost:8080/MinorWebApp/PageServes/CustomerOrders.jsp">Orders</a></button>
+                    <br><br>
+                </form>
+            </div>
+        </main>
+        <script src="/MinorWebApp/scripts/showResponse.js"></script>
+        <script>
+            let params = (new URL(document.location)).searchParams;
+            let response = params.get("response");
+
+            if (response == "feedback-success") {
+                showSuccess("Feedback recieved successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+        </script>
+    </body>
 </html>
