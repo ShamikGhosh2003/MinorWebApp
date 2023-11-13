@@ -62,7 +62,7 @@
                 <%
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-                    query = "SELECT * FROM ORDERS ORDER BY OID ASC";
+                    query = "SELECT OID, CID, PID, MID, QTY, TO_CHAR(ODATE, 'dd-mm-yyyy') AS ORDER_DATE, STATUS, ITEM_PRICE, TOTAL FROM ORDERS ORDER BY OID ASC";
                     ops = (OraclePreparedStatement) oconn.prepareCall(query);
                     ors = (OracleResultSet) ops.executeQuery();
                     orsm = (OracleResultSetMetaData) ors.getMetaData();
