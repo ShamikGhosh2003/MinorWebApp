@@ -47,7 +47,6 @@
     %>
                 <script>
                     //  Medicine already exists in stock.
-                    //  TODO: See if it's possible to redirect to the update inventory page with the value of this new medicine seleteced to be updated.
                     location.href="http://localhost:8080/MinorWebApp/PageServes/AddMedicine.jsp?response=exists";
                 </script>
     <%
@@ -181,32 +180,32 @@
                 </div>
             </div>
         </main>
-            <script src="/MinorWebApp/scripts/showResponse.js"></script>
-            <script>
-                let params = (new URL(document.location)).searchParams;
-                let response = params.get("response");
+        <script src="/MinorWebApp/scripts/showResponse.js"></script>
+        <script>
+            let params = (new URL(document.location)).searchParams;
+            let response = params.get("response");
 
-                if (response == "success") {
-                    showSuccess("Medicine inserted successful.<br>Please update it's stock <a href='http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp'>here</a>.");
-                    params.delete('response');
-                    window.history.replaceState({}, document.title, url.toString());
-                }
-                if(response == "failed") {
-                    showError("Failed to add medicine to inventory.<br>Try again later.");
-                    params.delete('response');
-                    window.history.replaceState({}, document.title, url.toString());
-                }
-                if(response == "exists") {
-                    showError("Medicine already exists in your inventory.<br>Please update it's stock <a href='http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp'>here</a>.");
-                    params.delete('response');
-                    window.history.replaceState({}, document.title, url.toString());
-                }
-                if(response == "new-added") {
-                    showSuccess("Medicine added to database successful.<br>Please add it to your inventory here.</a>");
-                    params.delete('response');
-                    window.history.replaceState({}, document.title, url.toString());
-                }
-            </script>
+            if (response == "success") {
+                showSuccess("Medicine inserted successful.<br>Please update it's stock <a href='http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp'>here</a>.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if(response == "failed") {
+                showError("Failed to add medicine to inventory.<br>Try again later.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if(response == "exists") {
+                showError("Medicine already exists in your inventory.<br>Please update it's stock <a href='http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp'>here</a>.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if(response == "new-added") {
+                showSuccess("Medicine added to database successful.<br>Please add it to your inventory here.</a>");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+        </script>
     </body>
 </html>
 

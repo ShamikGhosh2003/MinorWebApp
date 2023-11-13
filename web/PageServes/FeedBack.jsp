@@ -94,7 +94,7 @@
         <link rel="stylesheet" href="../stylesheet/main-style.css">
         <title>Feedback</title>
         <style>
-            #feedback-text-box {
+            textarea {
                 width: 100%;
                 height: 100px;
                 padding: 5px;
@@ -125,7 +125,7 @@
                         <br>
                         <p>Please let us know how we can do better.</p>
                         <br>
-                        <textarea id="feedback-text-box" name="feedback" placeholder="Feedback..." required></textarea>
+                        <textarea name="feedback" placeholder="Feedback..." required></textarea>
                         <br>
                         <br>
                         <div class="input-group button-group">
