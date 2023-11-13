@@ -1,6 +1,7 @@
 /*
-To display an error add in <div class="error-alert"></div>
-To display an success add in <div class="success-alert"></div>
+To display an error add in <div id="error-alert"></div>
+To display an success add in <div id="success-alert"></div>
+To display an notice add in <div id="notice-alert"></div>
 Code for URL param handling:
 
 <script>
@@ -33,4 +34,13 @@ function showSuccess(message) {
     successAlert.offsetHeight;
     successAlert.style.animation = null; 
     window.location.hash = 'sucess-alert';
+}
+function showNotice(message) {
+    var noticeAlert = document.getElementById('notice-alert');
+    noticeAlert.innerHTML = message;
+    noticeAlert.style.display = "block";
+    noticeAlert.style.animation = 'none';
+    noticeAlert.offsetHeight;
+    noticeAlert.style.animation = null; 
+    window.location.hash = 'notice-alert';
 }
