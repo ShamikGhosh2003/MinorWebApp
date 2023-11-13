@@ -23,7 +23,7 @@
 %>
             <script>
                 // Incorrect OTP.
-                showError("Wrong OTP.");
+                location.href="http://localhost:8080/MinorWebApp/PageServes/VerifyOTP.jsp?response=wrong-otp";
             </script>
 <%
         }
@@ -94,11 +94,11 @@
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());
             }
-            /* if (response == "wrong-otp") {
+            if (response == "wrong-otp") {
                 showError("Wrong OTP.");
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());
-            } */
+            }
         </script>
     </body>
 </html>

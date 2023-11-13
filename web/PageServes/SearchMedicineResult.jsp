@@ -7,6 +7,46 @@
 <%@page import="oracle.jdbc.OraclePreparedStatement"%>
 <%@page import="oracle.jdbc.OracleConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <link rel="stylesheet" href="../stylesheet/main-style.css">
+    <script src="/MinorWebApp/scripts/showResponse.js"></script>
+    <script>
+        function maxNumberInput(input, max) {
+            if (input.value !== '') {
+                if (input.value > max) {
+                    input.value = max;
+                }
+                if (input.value < 1) {
+                    input.value = 1;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
+        <span class="heading">MedFinder</span>
+        <nav class="navbar">
+        <a href="http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp">Home</a>
+        <a href="http://localhost:8080/MinorWebApp/StatPages/about.html">About Us</a>
+        <a href="http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp">Cart</a>
+        <div class="navbar-dropdown">
+            <a class="navbar-dropdown-button">Settings</a>
+            <div class="navbar-dropdown-content">
+                <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+                <a href="http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp">Change Password</a>
+                <a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback</a>
+            </div>
+        </div>
+        </nav>
+    </header>
+<%-- Java code needs to be after head to give time for the JS to load the error functions. --%>
 <%! 
     OracleConnection oconn;
     OraclePreparedStatement ops, ops1;
@@ -46,107 +86,82 @@
         out.println("Error: " + ex.getMessage());
     }
 %>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Results</title>
-    <link rel="stylesheet" href="../stylesheet/main-style.css">
-    <script>
-        function maxNumberInput(input, max) {
-            if (input.value !== '') {
-                if (input.value > max) {
-                    input.value = max;
-                }
-                if (input.value < 1) {
-                    input.value = 1;
-                }
-            }
-        }
-    </script>
-</head>
-<body>
-    <header>           
-        <span class="heading">MedFinder</span>
-        <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="registerUser.html">Register</a>
-        <a href="about.html">About Us</a>
-        <a href="#">Contact</a>
-        <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
-        </nav>
-    </header>
     <main>
         <div class="result-container">
-            <h2>Search Result</h2>
-            <table>
-                <thead>
-                    <%
-                        for(int i=1; i<=orsm.getColumnCount()-2; i++) //-2 given to exclude PID, MID from printing
-                        {
-                    %>
-                    <th><%=orsm.getColumnName(i)%></th>
-                    <%
-                        }
-                    %>
-                    <th>QUANTITY</th>
-                </thead>
-                <tbody>
-                    <%  
-                        while(ors.next())
-                        {
-                            hasResult=true; 
-                    %>
-                    <tr>
+            <div class="result-box">
+                <h2>Search Result</h2>
+                <br>
+                <div id="error-alert"></div>
+                <table>
+                    <thead>
                         <%
-                            ident = "ORDERS,"+cid;
-                            int count = 0;
-                            for(int i=1; i<=orsm.getColumnCount(); i++) 
-                            {   
-                                if(orsm.getColumnName(i).equals("PID")){
-                                    ident+=","+ors.getString(i);++count;}
-                                if(orsm.getColumnName(i).equals("MID")){
-                                    ident+=","+ors.getString(i);++count;}
-                                if(orsm.getColumnName(i).equals("MQTY"))
-                                    ident+=","+ors.getString(i);
-                                if(orsm.getColumnName(i).equals("PRICE"))
-                                    ident+=","+ors.getString(i);
-                                if(count!=0)
-                                    continue;
+                            for(int i=1; i<=orsm.getColumnCount()-2; i++) //-2 given to exclude PID, MID from printing
+                            {
                         %>
-                                <td><%=ors.getString(i)%></td>
-                        <%                             
+                        <th><%=orsm.getColumnName(i)%></th>
+                        <%
                             }
                         %>
-                        <td>                            
-                            <form method="POST" action="http://localhost:8080/MinorWebApp/AddToCart">
-                                <!--<h3><%=ident%></h3>-->
-                                <%-- <input type="number" id="quantity" name="<%=ident%>" min="1" max="100"> --%>
-                                <input type="number" id="quantity" name="<%=ident%>" min="1" max="<%=ors.getInt("MQTY")%>" oninput="maxNumberInput(this,<%=ors.getInt("MQTY")%>)">
-                                <button type="submit" name="cart" value="<%=ident%>" class="button-80">Add to cart</button>
-                            </form>
-                        </td>
-                    </tr>  
-                    <% 
-                        }
-                    %>
-                </tbody>
-            </table> 
-            <!--
-            TODO:
-            Change this submit quantity form to showing which pharmacy has said medicine instead through SQL queries.
-            -->
-            <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp">
-                <input type="submit" value="Go to cart" name="go-to-cart">
-            </form>
-            <%
-                if(!hasResult) {
-            %>
-            <p>No results found for <%=request.getParameter("medicineName")%></p>
-            <%
-                }
-            %>
+                        <th>QUANTITY</th>
+                    </thead>
+                    <tbody>
+                        <%  
+                            while(ors.next())
+                            {
+                                hasResult=true; 
+                        %>
+                        <tr>
+                            <%
+                                ident = "ORDERS,"+cid;
+                                int count = 0;
+                                for(int i=1; i<=orsm.getColumnCount(); i++) 
+                                {   
+                                    if(orsm.getColumnName(i).equals("PID")){
+                                        ident+=","+ors.getString(i);++count;}
+                                    if(orsm.getColumnName(i).equals("MID")){
+                                        ident+=","+ors.getString(i);++count;}
+                                    if(orsm.getColumnName(i).equals("MQTY"))
+                                        ident+=","+ors.getString(i);
+                                    if(orsm.getColumnName(i).equals("PRICE"))
+                                        ident+=","+ors.getString(i);
+                                    if(count!=0)
+                                        continue;
+                            %>
+                                    <td><%=ors.getString(i)%></td>
+                            <%                             
+                                }
+                            %>
+                            <td>                         
+                                <form method="POST" action="http://localhost:8080/MinorWebApp/AddToCart">
+                                    <!--<h3><%=ident%></h3>-->
+                                    <%-- <input type="number" id="quantity" name="<%=ident%>" min="1" max="100"> --%>
+                                    <input type="number" id="quantity" name="<%=ident%>" min="1" max="<%=ors.getInt("MQTY")%>" oninput="maxNumberInput(this,<%=ors.getInt("MQTY")%>)">
+                                    <button type="submit" name="cart" value="<%=ident%>" class="button-80">Add to cart</button>
+                                </form>
+                            </td>
+                        </tr>  
+                        <% 
+                            }
+                        %>
+                    </tbody>
+                </table> 
+                <div class="button-menu">
+                    <button onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'">Search Medicine</button>
+                    <button onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'">Go to cart</button>
+                </div>
+                <%-- <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp">
+                    <input type="submit" value="Go to cart" name="go-to-cart">
+                </form> --%>
+                <%
+                    if(!hasResult) {
+                %>
+                <script>
+                showError("No results found for <%=request.getParameter("medicineName")%>")
+                </script>
+                <%
+                    }
+                %>
+            </div>
         </div>
     </main>
 </body>
