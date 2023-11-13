@@ -63,7 +63,7 @@
                 <div id="success-alert"></div>
                 <form action="SearchMedicineResult.jsp" method="post">
                     <select name="medicineName">
-                      <option value="" selected disabled>Select a medicine</select>
+                      <option value="" selected disabled>Select a medicine</option>
                     <%
                         DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                         oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
