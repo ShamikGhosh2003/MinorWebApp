@@ -65,7 +65,7 @@
                 <h2>ORDERS</h2>
                 <%
                     // TODO - PNAME AS PHARMACY etc for all JSP tables
-                    query = "SELECT O.OID,P.PNAME, P.ADDRESS, M.MNAME, O.QTY, O.ITEM_PRICE, O.TOTAL FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.MID=M.MID AND O.PID=P.PID AND C.CID = ? AND O.STATUS = 'ORDERED' ORDER BY OID ASC";
+                    query = "SELECT O.OID,P.PNAME, P.ADDRESS, M.MNAME, O.QTY, TO_CHAR(ODATE, 'dd-mm-yyyy') AS ORDER_DATE, O.ITEM_PRICE, O.TOTAL FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.MID=M.MID AND O.PID=P.PID AND C.CID = ? AND O.STATUS = 'ORDERED' ORDER BY OID ASC";
                     ops = (OraclePreparedStatement) oconn.prepareCall(query);
                     ops.setString(1, cid);
                     ors = (OracleResultSet) ops.executeQuery();

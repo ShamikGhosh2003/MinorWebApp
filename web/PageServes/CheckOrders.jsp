@@ -19,7 +19,7 @@
             OracleResultSet ors; //Store the data in the webpage from oracle
             OracleResultSetMetaData orsm;
             int reccounter=0; //record counter
-            String query;
+            String query, email;
             java.util.Properties props = new java.util.Properties();
             String oconnUrl, oconnUsername, oconnPassword;
         %>
@@ -34,6 +34,9 @@
             } catch (IOException ex) {
                 out.println("Error: " + ex.getMessage());
             }
+            HttpSession sess = request.getSession(false);
+            if(sess!=null)
+                email = sess.getAttribute("email").toString();
         %>
     </head>
     <body>
@@ -60,8 +63,9 @@
                     <%
                         DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                         oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-                        query = "SELECT O.OID, O.CID, C.FNAME || ' ' || C.LNAME AS CUSTOMER_NAME, O.PID, P.PNAME, O.MID, M.MNAME, O.ODATE, O.QTY, O.STATUS FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.PID=P.PID AND O.MID = M.MID ORDER BY OID ASC";
-                        ops = (OraclePreparedStatement) oconn.prepareCall(query);                    
+                        query = "SELECT O.OID, O.CID, C.FNAME || ' ' || C.LNAME AS CUSTOMER_NAME, O.PID, P.PNAME, O.MID, M.MNAME, TO_CHAR(ODATE, 'dd-mm-yyyy') AS ORDER_DATE, O.QTY, O.STATUS FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.PID=P.PID AND O.MID = M.MID AND P.EMAIL = ? ORDER BY OID ASC";
+                        ops = (OraclePreparedStatement) oconn.prepareCall(query);    
+                        ops.setString(1, email);
                         ors = (OracleResultSet) ops.executeQuery();
                         orsm = (OracleResultSetMetaData) ors.getMetaData();
                     %>
