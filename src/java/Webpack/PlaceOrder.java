@@ -74,6 +74,7 @@ public class PlaceOrder extends HttpServlet {
                 ors1 = (OracleResultSet) ops1.executeQuery();
                 orsm1 = (OracleResultSetMetaData) ors1.getMetaData();
                 while(ors1.next()){
+                    boolean change = false;
                     for(int i=1; i<=orsm1.getColumnCount(); i++){
                         oid = ors1.getString("OID");
                         cid = ors1.getString("CID");
@@ -106,7 +107,10 @@ public class PlaceOrder extends HttpServlet {
                             out.println("location.href='http://localhost:8080/MinorWebApp/PlaceOrder';");
                             out.println("<script>");
                         }
-                        mqty = ""+(Integer.parseInt(mqty)-Integer.parseInt(qty));
+                        if(!change){
+                            mqty = ""+(Integer.parseInt(mqty)-Integer.parseInt(qty));
+                            change = true;
+                        }
                         query = "UPDATE PHARM_MED_STOCK SET MQTY = ? WHERE PID = ? AND MID = ?";
                         ops = (OraclePreparedStatement) oconn.prepareStatement(query);
                         ops.setString(1,mqty);
