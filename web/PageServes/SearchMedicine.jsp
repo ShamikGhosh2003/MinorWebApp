@@ -72,14 +72,20 @@
     %>
 </head>
     <body>
-        <header>           
+        <header>
+            <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
             <span class="heading">MedFinder</span>
             <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="registerUser.html">Register</a>
-            <a href="about.html">About Us</a>
-            <a href="#">Contact</a>
-            <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+            <a href="http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp">Home</a>
+            <a href="http://localhost:8080/MinorWebApp/StatPages/about.html">About Us</a>
+            <a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback</a>
+            <div class="navbar-dropdown">
+                <a class="navbar-dropdown-button">Settings</a>
+                <div class="navbar-dropdown-content">
+                    <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+                    <a href="http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp">Change Password</a>
+                </div>
+            </div>
             </nav>
         </header>
         <main>
@@ -135,6 +141,26 @@
 
             if (response == "feedback-success") {
                 showSuccess("Feedback recieved successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if (response == "order-placed") {
+                showSuccess("Order placed successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if (response == "added-cart") {
+                showSuccess("Added to cart successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if (response == "failed-cart") {
+                showError("Failed to add to cart.<br>Please try again later.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if (response == "order-too-high") {
+                showError("Not enough items in stock.<br>Please try again.");
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());
             }

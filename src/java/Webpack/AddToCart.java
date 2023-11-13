@@ -77,8 +77,9 @@ public class AddToCart extends HttpServlet {
             total = ""+Integer.parseInt(qty)*Integer.parseInt(price);
             if(Integer.parseInt(tbQty)<Integer.parseInt(qty)){
                 out.println("<script>");
-                out.println("alert('Number of items is greater than stock, try again!');");
-                out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp';");
+                // More item requested than in stock.
+                // Shouldn't happen due to JS but just in case.
+                out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp?response=order-too-high';");
                 out.println("</script>");
             }else{                
                 try {
@@ -113,12 +114,13 @@ public class AddToCart extends HttpServlet {
                     int x = ops.executeUpdate();
                     if(x>0){
                         out.println("<script>");
-                        out.println("alert('Item added to Cart');");
-                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp';");
+                        // Item added to cart successfully.
+                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp?response=added-cart';");
                         out.println("</script>");
                     }else{
                         out.println("<script>");
-                        out.println("alert('No changes to the database');");
+                        // Failed to add to cart.
+                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp?response=failed-cart';");
                         out.println("</script>");
                     }
                 }catch (SQLException ex) {
