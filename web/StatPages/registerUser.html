@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../stylesheet/main-style.css">
         <title>Register User</title>
+        <script src="/MinorWebApp/scripts/showResponse.js"></script>
         <script>
             window.onload = function() {
                 document.forms['register'].addEventListener('submit', function(event) {
@@ -15,17 +16,7 @@
                     }
                 });
             };
-        
-            function showError(message) {
-                var errorAlert = document.getElementById('error-alert');
-                errorAlert.innerHTML = message;
-                errorAlert.style.display = "block";
-                errorAlert.style.animation = 'none';
-                errorAlert.offsetHeight;
-                errorAlert.style.animation = null; 
-                window.location.hash = 'error-alert';
-            }
-        
+            
             function validateForm() {
                 var fname = document.forms['register']['fname'].value;
                 var lname = document.forms['register']['lname'].value;
@@ -66,6 +57,12 @@
                     return false;
                 }
                 return true;
+            }
+
+            function maxInputNumber(element, maxLength) {
+                if(element.value.length > maxLength) {
+                    element.value = element.value.slice(0, maxLength);
+                }
             }
         </script>        
     </head>
@@ -131,7 +128,7 @@
                         <br>
                         <div class="input-group">
                             <label for="pincode">Pincode:</label>
-                            <input type="number" name="pincode" placeholder="700000">
+                            <input type="number" name="pincode" placeholder="700000" oninput="maxInputNumber(this,6)">
                         </div>
                         <br>
                         <div class="input-group radio-group">
