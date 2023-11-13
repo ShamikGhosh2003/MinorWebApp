@@ -18,7 +18,9 @@ import oracle.jdbc.OracleConnection;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 import oracle.jdbc.OracleResultSetMetaData;
-import Webpack.CurrentDateTime;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @WebServlet(name = "PlaceOrder", urlPatterns = {"/PlaceOrder"})
 public class PlaceOrder extends HttpServlet {
@@ -50,7 +52,7 @@ public class PlaceOrder extends HttpServlet {
         }
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
@@ -66,6 +68,12 @@ public class PlaceOrder extends HttpServlet {
                 DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                 oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
                 odate = CurrentDateTime.getDateTime();
+                //CHANGING THE FORMAT OF DATE                
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+                Date dt = sdf.parse(odate);
+                SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MMM-yyyy");
+                odate = sdf1.format(dt);
+                out.println("<h3>ODATE: "+odate+"</h3>");
                 query1 = "SELECT OID, CID, PID, MID, QTY, ITEM_PRICE, TOTAL FROM ORDERS WHERE CID = (SELECT CID FROM CUSTOMER WHERE EMAIL = ?) AND STATUS = 'CART'";
                 ops1 = (OraclePreparedStatement) oconn.prepareStatement(query1);
                 ops1.setString(1,email);
@@ -123,13 +131,13 @@ public class PlaceOrder extends HttpServlet {
                             out.println("location.href='http://localhost:8080/MinorWebApp/PlaceOrder';");
                             out.println("<script>");
                         }
-                        query = "UPDATE ORDERS SET STATUS = 'ORDERED' WHERE OID = ? AND CID = ? AND PID = ? AND MID = ?";
+                        query = "UPDATE ORDERS SET ODATE = ?, STATUS = 'ORDERED' WHERE OID = ? AND CID = ? AND PID = ? AND MID = ?";
                         ops = (OraclePreparedStatement) oconn.prepareStatement(query);
-                        //ops.setString(1,odate);
-                        ops.setString(1,oid);
-                        ops.setString(2,cid);
-                        ops.setString(3,pid);
-                        ops.setString(4,mid);
+                        ops.setString(1,odate);
+                        ops.setString(2,oid);
+                        ops.setString(3,cid);
+                        ops.setString(4,pid);
+                        ops.setString(5,mid);
                         x = ops.executeUpdate();
                         if(x<=0){
                             out.println("<script>");
@@ -164,7 +172,7 @@ public class PlaceOrder extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (SQLException ex) {
+        } catch (SQLException | ParseException ex) {
             Logger.getLogger(PlaceOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -181,7 +189,11 @@ public class PlaceOrder extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            try {
+                processRequest(request, response);
+            } catch (ParseException ex) {
+                Logger.getLogger(PlaceOrder.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(PlaceOrder.class.getName()).log(Level.SEVERE, null, ex);
         }
