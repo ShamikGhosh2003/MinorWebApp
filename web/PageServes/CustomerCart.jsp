@@ -83,7 +83,7 @@
                     <th>ACTION</th>
                 </thead>
                 <tbody>
-                    <%  
+                    <%  total = 0;
                         while(ors.next())
                         { 
                     %>
