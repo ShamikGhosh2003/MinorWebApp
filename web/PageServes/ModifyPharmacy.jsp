@@ -106,8 +106,13 @@
             email = sess.getAttribute("email").toString();
             userType = sess.getAttribute("userType").toString();
         }
+        if(userType.equals("PHARMACY"))
+            pid = sess.getAttribute("pid").toString();
         if(request.getParameter("submit")==null){
-            btnval = request.getParameter("Modify");
+            if(userType.equals("PHARMACY"))
+                btnval = userType+","+pid;
+            else
+                btnval = request.getParameter("Modify");
             int i = btnval.indexOf(",");
             table = btnval.substring(0,i);
             pid = btnval.substring(i+1);
