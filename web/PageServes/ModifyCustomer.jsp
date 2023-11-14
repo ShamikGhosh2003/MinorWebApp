@@ -71,13 +71,7 @@
             sques = request.getParameter("sques");
             sans = request.getParameter("sans");
             city = request.getParameter("city");
-            if(userType.equals("ADMIN"))
-                password = request.getParameter("password");
-            if(userType.equals("CUSTOMER"))
-                query = "UPDATE CUSTOMER SET FNAME = ?, LNAME = ?, GENDER = ?, AGE = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ? WHERE CID = ?";
-            else
-                query = "UPDATE CUSTOMER SET FNAME = ?, LNAME = ?, GENDER = ?, AGE = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ?, PASSWORD = ? WHERE CID = ?";
-
+            query = "UPDATE CUSTOMER SET FNAME = ?, LNAME = ?, GENDER = ?, AGE = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ? WHERE CID = ?";
             ops = (OraclePreparedStatement) oconn.prepareCall(query);
             ops.setString(1, fname);
             ops.setString(2, lname);
@@ -89,12 +83,7 @@
             ops.setString(8, sques);
             ops.setString(9, sans);
             ops.setString(10, city);                        
-            if(userType.equals("ADMIN")){
-                ops.setString(11, password);
-                ops.setString(12, cid);
-            }else{
-                ops.setString(11, cid);
-            }            
+            ops.setString(11, cid);         
             int x = ops.executeUpdate();
             if(x>0){
                 if(userType.equals("ADMIN")){
@@ -163,7 +152,6 @@
             function validateForm() {
                 var fname = document.forms['register']['fname'].value;
                 var lname = document.forms['register']['lname'].value;
-                //var email = document.forms['register']['email'].value;
                 var phone = document.forms['register']['phone'].value;
                 var age = document.forms['register']['age'].value;
                 var address = document.forms['register']['address'].value;
@@ -172,10 +160,8 @@
                 var gender = document.forms['register']['gender'].value;
                 var sques = document.forms['register']['sques'].value;
                 var sans = document.forms['register']['sans'].value;
-                var password = document.forms['register']['password'].value;
-                var confirmPassword = document.forms['register']['confirm-password'].value;
         
-                if(fname === "" || lname === "" || phone === "" || age === "" || address === "" || city === "" || pincode === "" || gender === "" || sques === "" || sans === "" || password === "" || confirmPassword === "") {
+                if(fname === "" || lname === "" || phone === "" || age === "" || address === "" || city === "" || pincode === "" || gender === "" || sques === "" || sans === "") {
                     showError("All fields are required.");
                     return false;
                 }
@@ -313,23 +299,6 @@
                             <label for="sans">Security Answer:</label>
                             <input type="text" name="sans" id="sans" value="<%=sans%>" placeholder="<%=sans%>">
                         </div>
-                        <%-- <%                        
-                            if(userType.equals("ADMIN")){
-                        %>                        
-                        <br>
-                        <div class="input-group">
-                            <label for="password">Password:</label>
-                            <input type="password" name="password" value="<%=password%>" placeholder="********">
-                        </div>
-                        <br>
-                        <div class="input-group">
-                            <label for="confirm-password">Confirm password:</label>
-                            <input type="password" name="confirm-password" value="<%=password%>" placeholder="********">
-                        </div> 
-                        <%
-                            }
-                        %>                         --%>
-                        <%-- Not even the admin should be able to view or edit the password. --%>
                         <br>    
                         <div class="input-group button-group">
                             <label></label>
