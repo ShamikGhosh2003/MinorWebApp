@@ -45,7 +45,7 @@
         <span class="heading">MedFinder</span>
         <nav class="navbar">
         <a href="http://localhost:8080/MinorWebApp/StatPages/admin-database.html">Home</a>
-        <a href="about.html">About Us</a>
+        <a href="http://localhost:8080/MinorWebApp/StatPages/about.html">About Us</a>
         <div class="navbar-dropdown">
             <a class="navbar-dropdown-button">Settings</a>
             <div class="navbar-dropdown-content">
@@ -121,6 +121,17 @@
                 </table>
             </div>
         </div>
+        <script>
+            let params = (new URL(document.location)).searchParams;
+            let response = params.get("response");
+
+            if (response == "edit-success") {
+                showSuccess("Customer edited successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+        </script>
+        edit-success
     </main>
 </body>
 </html>

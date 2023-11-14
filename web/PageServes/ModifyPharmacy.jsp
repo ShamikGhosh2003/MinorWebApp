@@ -226,6 +226,7 @@
                 <form method="POST" name="register">
                     <h2>EDIT PHARMACY</h2>
                     <br>
+                    <div id="error-alert"></div>
                     <%
                         if(userType.equals("ADMIN")){
                     %>
@@ -242,7 +243,6 @@
                         <label for="email">Email:</label>
                         <input type="email" name="email" value="<%=pemail%>" readonly/>
                     </div>
-                    <div id="error-alert"></div>
                     <br>
                     <div class="input-group">
                         <label for="pname">Pharmacy Name:</label>
