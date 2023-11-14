@@ -49,14 +49,20 @@
     <link rel="stylesheet" href="../stylesheet/main-style.css">
 </head>
 <body>
-    <header>           
+    <header>
+        <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
         <span class="heading">MedFinder</span>
         <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="registerUser.html">Register</a>
-        <a href="about.html">About Us</a>
-        <a href="#">Contact</a>
-        <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+        <a href="http://localhost:8080/MinorWebApp/StatPages/SearchMedicine.jsp">Home</a>
+        <a href="http://localhost:8080/MinorWebApp/StatPages/about.html">About Us</a>
+        <a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback</a>
+        <div class="navbar-dropdown">
+            <a class="navbar-dropdown-button">Settings</a>
+            <div class="navbar-dropdown-content">
+                <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+                <a href="http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp">Change Password</a>
+            </div>
+        </div>
         </nav>
     </header>
     <main>
@@ -129,10 +135,6 @@
                 <button onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/PaymentPortal.jsp'">Place Order</button>
                 <button onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'">Search Medicine</button>
             </div>
-            <%-- <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/PaymentPortal.jsp">
-                
-                <input type="submit" value="PlaceOrder" name="PlaceOrder">
-            </form> --%>
             </div>
         </div>
     </main>

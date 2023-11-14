@@ -44,7 +44,6 @@
         </script>    
     </head>
     <body>
-        <main>
         <header>
             <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
             <span class="heading">MedFinder</span>
@@ -68,9 +67,7 @@
                         <h2>VERIFY OTP</h2>
                         <br>
                         <div id="error-alert"></div>
-                        <div id="success-alert"></div>
                         <div id="notice-alert"></div>
-                        <br>
                         <div class="input-group">
                             <label for="Totp">Enter OTP:</label>
                             <input type="number" id="mname" name="Totp" onclick="maxInputNumber(this,4)">

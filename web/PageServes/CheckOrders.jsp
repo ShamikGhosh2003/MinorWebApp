@@ -6,38 +6,39 @@
 <%@page import="oracle.jdbc.OraclePreparedStatement"%>
 <%@page import="oracle.jdbc.OracleConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%! 
+    //DECLARATION
+    OracleConnection oconn;
+    OraclePreparedStatement ops;
+    OracleResultSet ors; //Store the data in the webpage from oracle
+    OracleResultSetMetaData orsm;
+    int reccounter=0; //record counter
+    String query, email;
+    java.util.Properties props = new java.util.Properties();
+    String oconnUrl, oconnUsername, oconnPassword;
+%>
+<%
+    try {
+        InputStream input = application.getResourceAsStream("/WEB-INF/db.properties");
+        props.load(input);
+        oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
+            + props.getProperty("port") + ":" + props.getProperty("SID");
+        oconnUsername = props.getProperty("username");
+        oconnPassword = props.getProperty("password");
+    } catch (IOException ex) {
+        out.println("Error: " + ex.getMessage());
+    }
+    HttpSession sess = request.getSession(false);
+    if(sess!=null)
+        email = sess.getAttribute("email").toString();
+%>
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Check Orders</title>
         <link rel="stylesheet" href="../stylesheet/main-style.css">
-        <%! 
-            //DECLARATION
-            OracleConnection oconn;
-            OraclePreparedStatement ops;
-            OracleResultSet ors; //Store the data in the webpage from oracle
-            OracleResultSetMetaData orsm;
-            int reccounter=0; //record counter
-            String query, email;
-            java.util.Properties props = new java.util.Properties();
-            String oconnUrl, oconnUsername, oconnPassword;
-        %>
-        <%
-            try {
-                InputStream input = application.getResourceAsStream("/WEB-INF/db.properties");
-                props.load(input);
-                oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
-                    + props.getProperty("port") + ":" + props.getProperty("SID");
-                oconnUsername = props.getProperty("username");
-                oconnPassword = props.getProperty("password");
-            } catch (IOException ex) {
-                out.println("Error: " + ex.getMessage());
-            }
-            HttpSession sess = request.getSession(false);
-            if(sess!=null)
-                email = sess.getAttribute("email").toString();
-        %>
     </head>
     <body>
         <header>
