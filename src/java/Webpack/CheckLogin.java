@@ -89,9 +89,11 @@ public class CheckLogin extends HttpServlet {
                     response.sendRedirect("http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp");
                 }else if(ors3.next()){
                     userType = "PHARMACY";
+                    String pid = ors3.getString(1);
                     HttpSession sess = request.getSession(true);
                     sess.setAttribute("userType",userType);
                     sess.setAttribute("email",email);
+                    sess.setAttribute("pid", pid);
                     response.sendRedirect("http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html");
                 }else{
                     // response.sendRedirect("http://localhost:8080/MinorWebApp/StatPages/WrongPass.html");
