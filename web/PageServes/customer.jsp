@@ -131,7 +131,6 @@
                 window.history.replaceState({}, document.title, url.toString());
             }
         </script>
-        edit-success
     </main>
 </body>
 </html>
