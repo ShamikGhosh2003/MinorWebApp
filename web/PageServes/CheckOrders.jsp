@@ -13,7 +13,7 @@
     OracleResultSet ors; //Store the data in the webpage from oracle
     OracleResultSetMetaData orsm;
     int reccounter=0; //record counter
-    String query, email;
+    String query, email, ident;
     java.util.Properties props = new java.util.Properties();
     String oconnUrl, oconnUsername, oconnPassword;
 %>
@@ -64,7 +64,7 @@
                     <%
                         DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                         oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-                        query = "SELECT O.OID, O.CID, C.FNAME || ' ' || C.LNAME AS CUSTOMER_NAME, O.PID, P.PNAME, O.MID, M.MNAME, TO_CHAR(ODATE, 'dd-mm-yyyy') AS ORDER_DATE, O.QTY, O.STATUS FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.PID=P.PID AND O.MID = M.MID AND P.EMAIL = ? ORDER BY OID ASC";
+                        query = "SELECT O.OID, C.FNAME || ' ' || C.LNAME AS CUSTOMER_NAME, P.PNAME, M.MNAME, TO_CHAR(ODATE, 'dd-mm-yyyy') AS ORDER_DATE, O.QTY, O.STATUS, O.CID, O.PID, O.MID FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.PID=P.PID AND O.MID = M.MID AND P.EMAIL = ? ORDER BY OID ASC";
                         ops = (OraclePreparedStatement) oconn.prepareCall(query);    
                         ops.setString(1, email);
                         ors = (OracleResultSet) ops.executeQuery();
@@ -73,14 +73,15 @@
                     <table>
                         <thead>
                             <%
-                                for(int i=1; i<=orsm.getColumnCount(); i++)
+                                for(int i=1; i<=orsm.getColumnCount()-3; i++)
                                 {
                                     reccounter++;
                             %>
                                     <th><%=orsm.getColumnName(i)%></th>
                             <%
                                 }
-                            %>          
+                            %>   
+                            <th>Edit</th>
                         </thead>
                         <tbody>
                             <%  
@@ -89,17 +90,37 @@
                             %>
                             <tr>
                                 <%
+                                    ident = "ORDERS";
+                                    int count=0;
                                     for(int i=1; i<=orsm.getColumnCount(); i++)
                                     {
+                                        if(orsm.getColumnName(i).equals("OID"))
+                                        ident+=","+ors.getString(i);
+                                        if(orsm.getColumnName(i).equals("CID")){
+                                            ident+=","+ors.getString(i);++count;}
+                                        if(orsm.getColumnName(i).equals("PID")){
+                                            ident+=","+ors.getString(i);++count;}
+                                        if(orsm.getColumnName(i).equals("MID")){
+                                            ident+=","+ors.getString(i);++count;}
+                                        if(count!=0)
+                                            continue;
                                 %>
                                         <td><%=ors.getString(i)%></td>
                                 <% 
                                     }
                                 %>
+                                <td>
+                                    <div class="input-group button-group">
+                                        <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyOrders.jsp">
+                                            <!--<h3><%=ident%></h3>-->
+                                            <button type="submit" name="Modify" value="<%=ident%>" class="button-80">Change Status</button>
+                                        </form>
+                                    </div>
+                                </td>
                             </tr>    
                             <% 
                                 }
-                            %>
+                            %>                            
                         </tbody>
                         <tfoot>
                             <tr>
