@@ -12,7 +12,7 @@
     OraclePreparedStatement ops;
     OracleResultSet ors; //Store the data in the webpage from oracle
     OracleResultSetMetaData orsm;
-    String query;
+    String query, userType, email, cid, ident;
     java.util.Properties props = new java.util.Properties();
     String oconnUrl, oconnUsername, oconnPassword;
 %>
@@ -56,6 +56,22 @@
             </nav>
         </header>
         <main>
+            <%
+                HttpSession sess = request.getSession(false);
+                if(sess!=null){
+                    userType = sess.getAttribute("userType").toString();
+                    email = sess.getAttribute("email").toString();
+                }
+                DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+                oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
+                query = "SELECT CID FROM CUSTOMER WHERE EMAIL = ?";                                      
+                ops = (OraclePreparedStatement) oconn.prepareCall(query);
+                ops.setString(1, email);
+                ors = (OracleResultSet) ops.executeQuery();
+                ors.next();
+                cid = ors.getString(1);
+                ident = userType+","+cid;
+            %>
             <div class="search-container">
                 <h2>Search Medicine</h2>
                 <br>
@@ -64,9 +80,7 @@
                 <form action="SearchMedicineResult.jsp" method="post">
                     <select name="medicineName">
                       <option value="" selected disabled>Select a medicine</option>
-                    <%
-                        DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
-                        oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
+                    <%  
                         query = "SELECT MNAME FROM MEDICINE ORDER BY MNAME ASC";
                         ops = (OraclePreparedStatement) oconn.prepareCall(query);
                         ors = (OracleResultSet) ops.executeQuery();
@@ -92,6 +106,9 @@
                         <button type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'">Cart</button>
                         <button type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerOrders.jsp'">Orders</button>
                     </div>
+                </form>
+                <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyCustomer.jsp">
+                    <button type="submit" name="Modify" value="<%=ident%>" class="button-80">Edit Profile</button>
                 </form>
             </div>
         </main>
