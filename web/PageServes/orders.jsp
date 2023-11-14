@@ -62,7 +62,7 @@
                 <%
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-                    query = "SELECT OID, CID, PID, MID, QTY, TO_CHAR(ODATE, 'dd-mm-yyyy') AS ORDER_DATE, STATUS, ITEM_PRICE, TOTAL FROM ORDERS ORDER BY OID ASC";
+                    query = "SELECT O.OID, C.CID, C.FNAME || ' ' || C.LNAME AS CUSTOMER_NAME, O.PID, P.PNAME, O.MID, M.MNAME, O.QTY, TO_CHAR(O.ODATE, 'dd-mm-yyyy') AS ORDER_DATE, O.STATUS, O.ITEM_PRICE, O.TOTAL FROM ORDERS O, CUSTOMER C, PHARMACY P, MEDICINE M WHERE O.CID=C.CID AND O.PID=P.PID AND O.MID=M.MID ORDER BY OID ASC";
                     ops = (OraclePreparedStatement) oconn.prepareCall(query);
                     ors = (OracleResultSet) ops.executeQuery();
                     orsm = (OracleResultSetMetaData) ors.getMetaData();
@@ -105,7 +105,7 @@
                             %>
                             <td>
                                 <div class="input-group button-group">
-                                    <form method="POST" action="http://localhost:8080/MinorWebApp/ModifyAll">
+                                    <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyOrders.jsp">
                                         <!--<h3><%=ident%></h3>-->
                                         <button type="submit" name="Modify" value="<%=ident%>" class="button-80">MODIFY</button>
                                     </form>
