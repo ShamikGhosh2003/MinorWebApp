@@ -102,7 +102,7 @@
                             <td>
                             <div class="input-group button-group">
                                     <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyPharmMedStock.jsp">
-                                        <h3><%=ident%></h3>
+                                        <!--<h3><%=ident%></h3>-->
                                         <button type="submit" name="Modify" value="<%=ident%>" class="button-80">MODIFY</button>
                                     </form>
                                     <form method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
