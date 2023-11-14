@@ -1,17 +1,325 @@
-<%-- 
-    Document   : ModifyPharmacy
-    Created on : 12 Nov, 2023, 2:11:08 AM
-    Author     : ADMIN
---%>
-
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.io.InputStream"%>
+<%@page import="oracle.jdbc.OracleResultSetMetaData"%>
+<%@page import="oracle.jdbc.OracleResultSet"%>
+<%@page import="oracle.jdbc.OraclePreparedStatement"%>
+<%@page import="oracle.jdbc.OracleConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../stylesheet/main-style.css">
+        <title>Edit Pharmacy</title>
+        <script>
+            window.onload = function() {
+                document.forms['register'].addEventListener('submit', function(event) {
+                    if(!validateForm()) {
+                        event.preventDefault();
+                    } else {
+                        window.location.hash = '';
+                    }
+                });
+            };
+
+            function showError(message) {
+                var errorAlert = document.getElementById('error-alert');
+                errorAlert.innerHTML = message;
+                errorAlert.style.display = "block";
+                errorAlert.style.animation = 'none';
+                errorAlert.offsetHeight;
+                errorAlert.style.animation = null; 
+                window.location.hash = 'error-alert';
+            }
+
+            function validateForm() {
+                var pname = document.forms['register']['pname'].value;
+                //var email = document.forms['register']['email'].value;
+                var phone = document.forms['register']['phone'].value;
+                var address = document.forms['register']['address'].value;
+                var pincode = document.forms['register']['pincode'].value;
+                var password = document.forms['register']['password'].value;
+                var confirmPassword = document.forms['register']['confirm-password'].value;
+                var gstn = document.forms['register']['gstn'].value;
+
+                if(pname === "" || phone === "" || address === "" || pincode === "" || password === "" || confirmPassword === "" || gstn === "") {
+                    showError("All fields are required.");
+                    return false;
+                }
+                if(phone.length !== 10 || isNaN(phone)) {
+                    showError("Please enter a valid phone number.");
+                    return false;
+                }
+                if(pincode.length !== 6 || isNaN(pincode)) {
+                    showError("Please enter a valid pincode.");
+                    return false;
+                }
+                if(password.length < 8) {
+                    showError("Password must be at least 8 characters.");
+                    return false;
+                }
+                if(password !== confirmPassword) {
+                    showError("Passwords do not match.");
+                    return false;
+                }
+                if(gstn.length !== 15) {
+                    showError("Invalid GST number. GSTN should be 15 characters only!");
+                    return false;
+                }
+                return true;
+            }
+
+            function maxInputNumber(element, maxLength) {
+                if(element.value.length > maxLength) {
+                    element.value = element.value.slice(0, maxLength);
+                }
+            }
+        </script>
     </head>
     <body>
-        <h1>Hello World!</h1>
+    <%! 
+        OracleConnection oconn;
+        OraclePreparedStatement ops;
+        OracleResultSet ors; //Store the data in the webpage from oracle
+        OracleResultSetMetaData orsm;
+        String query, email, userType, btnval, table, pid, pemail, password, pname, address, gstn, phone, status, pincode, sques, sans, city;
+        java.util.Properties props = new java.util.Properties();
+        HttpSession sess;
+        String oconnUrl, oconnUsername, oconnPassword;
+    %>
+    <%
+        try{
+            InputStream input = application.getResourceAsStream("/WEB-INF/db.properties");
+            props.load(input);
+            oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
+                + props.getProperty("port") + ":" + props.getProperty("SID");
+            oconnUsername = props.getProperty("username");
+            oconnPassword = props.getProperty("password");
+        } catch (IOException ex) {
+            out.println("Error: " + ex.getMessage());
+        }
+        sess = request.getSession(false);
+        if(sess!=null){
+            email = sess.getAttribute("email").toString();
+            userType = sess.getAttribute("userType").toString();
+        }
+        if(request.getParameter("submit")==null){
+            btnval = request.getParameter("Modify");
+            int i = btnval.indexOf(",");
+            table = btnval.substring(0,i);
+            pid = btnval.substring(i+1);
+        }
+        try{
+            DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+            oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);        
+            query = "SELECT * FROM PHARMACY WHERE PID = ?";
+            ops = (OraclePreparedStatement) oconn.prepareCall(query);
+            ops.setString(1, pid);
+            ors = (OracleResultSet) ops.executeQuery();
+            ors.next();
+            pemail = ors.getString("EMAIL");
+            pname = ors.getString("PNAME");
+            gstn = ors.getString("GSTN");
+            address = ors.getString("ADDRESS");
+            phone = ors.getString("PHONE");
+            status = ors.getString("STATUS");
+            pincode = ors.getString("PINCODE");
+            sques = ors.getString("SQUES");
+            sans = ors.getString("SANS");
+            city = ors.getString("CITY");
+            password = ors.getString("PASSWORD");
+
+            if(request.getParameter("submit")!=null){
+                pname = request.getParameter("pname");
+                address = request.getParameter("address");
+                gstn = request.getParameter("gstn");
+                phone = request.getParameter("phone");
+                pincode = request.getParameter("pincode");
+                sques = request.getParameter("sques");
+                sans = request.getParameter("sans");
+                city = request.getParameter("city");
+                if(userType.equals("ADMIN"))
+                   password = request.getParameter("password");
+                if(userType.equals("PHARMACY"))
+                    query = "UPDATE PHARMACY SET PNAME = ?, GSTN = ?, STATUS = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ? WHERE PID=?";
+                else
+                    query = "UPDATE PHARMACY SET PNAME = ?, GSTN = ?, STATUS = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ?, PASSWORD = ? WHERE PID=?";
+
+                ops = (OraclePreparedStatement) oconn.prepareCall(query);
+                ops.setString(1, pname);
+                ops.setString(2, gstn);
+                ops.setString(3, status);
+                ops.setString(4, address);
+                ops.setString(5, phone);
+                ops.setString(6, pincode);
+                ops.setString(7, sques);
+                ops.setString(8, sans);
+                ops.setString(9, city);                        
+                if(userType.equals("ADMIN")){
+                    ops.setString(10, password);
+                    ops.setString(11, pid);
+                }else{
+                    ops.setString(10, pid);
+                }            
+                int x = ops.executeUpdate();
+                if(x>0){
+                    if(userType.equals("ADMIN")){
+        %>
+                    <script>
+                        alert("Data modified successfully!");
+                        location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp";
+                    </script>
+        <%
+                    }else{
+        %>
+                    <script>
+                        alert("Data modified successfully!");
+                        //TODO Redirect to profile page of user.
+                        //location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp";
+                    </script>
+        <%
+                    }
+                }else{
+                    if(userType.equals("ADMIN")){
+        %>
+                    <script>
+                        alert("No changes to the database");
+                        location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp";
+                    </script>
+        <%
+                    }else{
+        %>
+                    <script>
+                        alert("No changes to the database");
+                        //TODO Redirect to profile page of user.
+                        //location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp";
+                    </script>
+        <%
+                    }
+                    oconn.close();
+                    ops.close();
+                }
+            }else{
+                
+                //sess.setAttribute("btnval", btnval);
+            }
+        }catch(SQLException ex){
+            out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
+        }
+    %>
+        <header>
+            <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
+            <span class="heading">MedFinder</span>
+            <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+            <a href="about.html">About Us</a>
+            <a href="../PageServes/FeedBack.jsp">Feedback</a>
+            </nav>
+        </header>
+    <main>
+        <div class="form-container">
+            <div class="form-box">
+                <form method="POST" name="register">
+                    <h2>EDIT PHARMACY</h2>
+                    <br>
+                    <%
+                        if(userType.equals("ADMIN")){
+                    %>
+                        <br>
+                        <div class="input-group">
+                            <label for="pid">Pharmacy ID:</label>
+                            <input type="text" id="pid" name="pid" value="<%=pid%>" readonly/>
+                        </div>
+                    <%
+                        }
+                    %>
+                    <br>
+                    <div class="input-group">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" value="<%=pemail%>" readonly/>
+                    </div>
+                    <div id="error-alert"></div>
+                    <br>
+                    <div class="input-group">
+                        <label for="pname">Pharmacy Name:</label>
+                        <input type="text" name="pname" value="<%=pname%>">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="gstn">GSTN:</label>
+                        <input type="text" name="gstn" value="<%=gstn%>">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="phone">Phone:</label>
+                        <input type="text" name="phone" value="<%=phone%>">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="address">Address:</label>
+                        <input type="text" name="address" value="<%=address%>">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="city">City:</label>
+                        <select id="city" name="city">
+                            <option value="" selected disabled hidden>Select a City</option>
+                            <option value="KOLKATA">Kolkata</option>
+                            <option value="HOWRAH">Howrah</option>
+                            <option value="BURDWAN">Burdwan</option>
+                            <option value="DURGAPUR">Durgapur</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="pincode">Pincode:</label>
+                        <input type="number" name="pincode" value="<%=pincode%>" oninput="maxInputNumber(this,6)">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="sques">Security Question:</label>
+                        <select id="sques" name="sques">
+                            <option value="" selected disabled hidden>Select a Security Question</option>
+                            <option value="CHILDHOOD NICKNAME?">Childhood nickname?</option>
+                            <option value="WHAT IS YOUR MOTHER'S MAIDEN NAME?">What is your mother's maiden name?</option>
+                            <option value="WHAT SCHOOL DID YOU GO TO?">What school did you go to?</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="sans">Security Answer:</label>
+                        <input type="text" name="sans" value="<%=sans%>">
+                    </div>
+                    <%                        
+                        if(userType.equals("ADMIN")){
+                    %>                        
+                    <br>
+                    <div class="input-group">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" value="<%=password%>" placeholder="********">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="confirm-password">Confirm password:</label>
+                        <input type="password" name="confirm-password" value="<%=password%>" placeholder="********">
+                    </div> 
+                    <%
+                        }
+                    %>                                  
+                    <br>    
+                    <div class="input-group button-group">
+                        <label></label>
+                        <button type="submit" name="submit" class="button-80">Submit</button>
+                        <button type="reset" class="button-80">Clear</button>
+                   </div>                   
+                </form>
+            </div>
+        </div>
+    </main>
     </body>
 </html>
+
