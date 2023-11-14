@@ -7,6 +7,140 @@
 <%@page import="oracle.jdbc.OraclePreparedStatement"%>
 <%@page import="oracle.jdbc.OracleConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%! 
+    OracleConnection oconn;
+    OraclePreparedStatement ops;
+    OracleResultSet ors; //Store the data in the webpage from oracle
+    OracleResultSetMetaData orsm;
+    String query, email, userType, btnval, table, cid, cemail, password, fname, lname, gender, age, address, phone, pincode, sques, sans, city;
+    java.util.Properties props = new java.util.Properties();
+    HttpSession sess;
+    String oconnUrl, oconnUsername, oconnPassword;
+%>
+<%
+    try{
+        InputStream input = application.getResourceAsStream("/WEB-INF/db.properties");
+        props.load(input);
+        oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
+            + props.getProperty("port") + ":" + props.getProperty("SID");
+        oconnUsername = props.getProperty("username");
+        oconnPassword = props.getProperty("password");
+    } catch (IOException ex) {
+        out.println("Error: " + ex.getMessage());
+    }
+    sess = request.getSession(false);
+    if(sess!=null){
+        email = sess.getAttribute("email").toString();
+        userType = sess.getAttribute("userType").toString();
+    }
+    if(request.getParameter("submit")==null){
+        btnval = request.getParameter("Modify");
+        int i = btnval.indexOf(",");
+        table = btnval.substring(0,i);
+        cid = btnval.substring(i+1);
+    }
+    try{
+        DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+        oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);        
+        query = "SELECT * FROM CUSTOMER WHERE CID = ?";
+        ops = (OraclePreparedStatement) oconn.prepareCall(query);
+        ops.setString(1, cid);
+        ors = (OracleResultSet) ops.executeQuery();
+        ors.next();
+        cemail = ors.getString("EMAIL");
+        fname = ors.getString("FNAME");
+        lname = ors.getString("LNAME");
+        gender = ors.getString("GENDER");
+        age = ors.getString("AGE");
+        address = ors.getString("ADDRESS");
+        phone = ors.getString("PHONE");
+        pincode = ors.getString("PINCODE");
+        sques = ors.getString("SQUES");
+        sans = ors.getString("SANS");
+        city = ors.getString("CITY");
+        password = ors.getString("PASSWORD");
+
+        if(request.getParameter("submit")!=null){
+            fname = request.getParameter("fname");
+            lname = request.getParameter("lname");
+            gender = request.getParameter("gender");
+            age = request.getParameter("age");
+            address = request.getParameter("address");
+            phone = request.getParameter("phone");
+            pincode = request.getParameter("pincode");
+            sques = request.getParameter("sques");
+            sans = request.getParameter("sans");
+            city = request.getParameter("city");
+            if(userType.equals("ADMIN"))
+                password = request.getParameter("password");
+            if(userType.equals("CUSTOMER"))
+                query = "UPDATE CUSTOMER SET FNAME = ?, LNAME = ?, GENDER = ?, AGE = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ? WHERE CID = ?";
+            else
+                query = "UPDATE CUSTOMER SET FNAME = ?, LNAME = ?, GENDER = ?, AGE = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ?, PASSWORD = ? WHERE CID = ?";
+
+            ops = (OraclePreparedStatement) oconn.prepareCall(query);
+            ops.setString(1, fname);
+            ops.setString(2, lname);
+            ops.setString(3, gender);
+            ops.setString(4, age);
+            ops.setString(5, address);
+            ops.setString(6, phone);
+            ops.setString(7, pincode);
+            ops.setString(8, sques);
+            ops.setString(9, sans);
+            ops.setString(10, city);                        
+            if(userType.equals("ADMIN")){
+                ops.setString(11, password);
+                ops.setString(12, cid);
+            }else{
+                ops.setString(11, cid);
+            }            
+            int x = ops.executeUpdate();
+            if(x>0){
+                if(userType.equals("ADMIN")){
+    %>
+                <script>
+                    location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp?response=edit-success";
+                </script>
+    <%
+                }else{
+    %>
+                <script>
+                    alert("Data modified successfully!");
+                    //TODO Redirect to profile page of user.
+                    // location.href="http://localhost:8080/MinorWebApp/PageServes/CustomerProfile.jsp?edit-sucess";
+                    //location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp";
+                </script>
+    <%
+                }
+            }else{
+                if(userType.equals("ADMIN")){
+    %>
+                <script>
+                    alert("No changes to the database");
+                    location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp";
+                </script>
+    <%
+                }else{
+    %>
+                <script>
+                    alert("No changes to the database");
+                    //TODO Redirect to profile page of user.
+                    //location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp";
+                </script>
+    <%
+                }
+                oconn.close();
+                ops.close();
+            }
+        }else{
+            
+            //sess.setAttribute("btnval", btnval);
+        }
+    }catch(SQLException ex){
+        out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -72,140 +206,6 @@
         </script>        
     </head>
     <body>
-        <%! 
-        OracleConnection oconn;
-        OraclePreparedStatement ops;
-        OracleResultSet ors; //Store the data in the webpage from oracle
-        OracleResultSetMetaData orsm;
-        String query, email, userType, btnval, table, cid, cemail, password, fname, lname, gender, age, address, phone, pincode, sques, sans, city;
-        java.util.Properties props = new java.util.Properties();
-        HttpSession sess;
-        String oconnUrl, oconnUsername, oconnPassword;
-    %>
-    <%
-        try{
-            InputStream input = application.getResourceAsStream("/WEB-INF/db.properties");
-            props.load(input);
-            oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
-                + props.getProperty("port") + ":" + props.getProperty("SID");
-            oconnUsername = props.getProperty("username");
-            oconnPassword = props.getProperty("password");
-        } catch (IOException ex) {
-            out.println("Error: " + ex.getMessage());
-        }
-        sess = request.getSession(false);
-        if(sess!=null){
-            email = sess.getAttribute("email").toString();
-            userType = sess.getAttribute("userType").toString();
-        }
-        if(request.getParameter("submit")==null){
-            btnval = request.getParameter("Modify");
-            int i = btnval.indexOf(",");
-            table = btnval.substring(0,i);
-            cid = btnval.substring(i+1);
-        }
-        try{
-            DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
-            oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);        
-            query = "SELECT * FROM CUSTOMER WHERE CID = ?";
-            ops = (OraclePreparedStatement) oconn.prepareCall(query);
-            ops.setString(1, cid);
-            ors = (OracleResultSet) ops.executeQuery();
-            ors.next();
-            cemail = ors.getString("EMAIL");
-            fname = ors.getString("FNAME");
-            lname = ors.getString("LNAME");
-            gender = ors.getString("GENDER");
-            age = ors.getString("AGE");
-            address = ors.getString("ADDRESS");
-            phone = ors.getString("PHONE");
-            pincode = ors.getString("PINCODE");
-            sques = ors.getString("SQUES");
-            sans = ors.getString("SANS");
-            city = ors.getString("CITY");
-            password = ors.getString("PASSWORD");
-
-            if(request.getParameter("submit")!=null){
-                fname = request.getParameter("fname");
-                lname = request.getParameter("lname");
-                gender = request.getParameter("gender");
-                age = request.getParameter("age");
-                address = request.getParameter("address");
-                phone = request.getParameter("phone");
-                pincode = request.getParameter("pincode");
-                sques = request.getParameter("sques");
-                sans = request.getParameter("sans");
-                city = request.getParameter("city");
-                if(userType.equals("ADMIN"))
-                   password = request.getParameter("password");
-                if(userType.equals("CUSTOMER"))
-                    query = "UPDATE CUSTOMER SET FNAME = ?, LNAME = ?, GENDER = ?, AGE = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ? WHERE CID = ?";
-                else
-                    query = "UPDATE CUSTOMER SET FNAME = ?, LNAME = ?, GENDER = ?, AGE = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ?, PASSWORD = ? WHERE CID = ?";
-
-                ops = (OraclePreparedStatement) oconn.prepareCall(query);
-                ops.setString(1, fname);
-                ops.setString(2, lname);
-                ops.setString(3, gender);
-                ops.setString(4, age);
-                ops.setString(5, address);
-                ops.setString(6, phone);
-                ops.setString(7, pincode);
-                ops.setString(8, sques);
-                ops.setString(9, sans);
-                ops.setString(10, city);                        
-                if(userType.equals("ADMIN")){
-                    ops.setString(11, password);
-                    ops.setString(12, cid);
-                }else{
-                    ops.setString(11, cid);
-                }            
-                int x = ops.executeUpdate();
-                if(x>0){
-                    if(userType.equals("ADMIN")){
-        %>
-                    <script>
-                        alert("Data modified successfully!");
-                        location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp";
-                    </script>
-        <%
-                    }else{
-        %>
-                    <script>
-                        alert("Data modified successfully!");
-                        //TODO Redirect to profile page of user.
-                        //location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp";
-                    </script>
-        <%
-                    }
-                }else{
-                    if(userType.equals("ADMIN")){
-        %>
-                    <script>
-                        alert("No changes to the database");
-                        location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp";
-                    </script>
-        <%
-                    }else{
-        %>
-                    <script>
-                        alert("No changes to the database");
-                        //TODO Redirect to profile page of user.
-                        //location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp";
-                    </script>
-        <%
-                    }
-                    oconn.close();
-                    ops.close();
-                }
-            }else{
-                
-                //sess.setAttribute("btnval", btnval);
-            }
-        }catch(SQLException ex){
-            out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
-        }
-    %>
         <header>
             <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
             <span class="heading">MedFinder</span>
@@ -313,7 +313,7 @@
                             <label for="sans">Security Answer:</label>
                             <input type="text" name="sans" id="sans" value="<%=sans%>" placeholder="<%=sans%>">
                         </div>
-                        <%                        
+                        <%-- <%                        
                             if(userType.equals("ADMIN")){
                         %>                        
                         <br>
@@ -328,7 +328,8 @@
                         </div> 
                         <%
                             }
-                        %>                        
+                        %>                         --%>
+                        <%-- Not even the admin should be able to view or edit the password. --%>
                         <br>    
                         <div class="input-group button-group">
                             <label></label>
