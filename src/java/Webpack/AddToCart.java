@@ -123,6 +123,8 @@ public class AddToCart extends HttpServlet {
                         out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp?response=failed-cart';");
                         out.println("</script>");
                     }
+                ops.close();
+                oconn.close();
                 }catch (SQLException ex) {
                     Logger.getLogger(AddToCart.class.getName()).log(Level.SEVERE, null, ex);
                     out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
