@@ -224,18 +224,18 @@
                         <h2>Edit Customer Details</h2>
                         <br>
                         <div id="error-alert"></div>
+                        <br>
                         <%
                             if(userType.equals("ADMIN")){
                         %>
-                            <br>
-                            <div class="input-group">
-                                <label for="cid">Customer ID:</label>
-                                <input type="text" id="cid" name="cid" value="<%=cid%>" readonly/>
-                            </div>
+                          <br>
+                          <div class="input-group">
+                            <label for="cid">Customer ID:</label>
+                            <input type="text" id="cid" name="cid" value="<%=cid%>" readonly/>
+                          </div>
                         <%
                             }
                         %>
-                        <br>
                         <div class="input-group">
                             <label for="email">Email:</label>
                             <input type="email" id="email" name="email" value="<%=cemail%>" readonly/>

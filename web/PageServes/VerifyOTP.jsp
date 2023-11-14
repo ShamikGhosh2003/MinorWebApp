@@ -44,7 +44,6 @@
         </script>    
     </head>
     <body>
-        <main>
         <header>
             <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
             <span class="heading">MedFinder</span>
