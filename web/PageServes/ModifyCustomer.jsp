@@ -189,7 +189,30 @@
                     element.value = element.value.slice(0, maxLength);
                 }
             }
-        </script>        
+        </script>
+        <style>
+            .delete-button-container {
+                display: flex;
+                justify-content: center;
+                padding: 5px;
+            }
+            .delete-button {
+                background-color: #ff0000; /* Red background */
+                color: white; /* White text color */
+                border-radius: 6px;
+                padding: 15px 32px; /* Padding */
+                text-align: center; /* Centered text */
+                text-decoration: none; /* No underline */
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer; /* Pointer/hand icon */
+                transition: background .3s; /* Animation for background color */
+            }
+            .delete-button:hover {
+                background-color: #cc0000; /* Darker red when mouse hovers */
+            }
+        </style>
     </head>
     <body>
         <header>
@@ -304,8 +327,15 @@
                             <label></label>
                             <button type="submit" name="submit" class="button-80">Submit</button>
                             <button type="reset" class="button-80">Clear</button>
-                    </div>
+                        </div>
                     </form>
+                    <br>
+                    <%-- TODO fix the functionality idk whats wrong here --%>
+                    <div class="delete-button-container">
+                        <form  method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
+                            <button type="submit" name="Delete" class="delete-button">Delete User</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </main>

@@ -7,6 +7,141 @@
 <%@page import="oracle.jdbc.OraclePreparedStatement"%>
 <%@page import="oracle.jdbc.OracleConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%! 
+    OracleConnection oconn;
+    OraclePreparedStatement ops;
+    OracleResultSet ors; //Store the data in the webpage from oracle
+    OracleResultSetMetaData orsm;
+    String query, email, userType, btnval, table, pid, pemail, password, pname, address, gstn, phone, status, pincode, sques, sans, city;
+    java.util.Properties props = new java.util.Properties();
+    HttpSession sess;
+    String oconnUrl, oconnUsername, oconnPassword;
+%>
+<%
+    try{
+        InputStream input = application.getResourceAsStream("/WEB-INF/db.properties");
+        props.load(input);
+        oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
+            + props.getProperty("port") + ":" + props.getProperty("SID");
+        oconnUsername = props.getProperty("username");
+        oconnPassword = props.getProperty("password");
+    } catch (IOException ex) {
+        out.println("Error: " + ex.getMessage());
+    }
+    sess = request.getSession(false);
+    if(sess!=null){
+        email = sess.getAttribute("email").toString();
+        userType = sess.getAttribute("userType").toString();
+    }
+    if(userType.equals("PHARMACY"))
+        pid = sess.getAttribute("pid").toString();
+    if(request.getParameter("submit")==null){
+        if(userType.equals("PHARMACY"))
+            btnval = userType+","+pid;
+        else
+            btnval = request.getParameter("Modify");
+        int i = btnval.indexOf(",");
+        table = btnval.substring(0,i);
+        pid = btnval.substring(i+1);
+    }
+    try{
+        DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+        oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);        
+        query = "SELECT * FROM PHARMACY WHERE PID = ?";
+        ops = (OraclePreparedStatement) oconn.prepareCall(query);
+        ops.setString(1, pid);
+        ors = (OracleResultSet) ops.executeQuery();
+        ors.next();
+        pemail = ors.getString("EMAIL");
+        pname = ors.getString("PNAME");
+        gstn = ors.getString("GSTN");
+        address = ors.getString("ADDRESS");
+        phone = ors.getString("PHONE");
+        status = ors.getString("STATUS");
+        pincode = ors.getString("PINCODE");
+        sques = ors.getString("SQUES");
+        sans = ors.getString("SANS");
+        city = ors.getString("CITY");
+        password = ors.getString("PASSWORD");
+
+        if(request.getParameter("submit")!=null){
+            pname = request.getParameter("pname");
+            address = request.getParameter("address");
+            gstn = request.getParameter("gstn");
+            phone = request.getParameter("phone");
+            pincode = request.getParameter("pincode");
+            sques = request.getParameter("sques");
+            sans = request.getParameter("sans");
+            city = request.getParameter("city");
+            if(userType.equals("ADMIN"))
+                password = request.getParameter("password");
+            if(userType.equals("PHARMACY"))
+                query = "UPDATE PHARMACY SET PNAME = ?, GSTN = ?, STATUS = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ? WHERE PID=?";
+            else
+                query = "UPDATE PHARMACY SET PNAME = ?, GSTN = ?, STATUS = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ?, PASSWORD = ? WHERE PID=?";
+
+            ops = (OraclePreparedStatement) oconn.prepareCall(query);
+            ops.setString(1, pname);
+            ops.setString(2, gstn);
+            ops.setString(3, status);
+            ops.setString(4, address);
+            ops.setString(5, phone);
+            ops.setString(6, pincode);
+            ops.setString(7, sques);
+            ops.setString(8, sans);
+            ops.setString(9, city);                        
+            if(userType.equals("ADMIN")){
+                ops.setString(10, password);
+                ops.setString(11, pid);
+            }else{
+                ops.setString(10, pid);
+            }            
+            int x = ops.executeUpdate();
+            if(x>0){
+                if(userType.equals("ADMIN")){
+    %>
+                <script>
+                    alert("Data modified successfully!");
+                    location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp";
+                </script>
+    <%
+                }else{
+    %>
+                <script>
+                    alert("Data modified successfully!");
+                    //TODO Redirect to profile page of user.
+                    //location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp";
+                </script>
+    <%
+                }
+            }else{
+                if(userType.equals("ADMIN")){
+    %>
+                <script>
+                    alert("No changes to the database");
+                    location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp";
+                </script>
+    <%
+                }else{
+    %>
+                <script>
+                    alert("No changes to the database");
+                    //TODO Redirect to profile page of user.
+                    //location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp";
+                </script>
+    <%
+                }
+                oconn.close();
+                ops.close();
+            }
+        }else{
+            
+            //sess.setAttribute("btnval", btnval);
+        }
+    }catch(SQLException ex){
+        out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -78,153 +213,41 @@
                 }
             }
         </script>
+        <style>
+            .delete-button-container {
+                display: flex;
+                justify-content: center;
+                padding: 5px;
+            }
+            .delete-button {
+                background-color: #ff0000; /* Red background */
+                color: white; /* White text color */
+                border-radius: 6px;
+                padding: 15px 32px; /* Padding */
+                text-align: center; /* Centered text */
+                text-decoration: none; /* No underline */
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer; /* Pointer/hand icon */
+                transition: background .3s; /* Animation for background color */
+            }
+            .delete-button:hover {
+                background-color: #cc0000; /* Darker red when mouse hovers */
+            }
+        </style>
     </head>
     <body>
-    <%! 
-        OracleConnection oconn;
-        OraclePreparedStatement ops;
-        OracleResultSet ors; //Store the data in the webpage from oracle
-        OracleResultSetMetaData orsm;
-        String query, email, userType, btnval, table, pid, pemail, password, pname, address, gstn, phone, status, pincode, sques, sans, city;
-        java.util.Properties props = new java.util.Properties();
-        HttpSession sess;
-        String oconnUrl, oconnUsername, oconnPassword;
-    %>
-    <%
-        try{
-            InputStream input = application.getResourceAsStream("/WEB-INF/db.properties");
-            props.load(input);
-            oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
-                + props.getProperty("port") + ":" + props.getProperty("SID");
-            oconnUsername = props.getProperty("username");
-            oconnPassword = props.getProperty("password");
-        } catch (IOException ex) {
-            out.println("Error: " + ex.getMessage());
-        }
-        sess = request.getSession(false);
-        if(sess!=null){
-            email = sess.getAttribute("email").toString();
-            userType = sess.getAttribute("userType").toString();
-        }
-        if(userType.equals("PHARMACY"))
-            pid = sess.getAttribute("pid").toString();
-        if(request.getParameter("submit")==null){
-            if(userType.equals("PHARMACY"))
-                btnval = userType+","+pid;
-            else
-                btnval = request.getParameter("Modify");
-            int i = btnval.indexOf(",");
-            table = btnval.substring(0,i);
-            pid = btnval.substring(i+1);
-        }
-        try{
-            DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
-            oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);        
-            query = "SELECT * FROM PHARMACY WHERE PID = ?";
-            ops = (OraclePreparedStatement) oconn.prepareCall(query);
-            ops.setString(1, pid);
-            ors = (OracleResultSet) ops.executeQuery();
-            ors.next();
-            pemail = ors.getString("EMAIL");
-            pname = ors.getString("PNAME");
-            gstn = ors.getString("GSTN");
-            address = ors.getString("ADDRESS");
-            phone = ors.getString("PHONE");
-            status = ors.getString("STATUS");
-            pincode = ors.getString("PINCODE");
-            sques = ors.getString("SQUES");
-            sans = ors.getString("SANS");
-            city = ors.getString("CITY");
-            password = ors.getString("PASSWORD");
-
-            if(request.getParameter("submit")!=null){
-                pname = request.getParameter("pname");
-                address = request.getParameter("address");
-                gstn = request.getParameter("gstn");
-                phone = request.getParameter("phone");
-                pincode = request.getParameter("pincode");
-                sques = request.getParameter("sques");
-                sans = request.getParameter("sans");
-                city = request.getParameter("city");
-                if(userType.equals("ADMIN"))
-                   password = request.getParameter("password");
-                if(userType.equals("PHARMACY"))
-                    query = "UPDATE PHARMACY SET PNAME = ?, GSTN = ?, STATUS = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ? WHERE PID=?";
-                else
-                    query = "UPDATE PHARMACY SET PNAME = ?, GSTN = ?, STATUS = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ?, PASSWORD = ? WHERE PID=?";
-
-                ops = (OraclePreparedStatement) oconn.prepareCall(query);
-                ops.setString(1, pname);
-                ops.setString(2, gstn);
-                ops.setString(3, status);
-                ops.setString(4, address);
-                ops.setString(5, phone);
-                ops.setString(6, pincode);
-                ops.setString(7, sques);
-                ops.setString(8, sans);
-                ops.setString(9, city);                        
-                if(userType.equals("ADMIN")){
-                    ops.setString(10, password);
-                    ops.setString(11, pid);
-                }else{
-                    ops.setString(10, pid);
-                }            
-                int x = ops.executeUpdate();
-                if(x>0){
-                    if(userType.equals("ADMIN")){
-        %>
-                    <script>
-                        alert("Data modified successfully!");
-                        location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp";
-                    </script>
-        <%
-                    }else{
-        %>
-                    <script>
-                        alert("Data modified successfully!");
-                        //TODO Redirect to profile page of user.
-                        //location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp";
-                    </script>
-        <%
-                    }
-                }else{
-                    if(userType.equals("ADMIN")){
-        %>
-                    <script>
-                        alert("No changes to the database");
-                        location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp";
-                    </script>
-        <%
-                    }else{
-        %>
-                    <script>
-                        alert("No changes to the database");
-                        //TODO Redirect to profile page of user.
-                        //location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp";
-                    </script>
-        <%
-                    }
-                    oconn.close();
-                    ops.close();
-                }
-            }else{
-                
-                //sess.setAttribute("btnval", btnval);
-            }
-        }catch(SQLException ex){
-            out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
-        }
-    %>
-        <header>
-            <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
-            <span class="heading">MedFinder</span>
-            <nav class="navbar">
-            <a href="index.html">Home</a>
-            <a href="login.html">Login</a>
-            <a href="about.html">About Us</a>
-            <a href="../PageServes/FeedBack.jsp">Feedback</a>
-            </nav>
-        </header>
+    <header>
+        <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
+        <span class="heading">MedFinder</span>
+        <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="about.html">About Us</a>
+        <a href="../PageServes/FeedBack.jsp">Feedback</a>
+        </nav>
+    </header>
     <main>
         <div class="form-container">
             <div class="form-box">
@@ -322,6 +345,12 @@
                         <button type="reset" class="button-80">Clear</button>
                    </div>                   
                 </form>
+                <%-- TODO fix the functionality idk whats wrong here --%>
+                <div class="delete-button-container">
+                    <form  method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
+                        <button type="submit" name="Delete" class="delete-button">Delete User</button>
+                    </form>
+                </div>
             </div>
         </div>
     </main>
