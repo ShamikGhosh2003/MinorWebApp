@@ -68,10 +68,10 @@
         oconnPassword = props.getProperty("password");
         DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
         oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-        query = "SELECT P.PNAME, M.MNAME, P.ADDRESS, PMS.MQTY, PMS.PRICE, P.PID, M.MID FROM PHARMACY P,MEDICINE M, PHARM_MED_STOCK PMS WHERE M.MID = (SELECT MID FROM MEDICINE WHERE MNAME = ?) AND P.PID=PMS.PID AND M.MID=PMS.MID";
+        query = "SELECT P.PNAME, M.MNAME, P.ADDRESS, PMS.MQTY, PMS.PRICE, P.CITY, P.PID, M.MID FROM PHARMACY P,MEDICINE M, PHARM_MED_STOCK PMS WHERE M.MID = (SELECT MID FROM MEDICINE WHERE MNAME = ?) AND P.PID=PMS.PID AND M.MID=PMS.MID AND P.CITY=?";
         ops = (OraclePreparedStatement) oconn.prepareCall(query);
         ops.setString(1, request.getParameter("medicineName"));
-        //ops.setString(2, request.getParameter("city"));
+        ops.setString(2, request.getParameter("city"));
         ors = (OracleResultSet) ops.executeQuery();
         orsm = (OracleResultSetMetaData) ors.getMetaData();
         HttpSession sess = request.getSession(false);
