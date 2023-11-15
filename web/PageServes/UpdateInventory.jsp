@@ -10,6 +10,69 @@ an error if there are no medicine in a pharmacy's stock --%>
 <%@page import="oracle.jdbc.OracleResultSet"%>
 <%@page import="oracle.jdbc.OraclePreparedStatement"%>
 <%@page import="oracle.jdbc.OracleConnection"%>
+<%! 
+    OracleConnection oconn;
+    OraclePreparedStatement ops;
+    OracleResultSet ors; //Store the data in the webpage from oracle
+    OracleResultSetMetaData orsm;
+    String query, email, mqty, price, availability, mname;
+    java.util.Properties props = new java.util.Properties();
+    HttpSession sess;
+    String oconnUrl, oconnUsername, oconnPassword;
+%>
+<%
+    try{
+        InputStream input = application.getResourceAsStream("/WEB-INF/db.properties");
+        props.load(input);
+        oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
+            + props.getProperty("port") + ":" + props.getProperty("SID");
+        oconnUsername = props.getProperty("username");
+        oconnPassword = props.getProperty("password");
+    } catch (IOException ex) {
+        out.println("Error: " + ex.getMessage());
+    }
+    sess = request.getSession(false);
+    if(sess!=null)
+        email = sess.getAttribute("email").toString();
+    if(request.getParameter("submit")!=null){
+        try{
+                mqty = request.getParameter("mqty");
+                price = request.getParameter("price");
+                availability = request.getParameter("availability");
+                mname = request.getParameter("mname");
+                DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
+                oconn = (OracleConnection) DriverManager.getConnection(oconnUrl,oconnUsername,oconnPassword);
+                query = "UPDATE PHARM_MED_STOCK SET MQTY = ?, PRICE = ?, MAV = ? WHERE PID = (SELECT PID FROM PHARMACY WHERE EMAIL = ?) AND MID = (SELECT MID FROM MEDICINE WHERE MNAME = ?)";
+                ops = (OraclePreparedStatement) oconn.prepareStatement(query);
+                ops.setString(1,mqty);
+                ops.setString(2,price);
+                ops.setString(3,availability);
+                ops.setString(4,email);
+                ops.setString(5,mname);
+                ors = (OracleResultSet)ops.executeQuery();
+                int x = ops.executeUpdate();
+                if(x>0){
+%>
+                        <script>
+                            // Data inserted successfully.
+                            location.href = "http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp?response=success";
+                        </script>
+<%
+                }else{
+%>
+                        <script>
+                            alert("No changes in the PHARM_MED_STOCK database!!!");
+                            // Failed to update
+                            location.href="http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp?response=failed";
+
+                        </script>
+<% 
+                }
+            }catch (SQLException ex) {
+                out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
+            }
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,70 +80,30 @@ an error if there are no medicine in a pharmacy's stock --%>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Inventory JSP</title>
     <link rel="stylesheet" href="../stylesheet/main-style.css">
-    <%! 
-        OracleConnection oconn;
-        OraclePreparedStatement ops;
-        OracleResultSet ors; //Store the data in the webpage from oracle
-        OracleResultSetMetaData orsm;
-        String query, email, mqty, price, availability, mname;
-        java.util.Properties props = new java.util.Properties();
-        HttpSession sess;
-        String oconnUrl, oconnUsername, oconnPassword;
-    %>
-    <%
-        try{
-            InputStream input = application.getResourceAsStream("/WEB-INF/db.properties");
-            props.load(input);
-            oconnUrl = "jdbc:oracle:thin:@" + props.getProperty("hostname") + ":"
-                + props.getProperty("port") + ":" + props.getProperty("SID");
-            oconnUsername = props.getProperty("username");
-            oconnPassword = props.getProperty("password");
-        } catch (IOException ex) {
-            out.println("Error: " + ex.getMessage());
-        }
-        sess = request.getSession(false);
-        if(sess!=null)
-            email = sess.getAttribute("email").toString();
-        if(request.getParameter("submit")!=null){
-            try{
-                    mqty = request.getParameter("mqty");
-                    price = request.getParameter("price");
-                    availability = request.getParameter("availability");
-                    mname = request.getParameter("mname");
-                    DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
-                    oconn = (OracleConnection) DriverManager.getConnection(oconnUrl,oconnUsername,oconnPassword);
-                    query = "UPDATE PHARM_MED_STOCK SET MQTY = ?, PRICE = ?, MAV = ? WHERE PID = (SELECT PID FROM PHARMACY WHERE EMAIL = ?) AND MID = (SELECT MID FROM MEDICINE WHERE MNAME = ?)";
-                    ops = (OraclePreparedStatement) oconn.prepareStatement(query);
-                    ops.setString(1,mqty);
-                    ops.setString(2,price);
-                    ops.setString(3,availability);
-                    ops.setString(4,email);
-                    ops.setString(5,mname);
-                    ors = (OracleResultSet)ops.executeQuery();
-                    int x = ops.executeUpdate();
-                    if(x>0){
-    %>
-                            <script>
-                                alert("Data Inserted Successfully!!");
-                                // Data inserted successfully.
-                                location.href = "http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp?response=success";
-                                location.href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html";
-                            </script>
-    <%
-                    }else{
-    %>
-                            <script>
-                                alert("No changes in the PHARM_MED_STOCK database!!!");
-                                location.href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html";
-
-                            </script>
-    <% 
-                    }
-                }catch (SQLException ex) {
-                    out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
+    <script src="/MinorWebApp/scripts/showResponse.js"></script>
+    <script>
+        window.onload = function() {
+            document.forms['update-inventory'].addEventListener('submit', function(event) {
+                if(!validateForm()) {
+                    event.preventDefault();
+                } else {
+                    window.location.hash = '';
                 }
+            });
+        };
+
+        function validateForm() {
+            var mqty = document.forms['update-inventory']['mqty'].value;
+            var price = document.forms['update-inventory']['price'].value;
+            var availability = document.forms['update-inventory']['availability'].value;
+            
+            if(mqty === "" || price === "" || availability === "") {
+                showError("All fields are required.");
+                return false;
+            }
+            return true;
         }
-    %>
+    </script>
 </head>
 <body>
     <header>
@@ -102,13 +125,14 @@ an error if there are no medicine in a pharmacy's stock --%>
     <main>        
         <div class="form-container">
             <div class="form-box">
-                <form method="POST">
+                <form name="update-inventory" method="POST">
                     <h2>UPDATE INVENTORY</h2>
                         <br>
                         <div id="error-alert"></div>
+                        <div id="success-alert"></div>
                         <div class="input-group">
                             <label for="fname">Medicine Name:</label>
-                                <select name="mname" required>
+                                <select name="mname">
                                     <%
                                         DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                                         oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
@@ -128,17 +152,17 @@ an error if there are no medicine in a pharmacy's stock --%>
                         <br>
                         <div class="input-group">
                             <label for="mqty">Medicine Quantity</label>
-                            <input type="number" name="mqty" placeholder="Enter the number of items" required>
+                            <input type="number" name="mqty" placeholder="Enter the number of items">
                         </div>
                         <br>
                         <div class="input-group">
                             <label for="price">Price:</label>
-                            <input type="number" name="price" placeholder="Enter the Price per item" required>
+                            <input type="number" name="price" placeholder="Enter the Price per item">
                         </div>
                         <br>
                         <div class="input-group">
                             <label for="availability">Availability:</label>
-                            <select id="availability" name="availability" required>
+                            <select id="availability" name="availability">
                                 <option value="" selected disabled hidden>Select an Option</option>
                                 <option value="YES">Yes</option>
                                 <option value="NO">No</option>
@@ -150,10 +174,25 @@ an error if there are no medicine in a pharmacy's stock --%>
                             <label></label>
                             <button type="submit" name="submit" class="button-80">Submit</button>
                             <button type="reset" class="button-80">Clear</button>
-                        </div>                   
+                        </div>
                 </form>
             </div>
         </div>
+        <script>
+            let params = (new URL(document.location)).searchParams;
+            let response = params.get("response");
+
+            if (response == "success") {
+                showSuccess("Inventory updated successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if(response == "failed") {
+                showError("Failed to update inventory.<br>Try again later.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+        </script>
     </main>
 </body>
 </html>
