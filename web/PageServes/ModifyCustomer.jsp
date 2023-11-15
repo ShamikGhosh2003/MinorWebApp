@@ -220,6 +220,7 @@
                             <label for="cid">Customer ID:</label>
                             <input type="text" id="cid" name="cid" value="<%=cid%>" readonly/>
                           </div>
+                          <br>
                         <%
                             }
                         %>
@@ -311,7 +312,7 @@
                     <%-- TODO fix the functionality idk whats wrong here --%>
                     <div class="delete-button-container">
                         <form  method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
-                            <button type="submit" name="Delete" class="delete-button">Delete User</button>
+                            <button type="submit" name="Delete" class="delete-button" value="<%=btnval%>">Delete User</button>
                         </form>
                     </div>
                 </div>

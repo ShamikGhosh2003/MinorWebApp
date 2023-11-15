@@ -73,13 +73,7 @@
             sques = request.getParameter("sques");
             sans = request.getParameter("sans");
             city = request.getParameter("city");
-            if(userType.equals("ADMIN"))
-                password = request.getParameter("password");
-            if(userType.equals("PHARMACY"))
-                query = "UPDATE PHARMACY SET PNAME = ?, GSTN = ?, STATUS = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ? WHERE PID=?";
-            else
-                query = "UPDATE PHARMACY SET PNAME = ?, GSTN = ?, STATUS = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ?, PASSWORD = ? WHERE PID=?";
-
+            query = "UPDATE PHARMACY SET PNAME = ?, GSTN = ?, STATUS = ?, ADDRESS = ?, PHONE = ?, PINCODE = ?, SQUES = ?, SANS = ?, CITY = ? WHERE PID=?";
             ops = (OraclePreparedStatement) oconn.prepareCall(query);
             ops.setString(1, pname);
             ops.setString(2, gstn);
@@ -90,12 +84,7 @@
             ops.setString(7, sques);
             ops.setString(8, sans);
             ops.setString(9, city);                        
-            if(userType.equals("ADMIN")){
-                ops.setString(10, password);
-                ops.setString(11, pid);
-            }else{
-                ops.setString(10, pid);
-            }            
+            ops.setString(10, pid);          
             int x = ops.executeUpdate();
             if(x>0) {
     %>
@@ -157,11 +146,9 @@
                 var phone = document.forms['register']['phone'].value;
                 var address = document.forms['register']['address'].value;
                 var pincode = document.forms['register']['pincode'].value;
-                var password = document.forms['register']['password'].value;
-                var confirmPassword = document.forms['register']['confirm-password'].value;
                 var gstn = document.forms['register']['gstn'].value;
 
-                if(pname === "" || phone === "" || address === "" || pincode === "" || password === "" || confirmPassword === "" || gstn === "") {
+                if(pname === "" || phone === "" || address === "" || pincode === "" || gstn === "") {
                     showError("All fields are required.");
                     return false;
                 }
@@ -175,10 +162,6 @@
                 }
                 if(password.length < 8) {
                     showError("Password must be at least 8 characters.");
-                    return false;
-                }
-                if(password !== confirmPassword) {
-                    showError("Passwords do not match.");
                     return false;
                 }
                 if(gstn.length !== 15) {
@@ -292,23 +275,7 @@
                     <div class="input-group">
                         <label for="sans">Security Answer:</label>
                         <input type="text" name="sans" value="<%=sans%>">
-                    </div>
-                    <%                        
-                        if(userType.equals("ADMIN")){
-                    %>                        
-                    <br>
-                    <div class="input-group">
-                        <label for="password">Password:</label>
-                        <input type="password" name="password" value="<%=password%>" placeholder="********">
-                    </div>
-                    <br>
-                    <div class="input-group">
-                        <label for="confirm-password">Confirm password:</label>
-                        <input type="password" name="confirm-password" value="<%=password%>" placeholder="********">
-                    </div> 
-                    <%
-                        }
-                    %>                                  
+                    </div>                          
                     <br>    
                     <div class="input-group button-group">
                         <label></label>
@@ -319,7 +286,7 @@
                 <%-- TODO fix the functionality idk whats wrong here --%>
                 <div class="delete-button-container">
                     <form  method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
-                        <button type="submit" name="Delete" class="delete-button">Delete User</button>
+                        <button type="submit" name="Delete" class="delete-button" value="<%=btnval%>">Delete User</button>
                     </form>
                 </div>
             </div>
