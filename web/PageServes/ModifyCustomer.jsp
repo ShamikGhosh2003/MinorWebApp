@@ -209,10 +209,10 @@
             <nav class="navbar">
             <%
             if(userType.equals("ADMIN")) {
-                out.println('<a href="http://localhost:8080/MinorWebApp/StatPages/admin-database.html">Home</a>')
+                out.println("<a href='http://localhost:8080/MinorWebApp/StatPages/admin-database.html'>Home</a>");
             }
             else {
-                out.println('<a href="http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp">Home</a>')
+                out.println("<a href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'>Home</a>");
             }
             %>
             <a href="http://localhost:8080/MinorWebApp/StatPages/about.html">About Us</a>
