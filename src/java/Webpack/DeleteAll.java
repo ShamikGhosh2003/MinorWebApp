@@ -96,10 +96,14 @@ public class DeleteAll extends HttpServlet {
                 if(x>0){
                     out.println("<script>");
                     out.println("alert('Data modified Successfully!!');");
-                    if(table.equals("CUSTOMER")){
+                    if(table.equals("CUSTOMER") && userType.equals("ADMIN")){
                         out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/customer.jsp';");
-                    }else if(table.equals("PHARMACY")){
+                    }else if(table.equals("CUSTOMER") && userType.equals("CUSTOMER")){
+                        out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/login.html';");
+                    }else if(table.equals("PHARMACY") && userType.equals("ADMIN")){
                         out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp';");
+                    }else if(table.equals("PHARMACY") && userType.equals("PHARMACY")){
+                        out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/login.html';");
                     }else if(table.equals("MEDICINE")){
                         out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/medicine.jsp';");
                     }else if(table.equals("PHARM_MED_STOCK") && userType.equals("ADMIN")){
