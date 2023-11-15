@@ -120,16 +120,6 @@
                 });
             };
 
-            function showError(message) {
-                var errorAlert = document.getElementById('error-alert');
-                errorAlert.innerHTML = message;
-                errorAlert.style.display = "block";
-                errorAlert.style.animation = 'none';
-                errorAlert.offsetHeight;
-                errorAlert.style.animation = null; 
-                window.location.hash = 'error-alert';
-            }
-
             function validateForm() {
                 var mname = document.forms['add-medicine']['mname'].value;
                 

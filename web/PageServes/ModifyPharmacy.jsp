@@ -139,6 +139,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../stylesheet/main-style.css">
         <title>Edit Pharmacy</title>
+        <script src="/MinorWebApp/scripts/showResponse.js"></script>
         <script>
             window.onload = function() {
                 document.forms['register'].addEventListener('submit', function(event) {
@@ -149,16 +150,6 @@
                     }
                 });
             };
-
-            function showError(message) {
-                var errorAlert = document.getElementById('error-alert');
-                errorAlert.innerHTML = message;
-                errorAlert.style.display = "block";
-                errorAlert.style.animation = 'none';
-                errorAlert.offsetHeight;
-                errorAlert.style.animation = null; 
-                window.location.hash = 'error-alert';
-            }
 
             function validateForm() {
                 var pname = document.forms['register']['pname'].value;
@@ -203,29 +194,6 @@
                 }
             }
         </script>
-        <style>
-            .delete-button-container {
-                display: flex;
-                justify-content: center;
-                padding: 5px;
-            }
-            .delete-button {
-                background-color: #ff0000; /* Red background */
-                color: white; /* White text color */
-                border-radius: 6px;
-                padding: 15px 32px; /* Padding */
-                text-align: center; /* Centered text */
-                text-decoration: none; /* No underline */
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
-                cursor: pointer; /* Pointer/hand icon */
-                transition: background .3s; /* Animation for background color */
-            }
-            .delete-button:hover {
-                background-color: #cc0000; /* Darker red when mouse hovers */
-            }
-        </style>
     </head>
     <body>
         <header>
