@@ -104,6 +104,7 @@ main {
 }
 .form-box h2 {
     text-align: center;
+    font-family: 'Times New Roman', Times, serif;
 }
 .form-box-links {
     text-align: right; 
@@ -181,6 +182,25 @@ select {
 }
 .button-80:focus {
     outline: none;
+}
+.button-33 {
+  background-color: #c2fbd7;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+}
+.button-33:hover {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
 }
 /* General use table */
 .table-box-container {
@@ -298,7 +318,8 @@ select {
     margin: auto;
     padding: 10px;
 }
-.button-menu button {
+/* Blue Button */
+.button-12 {
     font-size: 16px;
     background-color: #007bff;
     color: #fff;
@@ -307,10 +328,10 @@ select {
     padding: 5px 10px;
     cursor: pointer;
 }
-.button-menu button:hover {
+.button-12:hover {
     background-color: #0056b3;
 }
-.button-menu a {
+.button-12 a {
     color: white;
     text-decoration: none;
 }
@@ -443,4 +464,48 @@ select {
 /* Timer to redirect pages. */
 #redirect-timer {
     color: red;
+}
+.delete-button-container {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+/* Delete customer/pharmacy on modify pages */
+.delete-button {
+    background-color: #ff0000;
+    color: white;
+    border-radius: 6px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background .3s;
+}
+.delete-button:hover {
+    background-color: #cc0000;
+}
+/* Delete button small */
+.delete-button-small {
+    background-color: #ff0000;
+    color: white;
+    border-radius: 6px;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background .3s;
+}
+.delete-button:hover {
+    background-color: #cc0000;
+}
+/* Page to go to profile/edit */
+.edit-button-container {
+    display: flex;
+    justify-content: left;
+    padding: 10px;
 }
