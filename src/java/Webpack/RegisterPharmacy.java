@@ -97,7 +97,7 @@ public class RegisterPharmacy extends HttpServlet {
                 email = email.toLowerCase();
                 sans = sans.toUpperCase();
                 //password = hash.passwordHash(password);
-                out.println("<h1>Displaying the HTML input values in this servlet...</h1>");
+                /*out.println("<h1>Displaying the HTML input values in this servlet...</h1>");
                 out.println("<h3>PID: "+pid+"</h3>");
                 out.println("<h3>Pharmacy Name: "+pname+"</h3>");                
                 out.println("<h3>GSTN: "+gstn+"</h3>");
@@ -109,7 +109,7 @@ public class RegisterPharmacy extends HttpServlet {
                 out.println("<h3>Pincode: "+pincode+"</h3>");
                 out.println("<h3>Status (by default): "+status+"</h3>");
                 out.println("<h3>Security Question: "+sques+"</h3>");
-                out.println("<h3>Security Answer: "+sans+"</h3>");
+                out.println("<h3>Security Answer: "+sans+"</h3>");*/
                 ops = (OraclePreparedStatement) oconn.prepareCall("INSERT INTO PHARMACY(PID,PNAME,PASSWORD,ADDRESS,GSTN,EMAIL,PHONE,STATUS,PINCODE,SQUES,SANS,CITY) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)");
                 ops.setString(1,pid);
                 ops.setString(2,pname);
@@ -124,11 +124,18 @@ public class RegisterPharmacy extends HttpServlet {
                 ops.setString(11,sans);
                 ops.setString(12,city);
                 int x = ops.executeUpdate();
-                if(x>0)
-                    out.println("<h3 style='color:green'>Data inserted Successfully....</h3>");
-                else
-                    out.println("<h3 style='color:Red'>No Data Changes....</h3>");
-                
+                if(x>0){
+                    out.println("<script>");
+                    out.println("alert('Account Created Successfully!');");
+                    out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/login.html';");
+                    out.println("</script>");
+                }
+                else{
+                    out.println("<script>");
+                    out.println("alert('Account did not get created');");
+                    out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/login.html';");
+                    out.println("</script>");
+                }
                 oconn.close();
                 ops.close();
             } catch (SQLException ex) {
