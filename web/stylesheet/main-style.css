@@ -32,7 +32,7 @@ header {
     font-size: 32px;
     color: #fff;
     text-decoration: none;
-    font-weight: 650;
+    font-weight: 650; 
     filter: drop-shadow(0 0 5px #09001d);
     font-family: 'Times New Roman', Times, serif;
 }
