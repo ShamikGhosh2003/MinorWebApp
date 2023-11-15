@@ -106,7 +106,7 @@
                             %>
                             <td>
                                 <form method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
-                                    <button type="submit" name="Delete" value="<%=ident%>" class="button-80">DELETE</button>
+                                    <button type="submit" name="Delete" value="<%=ident%>" class="delete-button-small">DELETE</button>
                                 </form>
                             </td>
                         </tr>    

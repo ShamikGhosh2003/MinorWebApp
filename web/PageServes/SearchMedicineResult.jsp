@@ -146,12 +146,9 @@
                     </tbody>
                 </table> 
                 <div class="button-menu">
-                    <button onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'">Search Medicine</button>
-                    <button onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'">Go to cart</button>
+                    <button class="button-12" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'">Search Medicine</button>
+                    <button class="button-12"onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'">Go to cart</button>
                 </div>
-                <%-- <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp">
-                    <input type="submit" value="Go to cart" name="go-to-cart">
-                </form> --%>
                 <%
                     if(!hasResult) {
                 %>

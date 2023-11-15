@@ -34,7 +34,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medicine Search JSP</title>
-    <link rel="stylesheet" href="../stylesheet/main-style.css">
+    <link rel="stylesheet" href="http://localhost:8080/MinorWebApp/stylesheet/main-style.css">
     <style>
     </style>
 </head>
@@ -103,13 +103,15 @@
                     <input type="submit" value="Search">
                     <br><br>
                     <div class="button-menu">
-                        <button type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'">Cart</button>
-                        <button type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerOrders.jsp'">Orders</button>
+                        <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'">Cart</button>
+                        <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerOrders.jsp'">Orders</button>
                     </div>
                 </form>
-                <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyCustomer.jsp">
-                    <button type="submit" name="Modify" value="<%=ident%>" class="button-80">Edit Profile</button>
-                </form>
+                <div class="edit-button-container">
+                    <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyCustomer.jsp">
+                        <button type="submit" name="Modify" value="<%=ident%>" class="button-33">Edit Profile</button>
+                    </form>
+                </div>
             </div>
         </main>
         <script src="/MinorWebApp/scripts/showResponse.js"></script>
