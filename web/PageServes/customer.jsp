@@ -59,6 +59,9 @@
         <div class="table-box-container">
             <div class="table-box">
                 <h2>Customer Table</h2>
+                <br>
+                <div id="error-alert"></div>
+                <div id="success-alert"></div>
                 <%
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
@@ -108,7 +111,7 @@
                                     </form>
                                 </div>
                             </td>
-                        </tr>    
+                        </tr>
                         <% 
                             }
                         %>
@@ -127,6 +130,11 @@
 
             if (response == "edit-success") {
                 showSuccess("Customer edited successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if (response == "edit-fail") {
+                showError("Failed to update customer.");
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());
             }

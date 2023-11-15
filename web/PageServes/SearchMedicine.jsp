@@ -142,6 +142,11 @@
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());
             }
+            if (response == "edit-fail") {
+                showError("Failed to update customer.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
         </script>
     </body>
 </html>

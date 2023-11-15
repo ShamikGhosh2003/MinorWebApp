@@ -97,47 +97,37 @@
                 ops.setString(10, pid);
             }            
             int x = ops.executeUpdate();
-            if(x>0){
+            if(x>0) {
+    %>
+                <script>
+                    // Edit successful
+                    location.href="http://localhost:8080/MinorWebApp/PageServes/ModifyPharmacy.jsp?response=edit-success";
+                </script>
+    <%
+            } else {
                 if(userType.equals("ADMIN")){
     %>
                 <script>
-                    alert("Data modified successfully!");
-                    location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp";
+                    alert("No changes to the database");
+                    // Edit fail admin
+                    location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp?response=edit-fail";
                 </script>
     <%
                 }else{
     %>
                 <script>
-                    alert("Data modified successfully!");
-                    //TODO Redirect to profile page of user.
-                    //location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp";
-                </script>
-    <%
-                }
-            }else{
-                if(userType.equals("ADMIN")){
-    %>
-                <script>
-                    alert("No changes to the database");
-                    location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp";
-                </script>
-    <%
-                }else{
-    %>
-                <script>
-                    alert("No changes to the database");
-                    //TODO Redirect to profile page of user.
-                    //location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp";
+                    // Edit fail pharmacy
+                    location.href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.hmtl?response=edit-fail";
                 </script>
     <%
                 }
                 oconn.close();
                 ops.close();
             }
-        }else{
-            
-            //sess.setAttribute("btnval", btnval);
         }
+        //  else {
+        //     //sess.setAttribute("btnval", btnval);
+        // }
     }catch(SQLException ex){
         out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
     }
@@ -238,16 +228,29 @@
         </style>
     </head>
     <body>
-    <header>
-        <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
-        <span class="heading">MedFinder</span>
-        <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="login.html">Login</a>
-        <a href="about.html">About Us</a>
-        <a href="../PageServes/FeedBack.jsp">Feedback</a>
-        </nav>
-    </header>
+        <header>
+            <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
+            <span class="heading">MedFinder</span>
+            <nav class="navbar">
+            <%
+            if(userType.equals("ADMIN")) {
+                out.println('<a href="http://localhost:8080/MinorWebApp/StatPages/admin-database.html">Home</a>')
+            }
+            else {
+                out.println('<a href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html">Home</a>')
+            }
+            %>
+            <a href="http://localhost:8080/MinorWebApp/StatPages/about.html">About Us</a>
+            <a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback</a>
+            <div class="navbar-dropdown">
+                <a class="navbar-dropdown-button">Settings</a>
+                <div class="navbar-dropdown-content">
+                    <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+                    <a href="http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp">Change Password</a>
+                </div>
+            </div>
+            </nav>
+        </header>
     <main>
         <div class="form-container">
             <div class="form-box">
@@ -354,6 +357,16 @@
             </div>
         </div>
     </main>
-    </body>
+    <script>
+        let params = (new URL(document.location)).searchParams;
+        let response = params.get("response");
+
+        if (response == "edit-success") {
+            showSuccess("Profile edited successfully.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+    </script>
+</body>
 </html>
 
