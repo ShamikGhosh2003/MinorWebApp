@@ -16,7 +16,8 @@
     java.util.Properties props = new java.util.Properties();
     String oconnUrl, oconnUsername, oconnPassword;
     String ident,email,cid;
-    int rtotal, total=0;
+    int rtotal, discount = 20, reccounter=0;
+    double total;
 %>
 <%
     try {
@@ -92,12 +93,14 @@
                     <th>ACTION</th>
                 </thead>
                 <tbody>
-                    <%  total = 0;
+                    <%  total = 0.0; reccounter = 0;
                         while(ors.next())
                         { 
                     %>
                     <tr>
                         <%
+                            //This variable counts the number of records in the table
+                            reccounter++;
                             ident = "ORDERS";
                             int count = 0;
                             for(int i=1; i<=orsm.getColumnCount(); i++) 
@@ -133,6 +136,9 @@
             </table>
             <br>
             <h4>Your total amount is: <%=total%></h4>
+            <h4>Discount is: <%=discount%>%</h4>
+            <h4>Total after discount is: <%=(total - ((total*discount)/100))%></h4>
+            <h4>#Records: <%=reccounter%></h4>
             <br>
             <div class="button-menu">
                 <button class="button-12" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/PaymentPortal.jsp'">Place Order</button>
