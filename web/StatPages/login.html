@@ -119,7 +119,7 @@
             window.history.replaceState({}, document.title, url.toString());
         }
         if (response == "account-created") {
-            showSuccess("Account created successfully.<br>Please try logging in again.");
+            showSuccess("Account created successfully.<br>Please try logging in.");
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());
         }
