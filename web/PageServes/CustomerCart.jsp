@@ -69,6 +69,9 @@
     <div class="result-container">
         <div class="result-box">
             <h2>CART</h2>
+            <br>
+            <div id="error-alert"></div>
+            <div id="success-alert"></div>
             <%
                 query = "SELECT O.OID,P.PNAME, P.ADDRESS, M.MNAME, O.QTY, O.ITEM_PRICE, O.TOTAL, O.CID, O.PID, O.MID FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.MID=M.MID AND O.PID=P.PID AND C.CID = ? AND O.STATUS = 'CART' ORDER BY OID ASC";
                 ops = (OraclePreparedStatement) oconn.prepareCall(query);
@@ -138,5 +141,16 @@
             </div>
         </div>
     </main>
+    <script src="/MinorWebApp/scripts/showResponse.js"></script>
+    <script>
+        let params = (new URL(document.location)).searchParams;
+        let response = params.get("response");
+
+        if (response == "delete-success") {
+            showSuccess("Entry deleted successfully.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+    </script>
 </body>
 </html>

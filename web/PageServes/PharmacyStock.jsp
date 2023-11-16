@@ -63,6 +63,8 @@
         <div class="table-box-container">
             <div class="table-box">
                 <h2>Pharmacy Medicine Stock Table</h2>
+                <br>
+                <div id="success-alert"></div>
                 <%
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
@@ -123,5 +125,16 @@
             </div>
         </div>
     </main>
+    <script src="/MinorWebApp/scripts/showResponse.js"></script>
+    <script>
+        let params = (new URL(document.location)).searchParams;
+        let response = params.get("response");
+
+        if (response == "delete-success") {
+            showSuccess("Entry deleted successfully.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+    </script>
 </body>
 </html>

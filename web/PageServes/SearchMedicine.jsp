@@ -107,7 +107,7 @@
                         <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerOrders.jsp'">Orders</button>
                     </div>
                 </form>
-                <div class="edit-button-container">
+                <div class="profile-edit-container">
                     <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyCustomer.jsp">
                         <button type="submit" name="Modify" value="<%=ident%>" class="button-33">Edit Profile</button>
                     </form>

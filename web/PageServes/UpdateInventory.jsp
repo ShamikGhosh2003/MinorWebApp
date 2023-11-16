@@ -61,7 +61,6 @@ an error if there are no medicine in a pharmacy's stock --%>
                 }else{
 %>
                         <script>
-                            alert("No changes in the PHARM_MED_STOCK database!!!");
                             // Failed to update
                             location.href="http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp?response=failed";
 

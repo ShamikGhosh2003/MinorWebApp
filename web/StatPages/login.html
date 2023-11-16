@@ -104,7 +104,17 @@
             window.history.replaceState({}, document.title, url.toString());
         }
         if (response == "change-password-success") {
-            showSuccess("Password changed successfully.<br>Please try logging in again.")
+            showSuccess("Password changed successfully.<br>Please try logging in again.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+        if (response == "customer-deleted") {
+            showSuccess("Account deleted successfully.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+        if (response == "pharmacy-deleted") {
+            showSuccess("Account deleted successfully.");
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());
         }

@@ -100,7 +100,7 @@
                                 }
                             %>
                             <td>
-                            <div class="input-group button-group">
+                            <div class="actions-button-container">
                                     <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyPharmMedStock.jsp">
                                         <!--<h3><%=ident%></h3>-->
                                         <button type="submit" name="Modify" value="<%=ident%>" class="button-80">MODIFY</button>
@@ -108,7 +108,7 @@
                                     <form method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
                                         <button type="submit" name="Delete" value="<%=ident%>" class="button-80">DELETE</button>
                                     </form>
-                                </div>
+                            </div>
                             </td>
                         </tr>    
                         <% 
@@ -123,6 +123,17 @@
                 </table>
             </div>
         </div>
+        <script src="/MinorWebApp/scripts/showResponse.js"></script>
+        <script>
+            let params = (new URL(document.location)).searchParams;
+            let response = params.get("response");
+
+            if (response == "delete-success") {
+                showSuccess("Entry deleted successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+        </script>
     </main>
 </body>
 </html>
