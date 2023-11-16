@@ -33,8 +33,8 @@
         email = sess.getAttribute("email").toString();
         userType = sess.getAttribute("userType").toString();
     }
-    if(request.getParameter("submit")==null){
-        btnval = request.getParameter("Modify");
+    btnval = request.getParameter("Modify");
+    if(btnval != null){
         int i = btnval.indexOf(",");
         table = btnval.substring(0,i);
         cid = btnval.substring(i+1);
@@ -85,14 +85,23 @@
             ops.setString(10, city);                        
             ops.setString(11, cid);         
             int x = ops.executeUpdate();
-            if(x>0) {
+            if(x>0){
+                if(userType.equals("ADMIN")){
     %>
                 <script>
-                    // Edit success
+                    // Edit success ADMIN
                     location.href="http://localhost:8080/MinorWebApp/PageServes/ModifyCustomer.jsp?response=edit-success";
                 </script>
     <%
-            } else {
+                }else{
+    %>
+                <script>
+                    // Edit success CUSTOMER
+                    location.href="http://localhost:8080/MinorWebApp/PageServes/ModifyCustomer.jsp?response=edit-success";
+                </script>
+    <%
+                }
+            }else{
                 if(userType.equals("ADMIN")){
     %>
                 <script>
@@ -111,7 +120,8 @@
                 oconn.close();
                 ops.close();
             }
-        } else {
+        }else{
+            
             //sess.setAttribute("btnval", btnval);
         }
     }catch(SQLException ex){

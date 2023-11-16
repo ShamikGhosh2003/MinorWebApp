@@ -35,11 +35,12 @@
     }
     if(userType.equals("PHARMACY"))
         pid = sess.getAttribute("pid").toString();
-    if(request.getParameter("submit")==null){
-        if(userType.equals("PHARMACY"))
-            btnval = userType+","+pid;
-        else
-            btnval = request.getParameter("Modify");
+    if(userType.equals("PHARMACY"))
+        btnval = userType+","+pid;
+    else
+        btnval = request.getParameter("Modify");
+
+    if(btnval != null){
         int i = btnval.indexOf(",");
         table = btnval.substring(0,i);
         pid = btnval.substring(i+1);
@@ -216,6 +217,7 @@
                     <h2>EDIT PHARMACY</h2>
                     <br>
                     <div id="error-alert"></div>
+                    <div id="success-alert"></div>
                     <%
                         if(userType.equals("ADMIN")){
                     %>
