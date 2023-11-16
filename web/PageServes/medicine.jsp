@@ -98,7 +98,7 @@
                                 }
                             %>
                             <td>
-                                <div class="input-group button-group">
+                                <div class="actions-button-container">
                                     <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyMedicine.jsp">
                                         <!--<h3><%=ident%></h3>-->
                                         <button type="submit" name="Modify" value="<%=ident%>" class="button-80">MODIFY</button>
@@ -122,5 +122,26 @@
             </div>
         </div>
     </main>
+    <script src="/MinorWebApp/scripts/showResponse.js"></script>
+    <script>
+        let params = (new URL(document.location)).searchParams;
+        let response = params.get("response");
+
+        if (response == "delete-success") {
+            showSuccess("Medicine deleted successfully.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+        if (response == "modify-success") {
+            showSuccess("Medicine modified successfully.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+        if (response == "modify-fail") {
+            showError("Failed to modify medicine.<br>Please try again later.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+    </script>
 </body>
 </html>

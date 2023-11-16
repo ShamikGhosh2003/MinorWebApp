@@ -52,9 +52,8 @@
     {
 %>
     <script>
-    // Do not try any malaligned URL. You can only use the link received in email
-        alert("An error occurred. You can only use the link recieved in your email. Please try again later.");
-        window.location.href = "../StatPages/ForgotPassword.html";
+        // Do not try any malaligned URL. You can only use the link received in email
+        location.href = "http://localhost:8080/MinorWebApp/StatPages/ForgotPassword.html?response=bad-link";
     </script>
 <%
     }
@@ -75,8 +74,8 @@
         {
 %>
         <script>
-            alert("Incorrect answer. Please try again.");
-            showError("Incorrect answer. Please try again.");
+            // Incorrect answer
+            location.href="http://localhost:8080/MinorWebApp/PageServes/VerifyQuestion.jsp?response=incorrect-answer";
         </script>
 <%
         }
@@ -102,16 +101,6 @@
                     }
                 });
             };
-
-            function showError(message) {
-                var errorAlert = document.getElementById('error-alert');
-                errorAlert.innerHTML = message;
-                errorAlert.style.display = "block";
-                errorAlert.style.animation = 'none';
-                errorAlert.offsetHeight;
-                errorAlert.style.animation = null; 
-                window.location.hash = 'error-alert';
-            }
 
             function validateForm() {
                 var sans = document.forms['verify-question-form']['tbAns'].value;
@@ -160,5 +149,16 @@
                 </div>
             </div>
         </main>
+        <script src="/MinorWebApp/scripts/showResponse.js"></script>
+        <script>
+            let params = (new URL(document.location)).searchParams;
+            let response = params.get("response");
+    
+            if (response == "incorrect-answer") {
+                showError("Incorrect answer.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+        </script>
     </body>
 </html>

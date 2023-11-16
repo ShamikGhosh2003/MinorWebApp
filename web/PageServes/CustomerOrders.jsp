@@ -49,16 +49,22 @@
     <link rel="stylesheet" href="../stylesheet/main-style.css">
 </head>
 <body>
-    <header>           
-        <span class="heading">MedFinder</span>
-        <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="registerUser.html">Register</a>
-        <a href="about.html">About Us</a>
-        <a href="#">Contact</a>
-        <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
-        </nav>
-    </header>
+        <header>
+            <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
+            <span class="heading">MedFinder</span>
+            <nav class="navbar">
+            <a href="http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp">Home</a>
+            <a href="http://localhost:8080/MinorWebApp/StatPages/about.html">About Us</a>
+            <a href="http://localhost:8080/MinorWebApp/PageServes/FeedBack.jsp">Feedback</a>
+            <div class="navbar-dropdown">
+                <a class="navbar-dropdown-button">Settings</a>
+                <div class="navbar-dropdown-content">
+                    <a href="http://localhost:8080/MinorWebApp/SessLogOut">Log Out</a>
+                    <a href="http://localhost:8080/MinorWebApp/PageServes/changePassword.jsp">Change Password</a>
+                </div>
+            </div>
+            </nav>
+        </header>
     <main>
         <div class="result-container">
             <div class="result-box">
@@ -104,8 +110,27 @@
                     </tbody>
                 </table>
                 <%-- TODO: Buttons to go back --%>
+                <div class="button-menu">
+                    <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'">Search Medicine</button>
+                    <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'">Cart</button>
+                </div>
             </div>
         </div>
     </main>
+    <script>
+        let params = (new URL(document.location)).searchParams;
+        let response = params.get("response");
+
+        if (response == "edit-success") {
+            showSuccess("Order updated successfully.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+        if(response == "edit-failed") {
+            showError("Failed to update order.<br>Try again later.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+    </script>
 </body>
 </html>

@@ -97,7 +97,6 @@
                 if(userType.equals("ADMIN")){
     %>
                 <script>
-                    alert("No changes to the database");
                     // Edit fail admin
                     location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp?response=edit-fail";
                 </script>
@@ -177,6 +176,14 @@
                 }
             }
         </script>
+        <script>
+            // Auto select the old value.
+            let city = "<%=city%>";
+            document.getElementById('city').value = city;
+            let sques = "<%=sques%>";
+            document.getElementById('sques').value = sques;
+        </script>
+        <script src="/MinorWebApp/scripts/deleteModal.js"></script>
     </head>
     <body>
         <header>
@@ -249,7 +256,7 @@
                     <div class="input-group">
                         <label for="city">City:</label>
                         <select id="city" name="city">
-                            <option value="" selected disabled hidden>Select a City</option>
+                            <option value="" disabled hidden>Select a City</option>
                             <option value="KOLKATA">Kolkata</option>
                             <option value="HOWRAH">Howrah</option>
                             <option value="BURDWAN">Burdwan</option>
@@ -265,7 +272,7 @@
                     <div class="input-group">
                         <label for="sques">Security Question:</label>
                         <select id="sques" name="sques">
-                            <option value="" selected disabled hidden>Select a Security Question</option>
+                            <option value="" disabled hidden>Select a Security Question</option>
                             <option value="CHILDHOOD NICKNAME?">Childhood nickname?</option>
                             <option value="WHAT IS YOUR MOTHER'S MAIDEN NAME?">What is your mother's maiden name?</option>
                             <option value="WHAT SCHOOL DID YOU GO TO?">What school did you go to?</option>
@@ -283,11 +290,22 @@
                         <button type="reset" class="button-80">Clear</button>
                    </div>                   
                 </form>
-                <%-- TODO fix the functionality idk whats wrong here --%>
                 <div class="delete-button-container">
-                    <form  method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
-                        <button type="submit" name="Delete" class="delete-button" value="<%=btnval%>">Delete User</button>
-                    </form>
+                    <button type="button" id="delete" class="delete-button" onclick="openDeleteModal()">Delete Pharmacy</button>
+                </div>
+                <div id="deleteModal" class="delete-modal">
+                    <div class="delete-modal-content">
+                        <h2>Warning!</h2>
+                        <br>
+                        <p>Are you sure you want to delete this pharmacy?</p>
+                        <br>
+                        <div class="delete-modal-button">
+                            <button type="button" onclick="closeDeleteModal()">No</button>
+                            <form method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
+                                <button type="submit" name="Delete" value="<%=btnval%>">Yes</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

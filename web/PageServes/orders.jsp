@@ -59,6 +59,9 @@
         <div class="table-box-container">
             <div class="table-box">
                 <h2>Orders Table</h2>
+                <br>
+                <div id="error-alert"></div>
+                <div id="success-alert"></div>
                 <%
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
@@ -104,7 +107,7 @@
                                 }
                             %>
                             <td>
-                                <div class="input-group button-group">
+                                <div class="actions-button-container">
                                     <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyOrders.jsp">
                                         <!--<h3><%=ident%></h3>-->
                                         <button type="submit" name="Modify" value="<%=ident%>" class="button-80">MODIFY</button>
@@ -128,5 +131,26 @@
             </div>
         </div>
     </main>
+    <script src="/MinorWebApp/scripts/showResponse.js"></script>
+    <script>
+        let params = (new URL(document.location)).searchParams;
+        let response = params.get("response");
+
+        if (response == "edit-success") {
+            showSuccess("Order updated successfully.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+        if(response == "edit-failed") {
+            showError("Failed to update order.<br>Try again later.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+        if (response == "delete-success") {
+            showSuccess("Entry deleted successfully.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+    </script>
 </body>
 </html>

@@ -59,6 +59,9 @@
         <div class="table-box-container">
             <div class="table-box">
                 <h2>Pharmacy Medicine Stock Table</h2>
+                <br>
+                <div id="error-alert"></div>
+                <div id="success-alert"></div>
                 <%
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
@@ -100,7 +103,7 @@
                                 }
                             %>
                             <td>
-                            <div class="input-group button-group">
+                            <div class="actions-button-container">
                                     <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyPharmMedStock.jsp">
                                         <!--<h3><%=ident%></h3>-->
                                         <button type="submit" name="Modify" value="<%=ident%>" class="button-80">MODIFY</button>
@@ -108,7 +111,7 @@
                                     <form method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
                                         <button type="submit" name="Delete" value="<%=ident%>" class="button-80">DELETE</button>
                                     </form>
-                                </div>
+                            </div>
                             </td>
                         </tr>    
                         <% 
@@ -123,6 +126,27 @@
                 </table>
             </div>
         </div>
+        <script src="/MinorWebApp/scripts/showResponse.js"></script>
+        <script>
+            let params = (new URL(document.location)).searchParams;
+            let response = params.get("response");
+
+            if (response == "delete-success") {
+                showSuccess("Entry deleted successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if (response == "edit-success") {
+                showSuccess("Pharmacy edited successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if (response == "edit-fail") {
+                showError("Failed to update pharmacy.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+        </script>
     </main>
 </body>
 </html>

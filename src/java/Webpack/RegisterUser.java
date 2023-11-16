@@ -1,4 +1,3 @@
-
 package Webpack;
 
 import java.io.IOException;
@@ -52,7 +51,6 @@ public class RegisterUser extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -127,14 +125,14 @@ public class RegisterUser extends HttpServlet {
                 int x = ops.executeUpdate();
                 if(x>0){
                     out.println("<script>");
-                    out.println("alert('Account Created Successfully!');");
-                    out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/login.html';");
+                    // Account created successfully.
+                    out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/login.html?response=account-created';");
                     out.println("</script>");
                 }
                 else{
                     out.println("<script>");
-                    out.println("alert('Account did not get created');");
-                    out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/login.html';");
+                    // Failed to created account
+                    out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/login.html?response=account-failed';");
                     out.println("</script>");
                 }
                 oconn.close();

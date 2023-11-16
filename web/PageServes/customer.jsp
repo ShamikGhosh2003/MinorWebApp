@@ -101,7 +101,7 @@
                                 }
                             %>
                             <td>
-                                <div class="input-group button-group">
+                                <div class="actions-button-container">
                                     <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyCustomer.jsp">
                                         <!--<h3><%=ident%></h3>-->
                                         <button type="submit" name="Modify" value="<%=ident%>" class="button-80">MODIFY</button>
@@ -124,6 +124,7 @@
                 </table>
             </div>
         </div>
+        <script src="/MinorWebApp/scripts/showResponse.js"></script>
         <script>
             let params = (new URL(document.location)).searchParams;
             let response = params.get("response");
@@ -135,6 +136,11 @@
             }
             if (response == "edit-fail") {
                 showError("Failed to update customer.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if (response == "delete-success") {
+                showSuccess("Customer deleted successfully.");
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());
             }

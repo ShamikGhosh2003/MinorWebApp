@@ -95,25 +95,25 @@ public class DeleteAll extends HttpServlet {
                 int x = ops.executeUpdate();
                 if(x>0){
                     out.println("<script>");
-                    out.println("alert('Data modified Successfully!!');");
+                    // Account deleted successful
                     if(table.equals("CUSTOMER") && userType.equals("ADMIN")){
-                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/customer.jsp';");
+                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/customer.jsp?response=delete-success';");
                     }else if(table.equals("CUSTOMER") && userType.equals("CUSTOMER")){
-                        out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/login.html';");
+                        out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/login.html?response=customer-deleted';");
                     }else if(table.equals("PHARMACY") && userType.equals("ADMIN")){
-                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp';");
+                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp?response=delete-success';");
                     }else if(table.equals("PHARMACY") && userType.equals("PHARMACY")){
-                        out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/login.html';");
+                        out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/login.html?response=pharmacy-deleted';");
                     }else if(table.equals("MEDICINE")){
-                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/medicine.jsp';");
+                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/medicine.jsp?response=delete-success';");
                     }else if(table.equals("PHARM_MED_STOCK") && userType.equals("ADMIN")){
-                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/medPharmStock.jsp';");
+                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/medPharmStock.jsp?response=delete-success';");
                     }else if(table.equals("PHARM_MED_STOCK") && userType.equals("PHARMACY")){
-                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/PharmacyStock.jsp';");
+                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/PharmacyStock.jsp?response=delete-success';");
                     }else if(table.equals("ORDERS") && userType.equals("ADMIN")){
-                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/orders.jsp';");
+                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/orders.jsp?response=delete-success';");
                     }else if(table.equals("ORDERS") && userType.equals("CUSTOMER")){
-                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp';");
+                        out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp?response=delete-success';");
                     }
                     out.println("</script>");
                 }else{
@@ -126,8 +126,8 @@ public class DeleteAll extends HttpServlet {
             }catch (SQLException ex) {
                 Logger.getLogger(DeleteAll.class.getName()).log(Level.SEVERE, null, ex);
                 out.println("<script>");
-                out.println("alert('Data cannot be deleted because it has records in the child table');");
-                out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/admin-database.html';");
+                // Data cannot be deleted because it has records in the child table.
+                out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/admin-database.html?response=delete-error';");
                 out.println("</script>");
             }
             out.println("</body>");
