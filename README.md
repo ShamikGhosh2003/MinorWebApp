@@ -10,6 +10,7 @@ Or more specifically the software this project was built on.
 ### Run the project
 1. Clone the project: `git clone https://github.com/ShamikGhosh2003/MinorWebApp.git`
 2. Under `/WEB/WEB-INF` create two files:
+   
     i. `db.properties`
     ```
     hostname=hostname
@@ -23,6 +24,6 @@ Or more specifically the software this project was built on.
     username=email@domain.com
     password=yourAppPassword
     ```
-3. Copy the two files to `src/java` as well.
-4. Open folder as a project in NetBeans.
-5. Run from `StatPages/login.html`.
+4. Copy the two files to `src/java` as well.
+5. Open folder as a project in NetBeans.
+6. Run from `StatPages/login.html`.
