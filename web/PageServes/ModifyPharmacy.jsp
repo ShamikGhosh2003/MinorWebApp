@@ -177,6 +177,13 @@
                 }
             }
         </script>
+        <script>
+            // Auto select the old value.
+            let city = "<%=city%>";
+            document.getElementById('city').value = city;
+            let sques = "<%=sques%>";
+            document.getElementById('sques').value = sques;
+        </script>
     </head>
     <body>
         <header>
@@ -249,7 +256,7 @@
                     <div class="input-group">
                         <label for="city">City:</label>
                         <select id="city" name="city">
-                            <option value="" selected disabled hidden>Select a City</option>
+                            <option value="" disabled hidden>Select a City</option>
                             <option value="KOLKATA">Kolkata</option>
                             <option value="HOWRAH">Howrah</option>
                             <option value="BURDWAN">Burdwan</option>
@@ -265,7 +272,7 @@
                     <div class="input-group">
                         <label for="sques">Security Question:</label>
                         <select id="sques" name="sques">
-                            <option value="" selected disabled hidden>Select a Security Question</option>
+                            <option value="" disabled hidden>Select a Security Question</option>
                             <option value="CHILDHOOD NICKNAME?">Childhood nickname?</option>
                             <option value="WHAT IS YOUR MOTHER'S MAIDEN NAME?">What is your mother's maiden name?</option>
                             <option value="WHAT SCHOOL DID YOU GO TO?">What school did you go to?</option>
