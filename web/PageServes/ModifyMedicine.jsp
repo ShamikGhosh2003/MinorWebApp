@@ -168,7 +168,6 @@
                 </div>
                 </form>
             </div>
-            <%-- TODO Button to go back  --%>
         </div>
     </main>
 </body>

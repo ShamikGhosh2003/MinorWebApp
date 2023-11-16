@@ -1,5 +1,3 @@
-<%-- TODO: Check if it's possible to have
-an error if there are no medicine in a pharmacy's stock --%>
 <%@page import="java.sql.SQLException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.io.IOException"%>

@@ -290,12 +290,6 @@
                         <button type="reset" class="button-80">Clear</button>
                    </div>                   
                 </form>
-                <%-- TODO fix the functionality idk whats wrong here --%>
-                <%-- <div class="delete-button-container">
-                    <form  method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
-                        <button type="submit" name="Delete" class="delete-button" value="<%=btnval%>">Delete User</button>
-                    </form>
-                </div> --%>
                 <div class="delete-button-container">
                     <button type="button" id="delete" class="delete-button" onclick="openDeleteModal()">Delete Pharmacy</button>
                 </div>

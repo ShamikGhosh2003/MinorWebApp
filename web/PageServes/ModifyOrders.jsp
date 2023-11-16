@@ -1,4 +1,3 @@
-<%-- TODO This page --%>
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.SQLException"%>
