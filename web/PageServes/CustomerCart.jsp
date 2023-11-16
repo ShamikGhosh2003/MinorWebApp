@@ -48,6 +48,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Result</title>
     <link rel="stylesheet" href="../stylesheet/main-style.css">
+    <script src="/MinorWebApp/scripts/showResponse.js"></script>
 </head>
 <body>
     <header>
@@ -138,16 +139,28 @@
             <h4>Your total amount is: <%=total%></h4>
             <h4>Discount is: <%=discount%>%</h4>
             <h4>Total after discount is: <%=(total - ((total*discount)/100))%></h4>
-            <h4>#Records: <%=reccounter%></h4>
             <br>
             <div class="button-menu">
-                <button class="button-12" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/PaymentPortal.jsp'">Place Order</button>
+                <button class="button-12" id="place-order" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/PaymentPortal.jsp'">Place Order</button>
                 <button class="button-12" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'">Search Medicine</button>
             </div>
             </div>
         </div>
     </main>
-    <script src="/MinorWebApp/scripts/showResponse.js"></script>
+    <script>
+        window.onload = function() {
+        document.getElementById('place-order').onclick = function(event) {
+            var reccounter = <%=reccounter%>;
+            alert(reccounter);
+            if(reccounter === 0) {
+            event.preventDefault();
+            showError("Cannot place order. Cart is empty.");
+            } else {
+            window.location.href = 'http://localhost:8080/MinorWebApp/PageServes/PaymentPortal.jsp';
+            }
+        }
+    }
+    </script>
     <script>
         let params = (new URL(document.location)).searchParams;
         let response = params.get("response");

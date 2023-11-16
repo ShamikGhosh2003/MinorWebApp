@@ -34,11 +34,11 @@ if(request.getParameter("submit")!=null){
     int x=0;
     while(x<1000)
         x=random.nextInt(9999);
-    body = "\n Your OTP is: "+x;
+    body = "Your OTP is: " + x +"\nPlease do not share this OTP with anyone.";
     //OTP generation code ends
     sess.setAttribute("otp",x);
     to = email;
-    subject = "OTP FOR PLACING ORDER";
+    subject = "MedFinder - Please confirm your order";
     final String username = mailUsername;
     final String password = mailPassword;
 
@@ -115,7 +115,7 @@ if(request.getParameter("submit")!=null){
                     showError("The CVV should be a three-digit number.");
                     return false;
                 }
-                if(cardNumber.length < 13 || cardNumber.length > 19 || isNaN(cardNumber)) {
+                if(cardNumber.length < 16 || isNaN(cardNumber)) {
                     showError("Invalid card number.");
                     return false;
                 }
@@ -163,27 +163,27 @@ if(request.getParameter("submit")!=null){
                         <br>
                         <div class="input-group">
                             <label for="nameOnCard">Name on Card</label>
-                            <input type="text" name="nameOnCard">
+                            <input type="text" name="nameOnCard" placeholder="John Doe">
                         </div>
                         <br>
                         <div class="input-group">
                             <label for="cardNumber">Card Number</label>
-                            <input type="text" name="cardNumber">
+                            <input type="text" name="cardNumber" placeholder="1234 5678 9123 4567" oninput="maxInputNumber(this,16)">
                         </div>
                         <br>
                         <div class="input-group">
                             <label for="expiry">Expiry Date</label>
-                            <input type="month" name="expiry">
+                            <input type="month" name="expiry" placeholder="2026-07">
                         </div>
                         <br>
                         <div class="input-group">
                             <label for="cvv">CVV</label>
-                            <input type="password" name="cvv" oninput="maxInputNumber(this,3)">
+                            <input type="password" name="cvv" oninput="maxInputNumber(this,3)" placeholder="123">
                         </div>  
                         <br>
                         <div class="input-group">
                             <label for="billingAddress">Billing Address</label>
-                            <textarea name="billingAddress"></textarea>
+                            <textarea name="billingAddress" placeholder="123, Gold Street"></textarea>
                         </div>                       
                         <br>    
                         <div class="input-group button-group">
