@@ -109,8 +109,8 @@
         </script>
         <script>
             // Auto select the old value.
-            let city = "<%=mcat%>";
-            document.getElementById('mcategory').value = city;
+            let mcat = "<%=mcat%>";
+            document.getElementById('mcategory').value = mcat;
         </script>      
     </head>
     <body>

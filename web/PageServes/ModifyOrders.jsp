@@ -196,8 +196,8 @@
         </script>
         <script>
             // Auto select the old value.
-            let city = "<%=status%>";
-            document.getElementById('status').value = city;
+            let status = "<%=status%>";
+            document.getElementById('status').value = status;
         </script>
     </head>
     <body>
