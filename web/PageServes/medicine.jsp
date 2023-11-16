@@ -132,6 +132,16 @@
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());
         }
+        if (response == "modify-success") {
+            showSuccess("Medicine modified successfully.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+        if (response == "modify-fail") {
+            showError("Failed to modify medicine.<br>Please try again later.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
     </script>
 </body>
 </html>

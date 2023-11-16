@@ -57,16 +57,16 @@
             if(x>0){
     %>
                 <script>
-                    alert("Data modified successfully!");
-                    location.href="http://localhost:8080/MinorWebApp/PageServes/medicine.jsp";
+                    // Modified successfully
+                    location.href="http://localhost:8080/MinorWebApp/PageServes/medicine.jsp?response=modify-success";
                 </script>
     <%
             }
             else{
     %>
             <script>
-                alert("No changes to the database");
-                location.href="http://localhost:8080/MinorWebApp/PageServes/medicine.jsp";
+                // Failed to modify
+                location.href="http://localhost:8080/MinorWebApp/PageServes/medicine.jsp?response=modify-fail";
             </script>
     <%
             }

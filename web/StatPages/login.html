@@ -128,6 +128,11 @@
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());
         }
+        if (response == "reset-password-success") {
+            showSuccess("Password resetted successfully.<br>Please try logging in.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
     </script>
 </body>
 </html>

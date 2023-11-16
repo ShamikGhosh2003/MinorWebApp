@@ -97,7 +97,6 @@
                 if(userType.equals("ADMIN")){
     %>
                 <script>
-                    alert("No changes to the database");
                     // Edit fail admin
                     location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp?response=edit-fail";
                 </script>

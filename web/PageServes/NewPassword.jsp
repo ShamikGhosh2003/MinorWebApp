@@ -103,9 +103,8 @@
                     sess.invalidate();
         %>
         <script>
-            alert("Password reset successfully!! You can now login using the new password");
-            alert("Redirecting for login ==>>");
-            location.href="http://localhost:8080/MinorWebApp/StatPages/login.html";
+            // Password reset successful
+            location.href="http://localhost:8080/MinorWebApp/StatPages/login.html?response=reset-password-success";
         </script>
         <%
                 }
