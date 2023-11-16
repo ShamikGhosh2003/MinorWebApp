@@ -59,6 +59,9 @@
         <div class="table-box-container">
             <div class="table-box">
                 <h2>Pharmacy Medicine Stock Table</h2>
+                <br>
+                <div id="error-alert"></div>
+                <div id="success-alert"></div>
                 <%
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
@@ -130,6 +133,16 @@
 
             if (response == "delete-success") {
                 showSuccess("Entry deleted successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if (response == "edit-success") {
+                showSuccess("Pharmacy edited successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if (response == "edit-fail") {
+                showError("Failed to update pharmacy.");
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());
             }
