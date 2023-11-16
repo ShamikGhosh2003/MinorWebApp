@@ -118,6 +118,16 @@
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());
         }
+        if (response == "account-created") {
+            showSuccess("Account created successfully.<br>Please try logging in again.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
+        if (response == "account-failed") {
+            showError("Failed to create account.<br>Please try again later.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
     </script>
 </body>
 </html>
