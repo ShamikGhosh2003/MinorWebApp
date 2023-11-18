@@ -151,7 +151,6 @@
         window.onload = function() {
         document.getElementById('place-order').onclick = function(event) {
             var reccounter = <%=reccounter%>;
-            alert(reccounter);
             if(reccounter === 0) {
             event.preventDefault();
             showError("Cannot place order. Cart is empty.");
