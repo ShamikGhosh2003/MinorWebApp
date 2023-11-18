@@ -141,19 +141,9 @@ main {
 .input-group input {
     width: 60%;
 }
-.input-group input {
-    background-color: transparent;
+.input-group input, .input-group select {
     background-color: rgba(255, 255, 255, 0.217);
     border: transparent;
-    /* border-bottom: 1px solid black; */
-    border-radius: 0px;
-    padding: 5px 8px;
-}
-.input-group select {
-    background-color: transparent;
-    background-color: rgba(255, 255, 255, 0.311);
-    border: transparent;
-    /* border-bottom: 1px solid black; */
     border-radius: 0px;
     padding: 5px 8px;
 }
@@ -294,6 +284,35 @@ select {
   box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
 }
+.button-62 {
+    background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+    border: 0;
+    border-radius: 12px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    /* line-height: 2.5; */
+    outline: transparent;
+    padding: 1rem 1rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow .2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+}
+.button-62:not([disabled]):focus {
+    box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
+
+.button-62:not([disabled]):hover {
+    box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+}
 /* Actions buttons on tables */
 .actions-button-container {
     display: flex;
@@ -407,7 +426,7 @@ select {
     border-radius: 4px;
     margin-bottom: 20px;
 }
-.search-container input[type="submit"] {
+#search-submit {
     width: 100%;
     height: 40px;
     background-color: #20ab4a;
@@ -415,8 +434,17 @@ select {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 0; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.search-container input[type="submit"]:hover {
+#search-submit {
     background-color: #1a753b;
 }
 /* Button menu for the search page */
@@ -575,6 +603,7 @@ select {
 }
 .result-box {
     max-width: 1000px;
+    max-width: 90%;
     margin: auto;
     padding: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -603,13 +632,17 @@ select {
 .result-box label {
     margin-right: 10px;
 }
-.result-box input[type="number"] {
-    width: 50px;
-    height: 30px;
+/* Quantity input on SearchMedicineResults */
+.result-box input[type="text"] {
+    width: 60px;
+    height: 40px;
     margin-right: 10px;
     outline: none;
     border: 1px solid #212121;
     border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.217);
+    padding: 5px 10px;
+    font-size: 20px;
 }
 .result-box a {
     color: rgb(0, 0, 255);
@@ -633,7 +666,7 @@ select {
 /* Form validation error alerts */
 #error-alert {
     color: #FF0000; 
-    background-color: #FFCCCC; 
+    background-color: #ffccccc2; 
     border: 2px solid #FF0000; 
     padding: 10px; 
     margin-bottom: 20px; 
@@ -662,8 +695,8 @@ select {
 /* Success alert pop up */
 #success-alert {
     color: #006400; 
-    background-color: #90EE90; 
-    border: 2px solid #006400; 
+    background-color: #90ee90b0;
+    border: 2px solid #006400;
     padding: 10px; 
     margin-bottom: 20px; 
     text-align: center;
@@ -677,7 +710,7 @@ select {
 /* Notice alert pop up */
 #notice-alert {
     color: #0000FF; 
-    background-color: #CCCCFF; 
+    background-color: #ccccffc2; 
     border: 2px solid #0000FF; 
     padding: 10px; 
     margin-bottom: 20px; 

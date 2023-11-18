@@ -35,6 +35,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medicine Search JSP</title>
     <link rel="stylesheet" href="http://localhost:8080/MinorWebApp/stylesheet/main-style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
     </style>
 </head>
@@ -100,7 +101,10 @@
                         <option value="DURGAPUR">Durgapur</option>
                     </select>
                     <br>
-                    <input type="submit" value="Search">
+                    <%-- <input type="submit" value="Search"> --%>
+                    <button id="search-submit" type="submit" value="Search">
+                        <span class="material-symbols-outlined">search</span> Search
+                    </button>
                     <br><br>
                     <div class="button-menu">
                         <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'">Cart</button>

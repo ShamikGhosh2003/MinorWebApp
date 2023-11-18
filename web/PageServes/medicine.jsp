@@ -58,7 +58,7 @@
     <main>
         <div class="table-box-container">
             <div class="table-box">
-                <h2>Medicine Displayer JSP</h2>
+                <h2>Medicine</h2>
                 <%
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);

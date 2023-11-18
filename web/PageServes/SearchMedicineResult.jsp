@@ -12,8 +12,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Search Results</title>
     <link rel="stylesheet" href="../stylesheet/main-style.css">
+    <style>
+        .material-symbols-outlined {
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
     <script src="/MinorWebApp/scripts/showResponse.js"></script>
     <script>
         function maxNumberInput(input, max) {
@@ -25,6 +35,25 @@
                     input.value = 1;
                 }
             }
+        }
+    </script>
+    <script>
+        window.onload = function() {
+        document.forms['cart'].addEventListener('submit', function(event) {
+            if(!validateForm()) {
+                event.preventDefault();
+            } else {
+                window.location.hash = '';
+            }
+        });
+    };
+        function validateForm() {
+            var quantity = document.getElementById('quantity').value;
+                if(quantity.length === 0 || isNaN(quantity)) {
+                    showError("Quantity cannot be zero.");
+                    return false;
+                }
+            return true;
         }
     </script>
 </head>
@@ -132,11 +161,11 @@
                                 }
                             %>
                             <td>                         
-                                <form method="POST" action="http://localhost:8080/MinorWebApp/AddToCart">
+                                <form method="POST" name="cart" action="http://localhost:8080/MinorWebApp/AddToCart">
                                     <!--<h3><%=ident%></h3>-->
                                     <%-- <input type="number" id="quantity" name="<%=ident%>" min="1" max="100"> --%>
-                                    <input type="number" id="quantity" name="<%=ident%>" min="1" max="<%=ors.getInt("MQTY")%>" oninput="maxNumberInput(this,<%=ors.getInt("MQTY")%>)">
-                                    <button type="submit" name="cart" value="<%=ident%>" class="button-80">Add to cart</button>
+                                    <input type="text" id="quantity" name="<%=ident%>" min="1" max="<%=ors.getInt("MQTY")%>" oninput="maxNumberInput(this,<%=ors.getInt("MQTY")%>)">
+                                    <button type="submit" name="cart" value="<%=ident%>" class="button-62"><span class="material-symbols-outlined"> shopping_cart </span></button>
                                 </form>
                             </td>
                         </tr>  
