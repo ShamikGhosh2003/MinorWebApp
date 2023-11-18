@@ -199,7 +199,7 @@
     </head>
     <body>
         <header>
-            <img src="http://localhost:8080/MinorWebApp/media/logo.png" class="logo">
+            <img src="../media/logo.png" class="logo">
             <span class="heading">MedFinder</span>
             <nav class="navbar">
             <%
