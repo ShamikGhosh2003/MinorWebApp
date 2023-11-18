@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&family=Raleway:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'poppins', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
 }
 body{
-    background: url("../media/bg3.jpg");
+    background: url("../media/bg3.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -100,11 +102,12 @@ main {
     padding: 20px;
     width: 50%;
     background-color: rgb(238, 214, 228, 0.7);
+    background-color: rgb(238, 214, 228, 0.7);
     border-radius: 10px;
 }
 .form-box h2 {
     text-align: center;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Playfair Display', serif;
 }
 .form-box-links {
     text-align: right; 
@@ -139,9 +142,19 @@ main {
 }
 .input-group input {
     background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.217);
     border: transparent;
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid black; */
     border-radius: 0px;
+    padding: 5px 8px;
+}
+.input-group select {
+    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.311);
+    border: transparent;
+    /* border-bottom: 1px solid black; */
+    border-radius: 0px;
+    padding: 5px 8px;
 }
 input {
     padding: 3px;
@@ -241,11 +254,11 @@ select {
 }
 .table-box h1 {
     padding: 0 5px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Playfair Display', serif;
 }
 .table-box h2 {
     margin-bottom: 20px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Playfair Display', serif;
 }
 .table-box table {
     width: 100%;
@@ -285,7 +298,7 @@ select {
 }
 .text-box h1 {
     padding-left: 10px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Playfair Display', serif;
     font-size: 50px;
 }
 .text-box p {
@@ -306,13 +319,18 @@ select {
     max-width: 1000px;
     margin: auto;
     padding: 20px;
+    width: 50%;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
-    background-color: #fff;
+    background-color: #ffffffe6;
+    /* background-color: color(255,255,255,0.6); */
+    background-color: rgb(238, 214, 228, 0.7);
     border-radius: 6px;
 }
 .search-container h2 {
     font-size: 24px;
+    text-align: center;
     margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
 }
 .search-container select {
     width: 100%;
@@ -347,7 +365,7 @@ select {
     padding: 10px;
 }
 /* Blue Button */
-.button-12 {
+/* .button-12 {
     font-size: 16px;
     background-color: #007bff;
     color: #fff;
@@ -362,6 +380,127 @@ select {
 .button-12 a {
     color: white;
     text-decoration: none;
+} */
+.button-12 {
+    background: #5E5DF0;
+    border-radius: 999px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+    transition: all 250ms;
+}
+.button-12:hover {
+    box-shadow: rgba(44, 68, 187, 0.35) 0 -25px 18px -14px inset,rgba(44, 68, 187, 0.25) 0 1px 2px,rgba(44, 68, 187, 0.25) 0 2px 4px,rgba(44, 68, 187, 0.25) 0 4px 8px,rgba(44, 68, 187, 0.25) 0 8px 16px,rgba(44, 68, 187, 0.25) 0 16px 32px;
+    transform: scale(1.05) rotate(-1deg);
+}
+/* Admin db tables delete button */
+.button-45 {
+    align-items: center;
+    background-color: #FFE7E7;
+    background-position: 0 0;
+    border: 1px solid #FEE0E0;
+    border-radius: 11px;
+    box-sizing: border-box;
+    color: #D33A2C;
+    cursor: pointer;
+    display: flex;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 33.4929px;
+    list-style: outside url(https://www.smashingmagazine.com/images/bullet.svg) none;
+    padding: 2px 12px;
+    text-align: left;
+    text-decoration: none;
+    text-shadow: none;
+    text-underline-offset: 1px;
+    transition: border .2s ease-in-out,box-shadow .2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    word-break: break-word;
+}
+.button-45:active,
+.button-45:hover,
+.button-45:focus {
+    outline: 0;
+}
+.button-45:active {
+    background-color: #D33A2C;
+    box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+    color: #FFFFFF;
+}
+.button-45:hover {
+    background-color: #FFE3E3;
+    border-color: #FAA4A4;
+}
+.button-45:active:hover,
+.button-45:focus:hover,
+.button-45:focus {
+    background-color: #D33A2C;
+    box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+    color: #FFFFFF;
+}
+/* Admin db tables modify button */
+.button-46 {
+    align-items: center;
+    background-color: #E7F3FF;
+    background-position: 0 0;
+    border: 1px solid #D0E6FF;
+    border-radius: 11px;
+    box-sizing: border-box;
+    color: #2C56D3;
+    cursor: pointer;
+    display: flex;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 33.4929px;
+    padding: 2px 12px;
+    text-align: left;
+    text-decoration: none;
+    text-shadow: none;
+    text-underline-offset: 1px;
+    transition: border .2s ease-in-out,box-shadow .2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    word-break: break-word;
+}
+.button-46:active,
+.button-46:hover,
+.button-46:focus {
+    outline: 0;
+}
+.button-46:active {
+    background-color: #2C56D3;
+    box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+    color: #FFFFFF;
+}
+.button-46:hover {
+    background-color: #E3F0FF;
+    border-color: #A4C5FA;
+}
+.button-46:active:hover,
+.button-46:focus:hover,
+.button-46:focus {
+    background-color: #2C56D3;
+    box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+    color: #FFFFFF;
 }
 /* Search results container */
 .result-container {
@@ -373,12 +512,15 @@ select {
     margin: auto;
     padding: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: rgba(255, 236, 234, 0.7);
     border-radius: 6px;
 }
 .result-box h2 {
     font-size: 24px;
     margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
 }
 .result-box table {
     width: 100%;
@@ -386,7 +528,6 @@ select {
     margin-bottom: 20px;
 }
 .result-box th, .result-box td {
-    border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
@@ -519,7 +660,7 @@ select {
 .delete-button-small {
     background-color: #ff0000;
     color: white;
-    border-radius: 6px;
+    border-radius: 500px;
     padding: 10px 15px;
     text-align: center;
     text-decoration: none;
@@ -562,6 +703,7 @@ select {
 }
 .delete-modal-content h2 {
     color: red;
+    font-family: 'Times New Roman', Times, serif;
 }
 .delete-modal-content p {
     font-weight: bold;
