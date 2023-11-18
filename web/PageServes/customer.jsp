@@ -65,7 +65,7 @@
                 <%
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-                    query = "SELECT * FROM CUSTOMER ORDER BY CID ASC";
+                    query = "SELECT CID, EMAIL, FNAME || ' ' || LNAME AS CUSTOMER_NAME, GENDER, AGE, ADDRESS, PHONE, PINCODE, SQUES, SANS, CITY FROM CUSTOMER ORDER BY CID ASC";
                     ops = (OraclePreparedStatement) oconn.prepareCall(query);
                     ors = (OracleResultSet) ops.executeQuery();
                     orsm = (OracleResultSetMetaData) ors.getMetaData();
@@ -129,17 +129,17 @@
             let params = (new URL(document.location)).searchParams;
             let response = params.get("response");
 
-            if (response == "edit-success") {
+            if (response === "edit-success") {
                 showSuccess("Customer edited successfully.");
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());
             }
-            if (response == "edit-fail") {
+            if (response === "edit-fail") {
                 showError("Failed to update customer.");
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());
             }
-            if (response == "delete-success") {
+            if (response === "delete-success") {
                 showSuccess("Customer deleted successfully.");
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());

@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import oracle.jdbc.OracleConnection;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet; 
@@ -58,9 +57,6 @@ public class AddToCart extends HttpServlet {
             out.println("<title>Servlet AddToCart</title>");            
             out.println("</head>");
             out.println("<body>");
-            /*HttpSession sess = request.getSession(false);
-            if(sess!=null)
-                userType = sess.getAttribute("userType").toString();*/
             btnval = request.getParameter("cart");
             qty = request.getParameter(btnval);
             int i = btnval.indexOf(",");
@@ -89,12 +85,11 @@ public class AddToCart extends HttpServlet {
                     ors = (OracleResultSet) ops.executeQuery();
                     ors.next();
                     String lastOID = ors.getString("OID");
-                    oconn.close();
                     ops.close();
                     ors.close();
                     if(lastOID.equals("0"))
                     {
-                        oid = "O1000000000"; 
+                        oid = "O1000000000";  
                     }           
                     else
                     {
@@ -104,16 +99,13 @@ public class AddToCart extends HttpServlet {
                         //Setting the new OID
                         oid = "O"+oidNum;
                     }
-                    oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-                    query = "INSERT INTO "+table+"(OID, CID, PID, MID, QTY, STATUS, ITEM_PRICE, TOTAL) VALUES(?,?,?,?,?,?,?,?)";
-                    ops1 = (OraclePreparedStatement) oconn.prepareCall(query);
-                    ops1.clearParameters();
+                    ops1 = (OraclePreparedStatement) oconn.prepareCall("INSERT INTO ORDERS(OID, CID, PID, MID, QTY, STATUS, ITEM_PRICE, TOTAL) VALUES(?,?,?,?,?,?,?,?)");
                     ops1.setString(1, oid);
                     ops1.setString(2, cid);
                     ops1.setString(3, pid);
                     ops1.setString(4, mid); 
                     ops1.setString(5, qty);
-                    ops1.setString(6, status);
+                    ops1.setString(6, status); 
                     ops1.setString(7, price);
                     ops1.setString(8,total);  
                     int x = ops1.executeUpdate(); 

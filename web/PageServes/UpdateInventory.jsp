@@ -65,6 +65,8 @@
                         </script>
 <% 
                 }
+                ops.close();
+                oconn.close();
             }catch (SQLException ex) {
                 out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
             }
@@ -179,12 +181,12 @@
             let params = (new URL(document.location)).searchParams;
             let response = params.get("response");
 
-            if (response == "success") {
+            if (response === "success") {
                 showSuccess("Inventory updated successfully.");
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());
             }
-            if(response == "failed") {
+            if(response === "failed") {
                 showError("Failed to update inventory.<br>Try again later.");
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());

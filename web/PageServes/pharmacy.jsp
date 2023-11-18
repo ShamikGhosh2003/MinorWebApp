@@ -65,7 +65,7 @@
                 <%
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-                    query = "SELECT * FROM PHARMACY ORDER BY PID ASC";
+                    query = "SELECT PID, PNAME, EMAIL, ADDRESS, GSTN, PHONE, STATUS, PINCODE, SQUES, SANS, CITY FROM PHARMACY ORDER BY PID ASC";
                     ops = (OraclePreparedStatement) oconn.prepareCall(query);
                     ors = (OracleResultSet) ops.executeQuery();
                     orsm = (OracleResultSetMetaData) ors.getMetaData();
@@ -130,17 +130,17 @@
         let params = (new URL(document.location)).searchParams;
         let response = params.get("response");
 
-        if (response == "edit-success") {
+        if (response === "edit-success") {
             showSuccess("Pharmacy edited successfully.");
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());
         }
-        if (response == "edit-fail") {
+        if (response === "edit-fail") {
             showError("Failed to update pharmacy.");
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());
         }
-        if (response == "delete-success") {
+        if (response === "delete-success") {
             showSuccess("Pharmacy deleted successfully.");
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());

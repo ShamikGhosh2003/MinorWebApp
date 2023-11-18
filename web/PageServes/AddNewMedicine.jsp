@@ -126,6 +126,8 @@
                     </script>
         <%
                 }
+                ops.close();
+                oconn.close();
         }catch (SQLException ex) {
             out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
         }
@@ -195,12 +197,12 @@
                 let params = (new URL(document.location)).searchParams;
                 let response = params.get("response");
 
-                if (response == "new-medicine") {
+                if (response === "new-medicine") {
                     showError("Medicine entered does not exist in our database.<br>Please register the medicine.");
                     params.delete('response');
                     window.history.replaceState({}, document.title, url.toString());
                 }
-                if (response == "failed") {
+                if (response === "failed") {
                     showError("Failed to add the medicine.<br>Try again later.");
                     params.delete('response');
                     window.history.replaceState({}, document.title, url.toString());

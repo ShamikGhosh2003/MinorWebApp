@@ -70,7 +70,7 @@
             <div class="result-box">
                 <h2>ORDERS</h2>
                 <%
-                    query = "SELECT O.OID,P.PNAME, P.ADDRESS, M.MNAME, O.QTY, TO_CHAR(ODATE, 'dd-mm-yyyy') AS ORDER_DATE, O.ITEM_PRICE, O.TOTAL, O.STATUS FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.MID=M.MID AND O.PID=P.PID AND C.CID = ? AND (O.STATUS = 'ORDERED' OR O.STATUS = 'DISPATCHED' OR O.STATUS = 'DELIVERED') ORDER BY OID ASC";
+                    query = "SELECT O.OID,P.PNAME, P.ADDRESS, M.MNAME, O.QTY, TO_CHAR(ODATE, 'dd-mm-yyyy') AS ORDER_DATE, O.ITEM_PRICE, O.TOTAL, O.STATUS FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.MID=M.MID AND O.PID=P.PID AND C.CID = ? AND O.STATUS != 'CART' ORDER BY OID ASC";
                     ops = (OraclePreparedStatement) oconn.prepareCall(query);
                     ops.setString(1, cid);
                     ors = (OracleResultSet) ops.executeQuery();
@@ -120,12 +120,12 @@
         let params = (new URL(document.location)).searchParams;
         let response = params.get("response");
 
-        if (response == "edit-success") {
+        if (response === "edit-success") {
             showSuccess("Order updated successfully.");
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());
         }
-        if(response == "edit-failed") {
+        if(response === "edit-failed") {
             showError("Failed to update order.<br>Try again later.");
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());

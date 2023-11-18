@@ -97,6 +97,8 @@
             <%            
                 }
             }
+            ops.close();
+            oconn.close();
         }catch (SQLException ex) {
             out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
         }

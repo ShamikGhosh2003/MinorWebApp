@@ -195,7 +195,7 @@ if(request.getParameter("submit")!=null){
                             <label></label>
                             <button type="submit" name="submit" class="button-80">Submit Payment</button>
                             <label></label>
-                            <button type="submit" onclick="window.location.href='http://localhost:8080/PageServes/SearchMedicine.jsp'" class="button-80">Go back</button>
+                            <button type="submit" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'" class="button-80">Go back</button>
                         </div>
                         <br>
                     </form>
