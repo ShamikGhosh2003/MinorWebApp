@@ -61,9 +61,9 @@
             if(userType.equals("PHARMACY"))
                 table = "PHARMACY";
             oldpass = request.getParameter("current-password");
-            //oldpass = hash.passwordHash(oldpass);
+            oldpass = hash.passwordHash(oldpass);
             newpass = request.getParameter("new-password");
-            //newpass = hash.passwordHash(newpass);
+            newpass = hash.passwordHash(newpass);
             DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
             oconn = (OracleConnection) DriverManager.getConnection(oconnUrl,oconnUsername,oconnPassword);
             query = "SELECT * FROM "+table+" WHERE EMAIL=?";

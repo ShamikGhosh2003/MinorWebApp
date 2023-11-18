@@ -96,7 +96,7 @@ public class RegisterPharmacy extends HttpServlet {
                 address = address.toUpperCase();
                 email = email.toLowerCase();
                 sans = sans.toUpperCase();
-                //password = hash.passwordHash(password);
+                password = hash.passwordHash(password);
                 /*out.println("<h1>Displaying the HTML input values in this servlet...</h1>");
                 out.println("<h3>PID: "+pid+"</h3>");
                 out.println("<h3>Pharmacy Name: "+pname+"</h3>");                

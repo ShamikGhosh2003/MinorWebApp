@@ -185,7 +185,12 @@ if(request.getParameter("submit")!=null){
                             <label for="billingAddress">Billing Address</label>
                             <textarea name="billingAddress" placeholder="123, Gold Street"></textarea>
                         </div>                       
-                        <br>    
+                        <!--<br>    
+                        <div class="input-group">
+                            <label for="billingAddress">Billing Address</label>
+                            <textarea name="billingAddress" placeholder="123, Gold Street"></textarea>
+                        </div>-->    
+                        <br>
                         <div class="input-group button-group">
                             <label></label>
                             <button type="submit" name="submit" class="button-80">Submit Payment</button>

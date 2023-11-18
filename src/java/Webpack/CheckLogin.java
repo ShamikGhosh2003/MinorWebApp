@@ -58,7 +58,7 @@ public class CheckLogin extends HttpServlet {
             out.println("<body>");
             email = request.getParameter("email");
             password = request.getParameter("password");
-            //password = hash.passwordHash(password);
+            password = hash.passwordHash(password);
             email = email.toLowerCase();
             try {
                 DriverManager.registerDriver(new oracle.jdbc.OracleDriver());

@@ -13,17 +13,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import oracle.jdbc.OracleConnection;
 import oracle.jdbc.OraclePreparedStatement;
-import oracle.jdbc.OracleResultSet;
+import oracle.jdbc.OracleResultSet; 
 
 @WebServlet(name = "AddToCart", urlPatterns = {"/AddToCart"})
 public class AddToCart extends HttpServlet {
 
     String btnval,table,userType,status="CART",qty,oid,oidNum,cid,pid,mid,tbQty,price,total;
     OracleConnection oconn;
-    OraclePreparedStatement ops;
-    OracleResultSet ors;
+    OraclePreparedStatement ops, ops1;
+    OracleResultSet ors = null;
     String query = "SELECT NVL((SELECT * FROM (SELECT OID FROM ORDERS ORDER BY OID DESC) WHERE ROWNUM <=1),'0') AS OID FROM DUAL";
     
     // Oconn connection handling, change the classname in the try line: classname.class.getClassLoader()
@@ -87,10 +88,13 @@ public class AddToCart extends HttpServlet {
                     ops = (OraclePreparedStatement) oconn.prepareCall(query);
                     ors = (OracleResultSet) ops.executeQuery();
                     ors.next();
-                    String lastOID = ors.getString("OID");   
+                    String lastOID = ors.getString("OID");
+                    oconn.close();
+                    ops.close();
+                    ors.close();
                     if(lastOID.equals("0"))
                     {
-                        oid = "O1000000000";
+                        oid = "O1000000000"; 
                     }           
                     else
                     {
@@ -100,17 +104,19 @@ public class AddToCart extends HttpServlet {
                         //Setting the new OID
                         oid = "O"+oidNum;
                     }
-                    query = "INSERT INTO "+table+"(OID,CID,PID,MID,QTY,STATUS,ITEM_PRICE,TOTAL) VALUES(?,?,?,?,?,?,?,?)";
-                    ops = (OraclePreparedStatement) oconn.prepareCall(query);
-                    ops.setString(1, oid);
-                    ops.setString(2, cid);
-                    ops.setString(3, pid);
-                    ops.setString(4, mid);
-                    ops.setString(5, qty);
-                    ops.setString(6, status);
-                    ops.setString(7, price);
-                    ops.setString(8,total);
-                    int x = ops.executeUpdate();
+                    oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
+                    query = "INSERT INTO "+table+"(OID, CID, PID, MID, QTY, STATUS, ITEM_PRICE, TOTAL) VALUES(?,?,?,?,?,?,?,?)";
+                    ops1 = (OraclePreparedStatement) oconn.prepareCall(query);
+                    ops1.clearParameters();
+                    ops1.setString(1, oid);
+                    ops1.setString(2, cid);
+                    ops1.setString(3, pid);
+                    ops1.setString(4, mid); 
+                    ops1.setString(5, qty);
+                    ops1.setString(6, status);
+                    ops1.setString(7, price);
+                    ops1.setString(8,total);  
+                    int x = ops1.executeUpdate(); 
                     if(x>0){
                         out.println("<script>");
                         // Item added to cart successfully.
@@ -122,8 +128,8 @@ public class AddToCart extends HttpServlet {
                         out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp?response=failed-cart';");
                         out.println("</script>");
                     }
-                ops.close();
-                oconn.close();
+                    ops1.close();
+                    oconn.close(); 
                 }catch (SQLException ex) {
                     Logger.getLogger(AddToCart.class.getName()).log(Level.SEVERE, null, ex);
                     out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
@@ -147,7 +153,7 @@ public class AddToCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            processRequest(request, response); 
         } catch (SQLException ex) {
             Logger.getLogger(AddToCart.class.getName()).log(Level.SEVERE, null, ex);
         }
