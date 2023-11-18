@@ -104,10 +104,10 @@
                                 <div class="actions-button-container">
                                     <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyCustomer.jsp">
                                         <!--<h3><%=ident%></h3>-->
-                                        <button type="submit" name="Modify" value="<%=ident%>" class="button-80">MODIFY</button>
+                                        <button type="submit" name="Modify" value="<%=ident%>" class="button-46">MODIFY</button>
                                     </form>
                                     <form method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
-                                        <button type="submit" name="Delete" value="<%=ident%>" class="button-80">DELETE</button>
+                                        <button type="submit" name="Delete" value="<%=ident%>" class="button-45">DELETE</button>
                                     </form>
                                 </div>
                             </td>
