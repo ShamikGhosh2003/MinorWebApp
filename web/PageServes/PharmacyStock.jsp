@@ -74,7 +74,7 @@
                     ors = (OracleResultSet) ops.executeQuery();
                     orsm = (OracleResultSetMetaData) ors.getMetaData();
                 %>
-                <table>
+                <table id="stock">
                     <thead>
                         <%
                             for(int i=1; i<=orsm.getColumnCount(); i++)
@@ -134,6 +134,32 @@
             showSuccess("Entry deleted successfully.");
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());
+        }
+    </script>
+    <script>
+        function cleanNull() {
+            // Get the table
+            var table = document.getElementById('stock');
+            // i is row
+            for (var i = 1; i < table.rows.length; i++) {
+                // Current row
+                var row = table.rows[i];
+
+                // Replace 'null' values for MQTY and PRICE
+                if (row.cells[4].innerHTML === 'null') {
+                    row.cells[4].innerHTML = '0';
+                }
+                if (row.cells[5].innerHTML === 'null') {
+                    row.cells[5].innerHTML = '0';
+                }
+                // Replace 'null' values for MAV
+                if (row.cells[6].innerHTML === 'null') {
+                    row.cells[6].innerHTML = 'Unknown';
+                }
+            }
+        }
+        window.onload = function() {
+            cleanNull();
         }
     </script>
 </body>
