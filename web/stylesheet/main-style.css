@@ -816,11 +816,10 @@ select {
     background-color: rgba(0,0,0,0.4);
 }
 .delete-modal-content {
-    background-color: #fefefe;
+    background-color: #d6d6d6;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    border: 1px solid rgba(62, 61, 61, 0.829);
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
     width: 60%;
     border-radius: 6px;
@@ -831,6 +830,7 @@ select {
 }
 .delete-modal-content p {
     font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 /* Yes and No button for the modal */
 .delete-modal-button {

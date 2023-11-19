@@ -89,6 +89,16 @@
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());
             }
+            if (response === "update-success") {
+                showSuccess("Inventory updated successfully.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if (response == "update-fail") {
+                showError("Failed to update inventory.<br>Try again later.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
         </script>
     </main>
 </body>

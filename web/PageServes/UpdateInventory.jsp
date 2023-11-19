@@ -53,14 +53,14 @@
 %>
                         <script>
                             // Data inserted successfully.
-                            location.href = "http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp?response=success";
+                            location.href = "http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html?response=update-success";
                         </script>
 <%
                 }else{
 %>
                         <script>
                             // Failed to update
-                            location.href="http://localhost:8080/MinorWebApp/PageServes/UpdateInventory.jsp?response=failed";
+                            location.href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html?response=update-failed";
 
                         </script>
 <% 
@@ -177,21 +177,6 @@
                 </form>
             </div>
         </div>
-        <script>
-            let params = (new URL(document.location)).searchParams;
-            let response = params.get("response");
-
-            if (response === "success") {
-                showSuccess("Inventory updated successfully.");
-                params.delete('response');
-                window.history.replaceState({}, document.title, url.toString());
-            }
-            if(response === "failed") {
-                showError("Failed to update inventory.<br>Try again later.");
-                params.delete('response');
-                window.history.replaceState({}, document.title, url.toString());
-            }
-        </script>
     </main>
 </body>
 </html>
