@@ -64,7 +64,19 @@
                     element.value = element.value.slice(0, maxLength);
                 }
             }
-        </script>        
+        </script>
+        <script>
+            function validateCheckbox() {
+                var checkbox = document.getElementById('terms-checkbox');
+                var submit = document.getElementById('submit');
+                
+                if (checkbox.checked) {
+                    submit.disabled = false;
+                } else {
+                    submit.disabled = true;
+                }
+            }
+        </script>     
     </head>
     <body>
         <header>
@@ -161,10 +173,15 @@
                             <label for="confirm-password">Confirm password:</label>
                             <input type="password" name="confirm-password" placeholder="********">
                         </div>                         
-                        <br>    
+                        <br>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="terms-checkbox" name="terms-checkbox" onchange="validateCheckbox()">
+                            <label for="terms-checkbox">I agree to the <a href="http://localhost:8080/MinorWebApp/StatPages/terms.html">terms and conditions</a></label>
+                        </div>
+                        <br>
                         <div class="input-group button-group">
                             <label></label>
-                            <button type="submit" class="button-80">Submit</button>
+                            <button type="submit" id="submit" class="button-80" disabled>Submit</button>
                             <button type="reset" class="button-80">Clear</button>
                     </div>                   
                         <br>
