@@ -49,6 +49,27 @@
     <title>Search Result</title>
     <link rel="stylesheet" href="../stylesheet/main-style.css">
     <script src="/MinorWebApp/scripts/showResponse.js"></script>
+    <style>
+        .bill-container {
+            display: flex;
+            justify-content: flex-start;
+            padding-right: 40px;
+        }
+        .bill {
+            width: auto;
+            padding: -3px 4px;
+            font-size: 18px;
+        }
+        .bill tr, .bill td, .bill th {
+            padding: 0;
+            margin: 0;
+        }
+        .bill td:nth-child(1) {
+            width: 200px;
+            font-weight: 300px;
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -135,11 +156,25 @@
                     %>
                 </tbody>
             </table>
-            <br>
-            <h4>Your total amount is: <%=total%></h4>
-            <h4>Discount is: <%=discount%>%</h4>
-            <h4>Total after discount is: <%=(total - ((total*discount)/100))%></h4>
-            <br>
+            <div class="bill-container">
+                <div class="bill">
+                    <table>
+                    <tr>
+                        <td>Total:</td>
+                        <td><%=total%></td>
+                    </tr>
+                    <tr>
+                        <td>Discount:</td>
+                        <td><%=discount%>%</td>
+                    </tr>
+                    <tr>
+                        <td>Final total:</td>
+                        <td><%=(total - ((total*discount)/100))%></td>
+                    </tr>
+                    </table>
+                </div>
+            </div>
+            <br><br>
             <div class="button-menu">
                 <button class="button-12" id="place-order" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/PaymentPortal.jsp'">Place Order</button>
                 <button class="button-12" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'">Search Medicine</button>

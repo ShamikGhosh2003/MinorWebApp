@@ -108,7 +108,7 @@
                     <br><br>
                     <div class="button-menu">
                         <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'">Cart</button>
-                        <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerOrders.jsp'">Orders</button>
+                        <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerOrders.jsp'">My Orders</button>
                     </div>
                 </form>
                 <div class="profile-edit-container">

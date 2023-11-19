@@ -133,6 +133,10 @@ if(request.getParameter("submit")!=null){
                 padding: 3px;
                 width: 60%;
                 height: 40px;
+                background-color: rgba(255, 255, 255, 0.217);
+                border: transparent;
+                border-radius: 0px;
+                padding: 5px 8px;
             }
        </style>
     </head>
@@ -192,10 +196,8 @@ if(request.getParameter("submit")!=null){
                         </div>-->    
                         <br>
                         <div class="input-group button-group">
-                            <label></label>
                             <button type="submit" name="submit" class="button-80">Submit Payment</button>
-                            <label></label>
-                            <button type="submit" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'" class="button-80">Go back</button>
+                            <button type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'" class="button-12">Go back</button>
                         </div>
                         <br>
                     </form>
