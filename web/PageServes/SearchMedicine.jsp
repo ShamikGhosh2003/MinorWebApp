@@ -35,7 +35,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medicine Search JSP</title>
     <link rel="stylesheet" href="http://localhost:8080/MinorWebApp/stylesheet/main-style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <style>
     </style>
 </head>
@@ -107,13 +106,13 @@
                     </button>
                     <br><br>
                     <div class="button-menu">
-                        <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'">Cart</button>
-                        <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerOrders.jsp'">My Orders</button>
+                        <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'"><span class="material-symbols-outlined">shopping_cart</span> Cart</button>
+                        <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerOrders.jsp'"><span class="material-symbols-outlined">orders</span> My orders</button>
                     </div>
                 </form>
                 <div class="profile-edit-container">
                     <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyCustomer.jsp">
-                        <button type="submit" name="Modify" value="<%=ident%>" class="button-33">Edit Profile</button>
+                        <button type="submit" name="Modify" value="<%=ident%>" class="button-33"><span class="material-symbols-outlined">account_circle</span> Edit Profile</button>
                     </form>
                 </div>
             </div>

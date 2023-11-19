@@ -115,7 +115,7 @@
                                 <td>
                                         <form method="POST" action="http://localhost:8080/MinorWebApp/PageServes/ModifyOrders.jsp">
                                             <!--<h3><%=ident%></h3>-->
-                                            <button type="submit" name="Modify" value="<%=ident%>" class="button-12">Change Status</button>
+                                            <button type="submit" name="Modify" value="<%=ident%>" class="button-12"><span class="material-symbols-outlined">edit</span> Edit Status</button>
                                         </form>
                                 </td>
                             </tr>    

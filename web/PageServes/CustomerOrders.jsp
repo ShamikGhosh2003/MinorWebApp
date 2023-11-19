@@ -110,8 +110,8 @@
                 </table>
                 <%-- TODO: Buttons to go back --%>
                 <div class="button-menu">
-                    <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'">Search Medicine</button>
-                    <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'">Cart</button>
+                    <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'"><span class="material-symbols-outlined">search</span> Search</button>
+                    <button class="button-12" type="button" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'"><span class="material-symbols-outlined">shopping_cart</span> Cart</button>
                 </div>
             </div>
         </div>

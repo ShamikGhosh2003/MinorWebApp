@@ -12,7 +12,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Search Results</title>
     <link rel="stylesheet" href="../stylesheet/main-style.css">
     <style>
@@ -165,7 +164,7 @@
                                     <!--<h3><%=ident%></h3>-->
                                     <%-- <input type="number" id="quantity" name="<%=ident%>" min="1" max="100"> --%>
                                     <input type="text" id="quantity" name="<%=ident%>" min="1" max="<%=ors.getInt("MQTY")%>" oninput="maxNumberInput(this,<%=ors.getInt("MQTY")%>)">
-                                    <button type="submit" name="cart" value="<%=ident%>" class="button-62"><span class="material-symbols-outlined"> shopping_cart </span></button>
+                                    <button type="submit" name="cart" value="<%=ident%>" class="button-62"><span class="material-symbols-outlined"> add_shopping_cart </span></button>
                                 </form>
                             </td>
                         </tr>  
@@ -175,8 +174,8 @@
                     </tbody>
                 </table> 
                 <div class="button-menu">
-                    <button class="button-12" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'">Search Medicine</button>
-                    <button class="button-12"onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'">Go to cart</button>
+                    <button class="button-12" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'"><span class="material-symbols-outlined">search</span> Search</button>
+                    <button class="button-12"onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/CustomerCart.jsp'"><span class="material-symbols-outlined">shopping_cart</span> Cart</button>
                 </div>
                 <%
                     if(!hasResult) {

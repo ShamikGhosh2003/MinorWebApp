@@ -46,7 +46,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Result</title>
+    <title>Cart</title>
     <link rel="stylesheet" href="../stylesheet/main-style.css">
     <script src="/MinorWebApp/scripts/showResponse.js"></script>
     <style>
@@ -147,7 +147,7 @@
                         <td>
                             <form method="POST" action="http://localhost:8080/MinorWebApp/DeleteAll">
                                 <!--<h3><%=ident%></h3>-->
-                                <button type="submit" name="Delete" value="<%=ident%>" class="delete-button-small">DELETE</button>
+                                <button type="submit" name="Delete" value="<%=ident%>" class="delete-button-small"><span class="material-symbols-outlined">delete_forever</span>DELETE</button>
                             </form>
                         </td>
                     </tr>  
@@ -176,8 +176,8 @@
             </div>
             <br><br>
             <div class="button-menu">
-                <button class="button-12" id="place-order" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/PaymentPortal.jsp'">Place Order</button>
-                <button class="button-12" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'">Search Medicine</button>
+                <button class="button-12" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp'"><span class="material-symbols-outlined">search</span> Search</button>
+                <button class="button-12" id="place-order" onclick="window.location.href='http://localhost:8080/MinorWebApp/PageServes/PaymentPortal.jsp'"><span class="material-symbols-outlined">shopping_cart_checkout</span> Checkout</button>
             </div>
             </div>
         </div>
