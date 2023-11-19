@@ -49,6 +49,7 @@
         email = sess.getAttribute("email").toString();
         mname = sess.getAttribute("mname").toString();
     }
+    mname = mname.toUpperCase();
     mcategory = request.getParameter("mcategory"); 
     if(request.getParameter("submit")!=null){
         try{

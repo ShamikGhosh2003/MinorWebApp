@@ -92,6 +92,11 @@ public class RegisterPharmacy extends HttpServlet {
                     //Setting the new PID
                     pid = "P"+pidNum;
                 }
+                pname = pname.trim();
+                address = address.trim();
+                email = email.trim();
+                sans = sans.trim();
+                password = password.trim();
                 pname = pname.toUpperCase();
                 address = address.toUpperCase();
                 email = email.toLowerCase();

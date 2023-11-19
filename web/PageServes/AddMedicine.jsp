@@ -33,7 +33,8 @@
             email = sess.getAttribute("email").toString();
         mname = request.getParameter("mname");
         sess.setAttribute("mname",mname);
-        //mname = mname.toUpperCase();
+        mname = mname.trim();
+        mname = mname.toUpperCase();
         try{
             DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
             oconn = (OracleConnection) DriverManager.getConnection(oconnUrl,oconnUsername,oconnPassword);
