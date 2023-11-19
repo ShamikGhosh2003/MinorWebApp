@@ -70,6 +70,7 @@
             address = request.getParameter("address");
             gstn = request.getParameter("gstn");
             phone = request.getParameter("phone");
+            status = request.getParameter("status");
             pincode = request.getParameter("pincode");
             sques = request.getParameter("sques");
             sans = request.getParameter("sans");
@@ -140,6 +141,14 @@ if(x>0){
         <script src="/MinorWebApp/scripts/showResponse.js"></script>
         <script>
             window.onload = function() {
+                // Auto select old values
+                let city = "<%=city%>";
+                document.getElementById('city').value = city;
+                let sques = "<%=sques%>";
+                document.getElementById('sques').value = sques;
+                let status = "<%=status%>";
+                document.getElementById('status').value = status;
+
                 document.forms['register'].addEventListener('submit', function(event) {
                     if(!validateForm()) {
                         event.preventDefault();
@@ -185,13 +194,6 @@ if(x>0){
                     element.value = element.value.slice(0, maxLength);
                 }
             }
-        </script>
-        <script>
-            // Auto select the old value.
-            let city = "<%=city%>";
-            document.getElementById('city').value = city;
-            let sques = "<%=sques%>";
-            document.getElementById('sques').value = sques;
         </script>
         <script src="/MinorWebApp/scripts/deleteModal.js"></script>
     </head>
@@ -257,6 +259,16 @@ if(x>0){
                     <div class="input-group">
                         <label for="phone">Phone:</label>
                         <input type="text" name="phone" value="<%=phone%>">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <label for="status">Status:</label>
+                        <select id="status" name="status">
+                            <option value="" disabled hidden>Select STATUS</option>
+                            <option value="Operational">Operational</option>
+                            <option value="Closed">Closed</option>
+                            <option value="Suspended">Suspended</option>
+                        </select>
                     </div>
                     <br>
                     <div class="input-group">

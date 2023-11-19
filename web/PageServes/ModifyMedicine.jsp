@@ -87,6 +87,10 @@
         <script src="/MinorWebApp/scripts/showResponse.js"></script>
         <script>
             window.onload = function() {
+                // Auto select the old value.
+                let mcat = "<%=mcat%>";
+                document.getElementById('mcategory').value = mcat;
+                
                 document.forms['register'].addEventListener('submit', function(event) {
                     if(!validateForm()) {
                         event.preventDefault();
@@ -106,12 +110,7 @@
                 }
                 return true;
             }
-        </script>
-        <script>
-            // Auto select the old value.
-            let mcat = "<%=mcat%>";
-            document.getElementById('mcategory').value = mcat;
-        </script>      
+        </script>   
     </head>
     <body>
     <header>

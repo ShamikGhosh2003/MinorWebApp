@@ -138,6 +138,12 @@
         <script src="/MinorWebApp/scripts/showResponse.js"></script>
         <script>
             window.onload = function() {
+                // Auto select the old value.
+                let city = "<%=city%>";
+                document.getElementById('city').value = city;
+                let sques = "<%=sques%>";
+                document.getElementById('sques').value = sques;
+                
                 document.forms['register'].addEventListener('submit', function(event) {
                     if(!validateForm()) {
                         event.preventDefault();
@@ -187,13 +193,6 @@
                     element.value = element.value.slice(0, maxLength);
                 }
             }
-        </script>
-        <script>
-            // Auto select the old value.
-            let city = "<%=city%>";
-            document.getElementById('city').value = city;
-            let sques = "<%=sques%>";
-            document.getElementById('sques').value = sques;
         </script>
         <script src="/MinorWebApp/scripts/deleteModal.js"></script>
     </head>

@@ -163,6 +163,10 @@
         <title>Modify Orders</title>
         <script>
             window.onload = function() {
+                // Auto select the old value.
+                let status = "<%=status%>";
+                document.getElementById('status').value = status;
+                
                 document.forms['register'].addEventListener('submit', function(event) {
                     if(!validateForm()) {
                         event.preventDefault();
@@ -192,11 +196,6 @@
                     element.value = element.value.slice(0, maxLength);
                 }
             }
-        </script>
-        <script>
-            // Auto select the old value.
-            let status = "<%=status%>";
-            document.getElementById('status').value = status;
         </script>
     </head>
     <body>
