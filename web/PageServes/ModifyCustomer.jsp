@@ -90,14 +90,14 @@
     %>
                 <script>
                     // Edit success ADMIN
-                    location.href="http://localhost:8080/MinorWebApp/PageServes/ModifyCustomer.jsp?response=edit-success";
+                    location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp?response=edit-success";
                 </script>
     <%
                 }else{
     %>
                 <script>
                     // Edit success CUSTOMER
-                    location.href="http://localhost:8080/MinorWebApp/PageServes/ModifyCustomer.jsp?response=edit-success";
+                    location.href="http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp?response=edit-success";
                 </script>
     <%
                 }
@@ -105,14 +105,14 @@
                 if(userType.equals("ADMIN")){
     %>
                 <script>
-                    // Edit unsuccessful
+                    // Edit failed ADMIN
                     location.href="http://localhost:8080/MinorWebApp/PageServes/customer.jsp?response=edit-fail";
                 </script>
     <%
                 }else{
     %>
                 <script>
-                    // Edit failed for user
+                    // Edit failed CUSTOMER
                     location.href="http://localhost:8080/MinorWebApp/PageServes/SearchMedicine.jsp?response=edit-fail";
                 </script>
     <%

@@ -87,36 +87,45 @@
             ops.setString(9, city);                        
             ops.setString(10, pid);          
             int x = ops.executeUpdate();
-            if(x>0) {
-    %>
-                <script>
-                    // Edit successful
-                    location.href="http://localhost:8080/MinorWebApp/PageServes/ModifyPharmacy.jsp?response=edit-success";
-                </script>
-    <%
-            } else {
+if(x>0){
                 if(userType.equals("ADMIN")){
     %>
                 <script>
-                    // Edit fail admin
+                    // Edit success ADMIN
+                    location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp?response=edit-success";
+                </script>
+    <%
+                }else{
+    %>
+                <script>
+                    // Edit success PHARMACY
+                    location.href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html?response=edit-success";
+                </script>
+    <%
+                }
+            }else{
+                if(userType.equals("ADMIN")){
+    %>
+                <script>
+                    // Edit failed ADMIN
                     location.href="http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp?response=edit-fail";
                 </script>
     <%
                 }else{
     %>
                 <script>
-                    // Edit fail pharmacy
-                    location.href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.hmtl?response=edit-fail";
+                    // Edit failed PHARMACY
+                    location.href="http://localhost:8080/MinorWebApp/StatPages/PharmacyHome.html?response=edit-fail";
                 </script>
     <%
                 }
                 oconn.close();
                 ops.close();
             }
+        }else{
+            
+            //sess.setAttribute("btnval", btnval);
         }
-        //  else {
-        //     //sess.setAttribute("btnval", btnval);
-        // }
     }catch(SQLException ex){
         out.println("<h2 style='color:red'>Error is: "+ ex.toString() + "</h2>");
     }

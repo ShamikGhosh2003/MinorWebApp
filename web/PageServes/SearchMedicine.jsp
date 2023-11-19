@@ -149,7 +149,12 @@
                 window.history.replaceState({}, document.title, url.toString());
             }
             if (response == "edit-fail") {
-                showError("Failed to update customer.");
+                showError("Failed to update profile.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
+            if (response === "edit-success") {
+                showSuccess("Profile edited successfully.");
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());
             }
