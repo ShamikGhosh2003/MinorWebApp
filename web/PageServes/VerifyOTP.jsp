@@ -36,7 +36,7 @@
         <link rel="icon" href="../media/favion.ico" type="image/x-icon">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="../stylesheet/main-style.css">
-        <title>Verify OTP JSP</title>
+        <title>Verify OTP</title>
         <script>
             function maxInputNumber(element, maxLength) {
                 if(element.value.length > maxLength) {
