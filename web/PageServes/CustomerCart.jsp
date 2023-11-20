@@ -65,7 +65,7 @@
             margin: 0;
         }
         .bill td:nth-child(1) {
-            width: 200px;
+            width: 150px;
             font-weight: 300px;
             font-family: 'Playfair Display', serif;
         }
