@@ -129,11 +129,6 @@ main {
     line-height: 150%;
     font-size: 14px;
 }
-.form-box-links-forgot {
-    line-height: 150%;
-    font-size: 14px;
-    text-align: left;
-}
 .form-box a{
     color: rgb(0, 0, 255);
 }
