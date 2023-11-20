@@ -75,7 +75,7 @@
 %>
         <script>
             // Incorrect answer
-            location.href="http://localhost:8080/MinorWebApp/PageServes/VerifyQuestion.jsp?response=incorrect-answer";
+            location.href="http://localhost:8080/MinorWebApp/PageServes/VerifyQuestion.jsp?pemail=<%=email%>&response=incorrect-answer";
         </script>
 <%
         }

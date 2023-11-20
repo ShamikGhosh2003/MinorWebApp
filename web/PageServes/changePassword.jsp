@@ -173,6 +173,14 @@
                     showError("Passwords do not match.");
                     return false;
                 }
+                else if(newPassword === currentPassword) {
+                    showError("New password cannot be the same as old password.");
+                    return false;
+                }
+                    else if(newPassword.length < 8) {
+                    showError("New password must be at least 8 characters long.");
+                    return false;
+                }
                 return true;
             }
        </script>
@@ -232,7 +240,7 @@
         let response = params.get("response");
 
         if (response == "wrong-password") {
-            showError("Incorrect password.");
+            showError("Incorrect old password.");
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());
         }
