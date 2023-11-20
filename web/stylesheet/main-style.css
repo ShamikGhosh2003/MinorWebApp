@@ -13,7 +13,7 @@
     font-family: 'Ubuntu', sans-serif;
 }
 body{
-    background: url("../media/bg3.png");
+    background: url("../media/background.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -40,9 +40,11 @@ header {
     font-size: 32px;
     color: #fff;
     text-decoration: none;
-    font-weight: 650; 
-    filter: drop-shadow(0 0 5px #09001d);
+    font-weight: 700;
+    filter: drop-shadow(0 0 8px #09001d);
     font-family: 'Times New Roman', Times, serif;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1px;
 }
 /* MedFinder logo */
 .logo {
@@ -410,7 +412,6 @@ select {
     border: 3px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
     padding: 25px;
-    /* background-color: rgb(238, 214, 228); */
     background-color: rgb(238, 214, 228, 0.7);
     border-radius: 10px;
     padding-bottom: 50px;
@@ -861,4 +862,90 @@ select {
 }
 .delete-modal-button button:hover {
     background-color: #00688B; /* Darker blue color */
+}
+/* CSS for about page and index page */
+.about-container h1 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    font-size: 52px;
+    font-weight: 700;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+}
+.about-container {
+    padding: 30px 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.about-box {
+    width: 90%;
+    border: 1px solid #ddd;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    background-color: rgb(238, 214, 228, 0.7);
+    border-radius: 15px;
+    padding: 40px 20px;
+    margin: 20px auto;
+    transition: all 0.3s ease-out;
+    overflow: hidden;
+}
+.about-box:hover {
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.6);
+}
+.row {
+    display: flex;
+    padding: 15px;
+}
+.right {
+    justify-content: flex-start;
+    display: flex;
+}
+.left {
+    justify-content: flex-end;
+    display: flex;
+}
+.about-image {
+    padding: 20px;
+    height: 200px;
+    width: auto;
+    margin: 0 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.about-image img {
+    height: 180px;
+    width: 180px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: transform .2s;
+}
+.about-image img:hover {
+    transform: scale(1.1);
+}
+.about-text {
+    height: 200px;
+    width: auto;
+    padding-top: 15px;
+}
+/* footer and icons */
+footer {
+    background: rgba(61, 61, 61, 0.5);
+    padding: 8px 20px;
+    color: #ffffff;
+    text-align: center;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+.social-icon {
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    transition: transform 0.3s;
+}
+.social-icon:hover {
+  transform: scale(1.2);
 }

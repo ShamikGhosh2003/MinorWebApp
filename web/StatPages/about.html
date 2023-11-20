@@ -6,14 +6,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>About</title>
         <link rel="stylesheet" href="../stylesheet/main-style.css">
+        <style>
+            main {
+                padding-top: 30px;
+            }
+        </style>
     </head>
     <body>
         <header>
             <img src="../media/logo.png" class="logo">
             <span class="heading">MedFinder</span>
                 <nav class="navbar">
+                <a href="http://localhost:8080/MinorWebApp/StatPages/index.html">Home</a>
                 <a href="http://localhost:8080/MinorWebApp/StatPages/login.html">Login</a>
-                <a href="http://localhost:8080/MinorWebApp/StatPages/about.html">About Us</a>
                 <a href="http://localhost:8080/MinorWebApp/StatPages/terms.html">Terms</a>
                 <div class="navbar-dropdown">
                     <a class="navbar-dropdown-button">Register</a>
@@ -25,7 +30,32 @@
                 </nav>
         </header>
         <main>
-            <!-- TODO: Index page and about page -->
+            <div class="about-container">
+                <h1>MedFinder - About Us</h1>
+                <br><br>
+                <div class="about-box">
+                    <div class="row right">
+                        <div class="about-image">
+                            <img src="../media/ceo.jpeg">
+                        </div>
+                        <div class="about-text">
+                            <p>Meet our lovely CEO, Jeremy Elbertson.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet, nulla vel euismod accumsan, ligula mauris interdum nisi, sed mattis arcu sapien a enim. Praesent elementum vehicula rutrum. Nullam leo nisl, ultricies at elementum eu, vehicula ac dolor. Morbi a lectus eu eros sollicitudin laoreet. Aliquam at molestie nibh. Ut pellentesque magna id sem venenatis elementum. Sed augue mauris, pellentesque sit amet ante ac, sagittis efficitur justo. Curabitur vitae nisi odio. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent magna orci, iaculis et dignissim at, vestibulum id lacus. Sed luctus erat risus, a posuere risus ullamcorper in. Maecenas vitae ex sapien. Praesent lacinia orci non hendrerit aliquam. Nullam in lobortis risus. </p>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+                <div class="about-box">
+                    <div class="row left">
+                        <div class="about-text">
+                            <p></p>
+                        </div>
+                        <div class="about-image">
+                            <img src="../media/not-ceo.jpeg">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </body>
 </html>
