@@ -23,6 +23,7 @@
             <a href="#">Contact</a>
             </nav>
         </header>
+        <main>
         <div class="form-container">
             <div class="form-box" style="width: 38%;">
                 <form method="POST" name="reset-password">
@@ -77,7 +78,7 @@
                 {
                     sess = request.getSession(false);
                     pass = request.getParameter("tpass");
-                    //pass = hash.passwordHash(pass);
+                    pass = hash.passwordHash(pass);
                     email = sess1.getAttribute("email").toString();
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl,oconnUsername,oconnPassword);
@@ -121,11 +122,14 @@
                 sess1 = request.getSession(true);
                 sess1.setAttribute("email", email);
         %>
+                <!--
                 <h3 style="color: green">
                 Please verify your security credentials.
+                -->
                 </h3>
         <%                   
             }   
         %>
+    
     </body>
 </html>
