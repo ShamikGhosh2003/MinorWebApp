@@ -137,6 +137,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <link rel="icon" href="../media/favion.ico" type="image/x-icon">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="../stylesheet/main-style.css">
         <title>Add New Medicine</title>
