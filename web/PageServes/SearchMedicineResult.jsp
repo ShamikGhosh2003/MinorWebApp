@@ -14,47 +14,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
     <link rel="stylesheet" href="../stylesheet/main-style.css">
-    <style>
-        .material-symbols-outlined {
-        font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 24
-        }
-    </style>
     <script src="/MinorWebApp/scripts/showResponse.js"></script>
-    <script>
-        function maxNumberInput(input, max) {
-            if (input.value !== '') {
-                if (input.value > max) {
-                    input.value = max;
+<script>
+    window.onload = function() {
+        var forms = document.getElementsByName('cart');
+        for(var i = 0; i < forms.length; i++) {
+            forms[i].addEventListener('submit', function(event) {
+                if(!validateForm(event)) {
+                    event.preventDefault();
+                } else {
+                    window.location.hash = '';
                 }
-                if (input.value < 1) {
-                    input.value = 1;
-                }
-            }
+            });
         }
-    </script>
-    <script>
-        window.onload = function() {
-        document.forms['cart'].addEventListener('submit', function(event) {
-            if(!validateForm()) {
-                event.preventDefault();
-            } else {
-                window.location.hash = '';
-            }
-        });
     };
-        function validateForm() {
-            var quantity = document.getElementById('quantity').value;
-                if(quantity.length === 0 || isNaN(quantity)) {
-                    showError("Quantity cannot be zero.");
-                    return false;
-                }
-            return true;
+
+    function validateForm(event) {
+        var form = event.target;
+        var quantity = form.querySelector('.quantity').value;
+        if(quantity.length === 0) {
+            showError("Quantity cannot be empty.");
+            return false;
         }
-    </script>
+        if(isNaN(quantity)) {
+            showError("Quantity must be a number.");
+            return false;
+        }
+        return true;
+    }
+
+    function maxNumberInput(input, max) {
+        if (input.value !== '') {
+            if (input.value > max) {
+                input.value = max;
+            }
+            if (input.value < 1) {
+                input.value = 1;
+            }
+        }
+    }
+</script>
 </head>
 <body>
     <header>
@@ -160,10 +159,8 @@
                                 }
                             %>
                             <td>                         
-                                <form method="POST" name="cart" action="http://localhost:8080/MinorWebApp/AddToCart">
-                                    <!--<h3><%=ident%></h3>-->
-                                    <%-- <input type="number" id="quantity" name="<%=ident%>" min="1" max="100"> --%>
-                                    <input type="text" id="quantity" name="<%=ident%>" min="1" max="<%=ors.getInt("MQTY")%>" oninput="maxNumberInput(this,<%=ors.getInt("MQTY")%>)">
+                                    <form method="POST" name="cart" action="http://localhost:8080/MinorWebApp/AddToCart" onsubmit="return validateForm(event)">
+                                    <input type="text" class="quantity" name="<%=ident%>" min="1" max="<%=ors.getInt("MQTY")%>" oninput="maxNumberInput(this,<%=ors.getInt("MQTY")%>)">
                                     <button type="submit" name="cart" value="<%=ident%>" class="button-62"><span class="material-symbols-outlined"> add_shopping_cart </span></button>
                                 </form>
                             </td>
