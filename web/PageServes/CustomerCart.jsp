@@ -206,5 +206,10 @@
             window.history.replaceState({}, document.title, url.toString());
         }
     </script>
+<footer>
+    <a href="https://www.facebook.com" target="_blank"><img src="../media/facebook-icon.png" class="social-icon" alt="Facebook"></a>
+    <a href="https://www.twitter.com" target="_blank"><img src="../media/twitter-icon.ico" class="social-icon" alt="Twitter"></a>
+    <a href="https://www.pintrest.com" target="_blank"><img src="../media/pinterest-icon.png" class="social-icon" alt="Pintrest"></a>
+</footer>
 </body>
 </html>
