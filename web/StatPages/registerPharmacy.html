@@ -45,6 +45,10 @@
                     showError("Please enter a valid phone number.");
                     return false;
                 }
+                if(isNaN(age) || age < 0) {
+                    showError("Please enter a valid age.<br>You must be 13 or over to use our services.");
+                    return false;
+                }
                 if(pincode.length !== 6 || isNaN(pincode)) {
                     showError("Please enter a valid pincode.");
                     return false;

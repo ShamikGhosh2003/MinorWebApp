@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-    <link rel="icon" href="../media/favion.ico" type="image/x-icon">
+        <link rel="icon" href="../media/favion.ico" type="image/x-icon">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../stylesheet/main-style.css">
         <title>Register User</title>
@@ -42,7 +42,11 @@
                     return false;
                 }
                 if(phone.length !== 10 || isNaN(phone)) {
-                    showError("Please a enter valid phone number.");
+                    showError("Please enter a valid phone number.");
+                    return false;
+                }
+                if(isNaN(age) || age < 13) {
+                    showError("Please enter a valid age.<br>You must be 13 or over to use our services.");
                     return false;
                 }
                 if(pincode.length !== 6 || isNaN(pincode)) {
