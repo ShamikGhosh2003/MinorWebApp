@@ -17,7 +17,9 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: fixed;    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 header {
     top: 0;
@@ -936,8 +938,7 @@ footer {
     padding: 8px 20px;
     color: #ffffff;
     text-align: center;
-    left: 0;
-    bottom: 0;
+    margin-top: auto;
     width: 100%;
 }
 .social-icon {
