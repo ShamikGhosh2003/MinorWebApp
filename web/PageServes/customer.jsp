@@ -145,6 +145,11 @@
                 params.delete('response');
                 window.history.replaceState({}, document.title, url.toString());
             }
+            if (response == "delete-error") {
+                showError("Data cannot be deleted because it has records in the child table.");
+                params.delete('response');
+                window.history.replaceState({}, document.title, url.toString());
+            }
         </script>
     </main>
 <footer>
