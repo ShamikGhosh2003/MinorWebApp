@@ -127,7 +127,16 @@ public class DeleteAll extends HttpServlet {
                 Logger.getLogger(DeleteAll.class.getName()).log(Level.SEVERE, null, ex);
                 out.println("<script>");
                 // Data cannot be deleted because it has records in the child table.
-                out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/admin-database.html?response=delete-error';");
+                if(table.equals("CUSTOMER") && userType.equals("ADMIN")){
+                    out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/customer.jsp?response=delete-error';");
+                }else if(table.equals("CUSTOMER") && userType.equals("CUSTOMER")){
+                    out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/ModifyCustomer.jsp?response=delete-error';");
+                }else if(table.equals("PHARMACY") && userType.equals("ADMIN")){
+                    out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/pharmacy.jsp?response=delete-error';");
+                }else if(table.equals("PHARMACY") && userType.equals("PHARMACY")){
+                    out.println("location.href='http://localhost:8080/MinorWebApp/PageServes/ModifyPharmacy.jsp?response=delete-error';");
+                }
+                //out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/admin-database.html?response=delete-error';");
                 out.println("</script>");
             }
             out.println("</body>");
@@ -180,6 +189,6 @@ public class DeleteAll extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }
