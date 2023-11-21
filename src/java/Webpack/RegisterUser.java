@@ -93,21 +93,7 @@ public class RegisterUser extends HttpServlet {
                 fname = fname.toUpperCase();
                 lname = lname.toUpperCase();
                 address = address.toUpperCase();
-                password = hash.passwordHash(password);
-                /*out.println("<h1>Displaying the HTML input values in this servlet...</h1>");
-                out.println("<h3>CID: "+cid+"</h3>");
-                out.println("<h3>Email: "+email+"</h3>");
-                out.println("<h3>Password: "+password+"</h3>");
-                out.println("<h3>First Name: "+fname+"</h3>");
-                out.println("<h3>Last Name: "+lname+"</h3>");
-                out.println("<h3>Gender: "+gender+"</h3>");
-                out.println("<h3>Age: "+age+"</h3>");
-                out.println("<h3>Address: "+address+"</h3>");
-                out.println("<h3>City: "+city+"</h3>");
-                out.println("<h3>Phone: "+phone+"</h3>");
-                out.println("<h3>Pincode: "+pincode+"</h3>");
-                out.println("<h3>Security Question: "+sques+"</h3>");
-                out.println("<h3>Security Answer: "+sans+"</h3>");*/              
+                password = hash.passwordHash(password);             
                 ops = (OraclePreparedStatement) oconn.prepareCall("INSERT INTO CUSTOMER(CID,EMAIL,PASSWORD,FNAME,LNAME,GENDER,AGE,ADDRESS,PHONE,PINCODE,SQUES,SANS,CITY) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)");
                 ops.setString(1,cid);
                 ops.setString(2,email);
@@ -131,7 +117,6 @@ public class RegisterUser extends HttpServlet {
                 }
                 else{
                     out.println("<script>");
-                    // Failed to created account
                     out.println("location.href='http://localhost:8080/MinorWebApp/StatPages/login.html?response=account-failed';");
                     out.println("</script>");
                 }
