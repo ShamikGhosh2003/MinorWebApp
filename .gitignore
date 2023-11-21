@@ -9,3 +9,4 @@ nbproject
 web/StatPages/tests/
 web/StatPages/dummy.html
 web/PageServes/tests/
+.VSCodeCounter/

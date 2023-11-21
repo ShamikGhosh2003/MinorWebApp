@@ -81,7 +81,7 @@
         let response = params.get("response");
 
         if (response == "delete-error") {
-            showSuccess("Data cannot be deleted because it has records in the child table.");
+            showError("Data cannot be deleted because it has records in the child table.");
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());
         }
