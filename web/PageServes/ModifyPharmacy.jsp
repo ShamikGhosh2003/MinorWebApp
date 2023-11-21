@@ -342,6 +342,11 @@ if(x>0){
             params.delete('response');
             window.history.replaceState({}, document.title, url.toString());
         }
+        if (response == "delete-error") {
+            showError("Data cannot be deleted because it has records in the child table.");
+            params.delete('response');
+            window.history.replaceState({}, document.title, url.toString());
+        }
     </script>
     <footer>
         <a href="https://www.facebook.com" target="_blank"><img src="../media/facebook-icon.png" class="social-icon" alt="Facebook"></a>
