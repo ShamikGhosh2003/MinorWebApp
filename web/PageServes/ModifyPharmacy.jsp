@@ -265,10 +265,9 @@ if(x>0){
                     <div class="input-group">
                         <label for="status">Status:</label>
                         <select id="status" name="status">
-                            <option value="" disabled hidden>Select STATUS</option>
-                            <option value="Operational">Operational</option>
-                            <option value="Closed">Closed</option>
-                            <option value="Suspended">Suspended</option>
+                            <option value="OPERATIONAL">Operational</option>
+                            <option value="CLOSED">Closed</option>
+                            <option value="SUSPENDED">Suspended</option>
                         </select>
                     </div>
                     <br>
