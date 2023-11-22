@@ -61,7 +61,7 @@
     oconn.close();
     if(request.getParameter("bVerify")!=null)
     {
-        if(request.getParameter("tbAns").equals(ans))
+        if(request.getParameter("tbAns").equalsIgnoreCase(ans))
         {
 %>
         <script>
