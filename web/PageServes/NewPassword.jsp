@@ -140,7 +140,7 @@
         <div class="form-container">
             <div class="form-box" style="width: 38%;">
                 <form method="POST" name="reset-password">
-                    <h2>FORGOT PASSWORD</h2>
+                    <h2>NEW PASSWORD</h2>
                     <br>
                     <div id="error-alert"></div>
                     <br>
