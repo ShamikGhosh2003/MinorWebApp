@@ -268,7 +268,7 @@
                         </div>
                         <br>
                         <div class="input-group">
-                            <label for="address">Address:</label>
+                            <label for="address">Address/Delivery Address:</label>
                             <input type="text" name="address" value="<%=address%>" placeholder="<%=address%>">
                         </div>
                         <br>

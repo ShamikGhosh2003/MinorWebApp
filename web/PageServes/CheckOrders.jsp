@@ -69,7 +69,7 @@
                     <%
                         DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                         oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
-                        query = "SELECT O.OID, C.FNAME || ' ' || C.LNAME AS CUSTOMER_NAME, P.PNAME, M.MNAME, TO_CHAR(ODATE, 'dd-mm-yyyy') AS ORDER_DATE, O.QTY, O.STATUS, O.CID, O.PID, O.MID FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.PID=P.PID AND O.MID = M.MID AND P.EMAIL = ? AND O.STATUS != 'CART' ORDER BY OID ASC";
+                        query = "SELECT O.OID, C.FNAME || ' ' || C.LNAME AS CUSTOMER_NAME, P.PNAME, M.MNAME, TO_CHAR(ODATE, 'dd-mm-yyyy') AS ORDER_DATE, O.QTY, C.ADDRESS || ', ' || C.CITY AS ADDRESS, O.STATUS, O.CID, O.PID, O.MID FROM ORDERS O, PHARMACY P, CUSTOMER C, MEDICINE M WHERE O.CID=C.CID AND O.PID=P.PID AND O.MID = M.MID AND P.EMAIL = ? AND O.STATUS != 'CART' ORDER BY OID ASC";
                         ops = (OraclePreparedStatement) oconn.prepareCall(query);    
                         ops.setString(1, email);
                         ors = (OracleResultSet) ops.executeQuery();
