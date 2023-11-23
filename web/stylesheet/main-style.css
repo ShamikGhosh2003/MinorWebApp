@@ -930,7 +930,7 @@ select {
 .about-text {
     height: 200px;
     width: auto;
-    padding-top: 15px;
+    padding: 0 20px;
 }
 /* footer and icons */
 footer {

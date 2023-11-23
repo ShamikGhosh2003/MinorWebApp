@@ -60,6 +60,9 @@
         <div class="table-box-container">
             <div class="table-box">
                 <h2>Medicine</h2>
+                <br>
+                <div id="success-alert"></div>
+                <div id="error-alert"></div>
                 <%
                     DriverManager.registerDriver(new oracle.jdbc.OracleDriver());
                     oconn = (OracleConnection) DriverManager.getConnection(oconnUrl, oconnUsername, oconnPassword);
